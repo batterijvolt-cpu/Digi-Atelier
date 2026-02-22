@@ -203,7 +203,7 @@
 
       const thead = document.createElement('thead');
       const hr = document.createElement('tr');
-      ['Component', 'Waarde', 'Eenheid', 'Confidence', 'Notitie'].forEach(h => {
+      ['Component', 'Waarde', 'Eenheid', 'Confidence', 'Notitie', 'Bron', 'Datum'].forEach(h => {
         const th = document.createElement('th');
         th.textContent = h;
         hr.appendChild(th);
@@ -220,6 +220,23 @@
           td.textContent = String(v ?? '—');
           tr.appendChild(td);
         });
+
+        const tdSource = document.createElement('td');
+        if (r.source_url) {
+          const a = document.createElement('a');
+          a.href = r.source_url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = 'link';
+          tdSource.appendChild(a);
+        } else {
+          tdSource.textContent = '—';
+        }
+        tr.appendChild(tdSource);
+
+        const tdDate = document.createElement('td');
+        tdDate.textContent = r.source_date || '—';
+        tr.appendChild(tdDate);
         tbody.appendChild(tr);
       });
 

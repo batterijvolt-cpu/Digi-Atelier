@@ -1,12 +1,12 @@
 {
   "dataset": "fixed_cost_benchmarks_vlaanderen",
-  "updated_at_utc": "2026-02-22T13:55:00.000Z",
+  "updated_at_utc": "2026-02-22T13:38:00.000Z",
   "scope": "Residentiële elektriciteit Vlaanderen (conservatieve kostenweergave)",
   "method": "strict confidence gating: enkel high-confidence waarden tonen; anders '?'",
   "sources": [
-    "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
-    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
-    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers"
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven/hoeveel-bedragen-de-distributienettarieven",
+    "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/doe-de-v-testr"
   ],
   "rows": [
     {
@@ -14,49 +14,63 @@
       "value": "?",
       "unit": "c€/kWh",
       "confidence": "starter",
-      "note": "Nog geen high-confidence bronwaarde per productfiche in dataset."
+      "note": "Geen direct citeerbare officiële productfiche (amount+unit) in huidige pipeline.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/doe-de-v-testr",
+      "source_date": "2026-02-22"
     },
     {
       "component": "Vaste jaarlijkse vergoeding",
       "value": "?",
       "unit": "€/jaar",
       "confidence": "starter",
-      "note": "Nog geen high-confidence bronwaarde per productfiche in dataset."
+      "note": "Geen direct citeerbare officiële productfiche (amount+unit) in huidige pipeline.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/doe-de-v-testr",
+      "source_date": "2026-02-22"
     },
     {
       "component": "Nettarieven (distributie + transmissie)",
-      "value": "?",
+      "value": "5.48",
       "unit": "c€/kWh",
-      "confidence": "starter",
-      "note": "Nog geen high-confidence geconsolideerde bronwaarde per profiel/netgebied."
+      "confidence": "high",
+      "note": "Gemiddelde LS digitale meter 2026 over 8 Fluvius-netgebieden: 'Totaal kWh-tarief' (EUR/MWh) omgerekend naar c€/kWh.",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28"
     },
     {
       "component": "Capaciteitstariefcomponent",
-      "value": "?",
-      "unit": "€/jaar",
-      "confidence": "starter",
-      "note": "Nog geen high-confidence bronwaarde in huidige masterdata."
+      "value": "53.53",
+      "unit": "€/kW/jaar",
+      "confidence": "high",
+      "note": "Gemiddelde LS digitale meter 2026 over 8 Fluvius-netgebieden: 'Capaciteitstarief - gemiddelde maandpiek' (EUR/kW/jaar).",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28"
     },
     {
       "component": "Heffingen en toeslagen",
-      "value": "?",
+      "value": "2.90",
       "unit": "c€/kWh",
-      "confidence": "starter",
-      "note": "Nog geen high-confidence totaalwaarde in huidige masterdata."
+      "confidence": "high",
+      "note": "Gemiddelde LS digitale meter 2026 over 8 Fluvius-netgebieden: som van 'Tarieven voor de openbaredienstverplichtingen' + 'Tarieven voor de toeslagen' (EUR/kWh) omgerekend naar c€/kWh.",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28"
     },
     {
       "component": "BTW residentieel",
-      "value": "?",
+      "value": "6",
       "unit": "%",
-      "confidence": "medium",
-      "note": "Medium confidence => volgens regel tonen we '?'."
+      "confidence": "high",
+      "note": "Tarieflijst vermeldt expliciet 'Inclusief 6% btw' voor residentiële LS-voorbeelden.",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28"
     },
     {
       "component": "BTW standaard",
-      "value": "21",
+      "value": "?",
       "unit": "%",
-      "confidence": "high",
-      "note": "Standaard BTW-tarief in BE."
+      "confidence": "medium",
+      "note": "Nog geen rechtstreeks geciteerde officiële bronregel (amount+unit) opgenomen in pipeline.",
+      "source_url": "https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/vat-rates_en",
+      "source_date": "2026-02-22"
     }
   ]
 }
