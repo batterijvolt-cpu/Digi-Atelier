@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-02-22T15:00:22.811Z",
+  "generated_at_utc": "2026-02-22T18:36:00.000Z",
   "tables": [
     {
       "id": "belpex_prices_be_24h",
@@ -437,7 +437,7 @@
       "what_we_see": "Per leverancier/product: injectietype, tariefwaarde (of ?), confidence en bron.",
       "update_frequency": "Maandelijks",
       "max_age_hours": 192,
-      "last_update": "2026-02-22T17:40:00.000Z",
+      "last_update": "2026-02-22T18:36:00.000Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -501,25 +501,25 @@
             "Luminus",
             "Comfy",
             "vast",
-            "?",
+            "8.5",
             "c€/kWh",
-            "starter"
+            "high"
           ],
           [
             "Luminus",
             "ComfyFlex",
             "variabel",
-            "?",
+            "8.5",
             "c€/kWh",
-            "starter"
+            "high"
           ],
           [
             "Luminus",
             "Dynamic Online",
             "dynamisch",
-            "?",
+            "8.5",
             "c€/kWh",
-            "starter"
+            "high"
           ],
           [
             "TotalEnergies",
@@ -535,7 +535,7 @@
             "vast",
             "?",
             "c€/kWh",
-            "starter"
+            "medium"
           ]
         ]
       },
