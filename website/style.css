@@ -381,6 +381,20 @@ p.lede {
   color: #0b0d11;
   border-color: var(--accent);
 }
+.dataset-mode-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+.dataset-mode-grid .chart-hint {
+  margin-top: 0;
+  padding: 0.7rem 0.9rem;
+}
+@media (min-width: 980px) {
+  .dataset-mode-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .homegrid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
