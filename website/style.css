@@ -477,6 +477,13 @@ body.project.masterdata-page .matrix-table {
 body.project.masterdata-page .matrix-table th,
 body.project.masterdata-page .matrix-table td {
   border-bottom-color: rgba(15,23,42,0.08);
+  color: #1e293b;
+}
+body.project.masterdata-page .matrix-table th {
+  color: #64748b;
+}
+body.project.masterdata-page .matrix-table a {
+  color: #0f766e;
 }
 body.project.masterdata-page .story.compact {
   margin-top: 0.8rem;
