@@ -694,6 +694,19 @@ body.project.masterdata-page .kpi-row .card p {
   font-size: .78rem;
   cursor: pointer;
 }
+.part-version-badge {
+  position: fixed;
+  right: 14px;
+  bottom: 48px;
+  z-index: 70;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(30,41,59,.72);
+  color: #dbeafe;
+  padding: .35rem .72rem;
+  font-size: .72rem;
+  cursor: pointer;
+}
 
 @media (max-width: 640px) {
   body { padding: 2rem 1rem; }
@@ -701,4 +714,5 @@ body.project.masterdata-page .kpi-row .card p {
   h1 { font-size: 2.4rem; }
   .matrix { font-size: 0.85rem; }
   .part-map-toggle { bottom: 8px; right: 8px; }
+  .part-version-badge { bottom: 40px; right: 8px; }
 }

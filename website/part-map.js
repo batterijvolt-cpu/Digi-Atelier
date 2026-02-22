@@ -118,6 +118,31 @@
       apply();
     });
     document.body.appendChild(hint);
+
+    const versionBadge = document.createElement('button');
+    versionBadge.type = 'button';
+    versionBadge.className = 'part-version-badge';
+    versionBadge.textContent = 'Versie: laden…';
+    versionBadge.title = 'Live versie van deze pagina';
+    versionBadge.addEventListener('click', () => {
+      const txt = versionBadge.textContent || '';
+      navigator.clipboard?.writeText(txt).catch(() => {});
+    });
+    document.body.appendChild(versionBadge);
+
+    const versionUrl = scriptEl?.src
+      ? new URL('version.json', scriptEl.src).toString()
+      : 'version.json';
+    fetch(versionUrl)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((v) => {
+        if (!v) throw new Error('no version');
+        versionBadge.textContent = `${v.version || 'v?'} · ${v.label || 'live'}`;
+      })
+      .catch(() => {
+        versionBadge.textContent = 'Versie: onbekend';
+      });
+
     apply();
   }
 
