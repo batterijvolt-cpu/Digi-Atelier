@@ -12,18 +12,12 @@
     'main > .story'
   ].join(', ');
 
-  const PAGE_BASES = [
-    [/\/index\.html$/, 1],
-    [/\/projects\/evolt\.html$/, 101],
-    [/\/projects\/fluvius\.html$/, 201],
-    [/\/projects\/masterdata\.html$/, 301]
-  ];
-
   const pageBase = (() => {
     const p = location.pathname;
-    for (const [rx, base] of PAGE_BASES) {
-      if (rx.test(p)) return base;
-    }
+    if (p.includes('/projects/evolt.html')) return 101;
+    if (p.includes('/projects/fluvius.html')) return 201;
+    if (p.includes('/projects/masterdata.html')) return 301;
+    if (p.endsWith('/Digi-Atelier/') || p.endsWith('/index.html') || p === '/' ) return 1;
     return 901;
   })();
 
