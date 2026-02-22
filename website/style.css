@@ -409,6 +409,25 @@ p.lede {
     overflow-y: auto;
   }
 }
+.monthly-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+.monthly-table-scroll .matrix-table {
+  min-width: 460px;
+}
+@media (min-width: 1024px) {
+  .monthly-split {
+    grid-template-columns: 1.55fr 1fr;
+    align-items: start;
+  }
+  .monthly-split .chart-shell,
+  .monthly-split .table-scroll {
+    margin: 0;
+  }
+}
 .dataset-mode-grid .chart-hint {
   margin-top: 0;
   padding: 0.7rem 0.9rem;

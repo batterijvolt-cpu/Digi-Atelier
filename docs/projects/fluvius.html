@@ -41,13 +41,17 @@
           <h2>Afname, injectie en kwartierpiek per maand</h2>
           <p class="meta">Bron: Fluvius kwartierdata 2025. Piek = hoogste kwartiergemiddelde kW.</p>
         </header>
-        <div class="table-wrapper">
-          <table class="matrix-table compact" id="monthlyTable">
-            <thead><tr><th>Maand</th><th>Afname</th><th>Injectie</th><th>Piek (kW)</th></tr></thead>
-            <tbody></tbody>
-          </table>
+        <div class="monthly-split">
+          <div class="chart-shell">
+            <canvas id="monthlyChart" height="200"></canvas>
+          </div>
+          <div class="table-scroll monthly-table-scroll">
+            <table class="matrix-table compact" id="monthlyTable">
+              <thead><tr><th>Maand</th><th>Afname</th><th>Injectie</th><th>Piek (kW)</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
-        <canvas id="monthlyChart" height="200"></canvas>
       </section>
 
       <section class="analysis" id="hefbomen-stack">
