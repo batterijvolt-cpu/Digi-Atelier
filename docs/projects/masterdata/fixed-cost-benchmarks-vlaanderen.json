@@ -11,7 +11,7 @@
   "rows": [
     {
       "component": "Energieprijs (vast contract)",
-      "value": "?",
+      "value": "VAR",
       "unit": "c€/kWh",
       "confidence": "starter",
       "note": "Geen direct citeerbare officiële productfiche (amount+unit) in huidige pipeline.",
@@ -20,7 +20,7 @@
     },
     {
       "component": "Vaste jaarlijkse vergoeding",
-      "value": "?",
+      "value": "VAR",
       "unit": "€/jaar",
       "confidence": "starter",
       "note": "Geen direct citeerbare officiële productfiche (amount+unit) in huidige pipeline.",
@@ -65,7 +65,7 @@
     },
     {
       "component": "BTW standaard",
-      "value": "?",
+      "value": "VAR",
       "unit": "%",
       "confidence": "medium",
       "note": "Nog geen rechtstreeks geciteerde officiële bronregel (amount+unit) opgenomen in pipeline.",
