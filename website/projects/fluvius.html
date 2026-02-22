@@ -121,6 +121,8 @@
           </div>
         </div>
         <p class="chart-hint" id="switchSummary"></p>
+        <p class="chart-hint" id="recalcStatus">Preview klaar</p>
+        <p class="chart-hint" id="recalcWarning" style="color:#f59e0b;"></p>
         <canvas id="switchChart" height="230"></canvas>
       </section>
     </main>
@@ -252,134 +254,10 @@
     }
 
     // 206: één grafiek met alle hefbomen, incl. gemiste dynamische injectie
-    const offerCatalog = [
-      { id:'engie-flow-fixed', label:'ENGIE Flow (huidig vast) · afname 0.32 · injectie 0.03', afname:0.32, injectie:0.03, timingBonus:0.00 },
-      { id:'engie-dynamic', label:'ENGIE Dynamic · afname 0.30 · injectie 0.10', afname:0.30, injectie:0.10, timingBonus:0.02 },
-      { id:'luminus-comfyflex', label:'Luminus ComfyFlex · afname 0.31 · injectie 0.08', afname:0.31, injectie:0.08, timingBonus:0.015 },
-      { id:'octa-dynamic', label:'OCTA+ Dynamic · afname 0.30 · injectie 0.09', afname:0.30, injectie:0.09, timingBonus:0.018 }
-    ];
-
-    const switchAssumptions = {
-      capaciteitEurPerKwJaar: 53.53,
-      roundTripEff: 0.92,
-      pvBaseKwp: 6.0
-    };
-
-    let pvKwp = 6.0;
-    let switchChart;
-    const pvBtn = document.getElementById('pvCapBtn');
-    const pvMinus = document.getElementById('pvMinus');
-    const pvPlus = document.getElementById('pvPlus');
-    const currentOfferSel = document.getElementById('currentOffer');
-    const newOfferSel = document.getElementById('newOffer');
-    const switchSummary = document.getElementById('switchSummary');
-
-    function eur(v) { return `€ ${v.toFixed(0)}`; }
-
-    function getOfferById(id) {
-      return offerCatalog.find(o => o.id === id) || offerCatalog[0];
-    }
-
-    function renderSwitch() {
-      const currentOffer = getOfferById(currentOfferSel.value);
-      const newOffer = getOfferById(newOfferSel.value);
-
-      const factor = pvKwp / switchAssumptions.pvBaseKwp;
-      const baselineInjectie = monthlyData.injectie.reduce((a, b) => a + b, 0) * factor;
-      const baselinePeak = Math.max(...monthlyData.piek);
-
-      const labels = ['0 kWh', '5 kWh', '10 kWh', '20 kWh', '30 kWh'];
-      const geleverd = [0, 1150, scenarioData['10'].total[1], scenarioData['20'].total[1], scenarioData['30'].total[1]];
-      const pieken = [baselinePeak, 7.30, scenarioData['10'].total[2], scenarioData['20'].total[2], scenarioData['30'].total[2]];
-
-      const dataRows = labels.map((label, i) => {
-        const usedFromBattery = geleverd[i] * factor;
-        const selfVerbruik = usedFromBattery * currentOffer.afname;
-        const peakGain = Math.max(0, baselinePeak - pieken[i]) * switchAssumptions.capaciteitEurPerKwJaar;
-        const timingGain = usedFromBattery * Math.max(0, (newOffer.timingBonus - currentOffer.timingBonus));
-
-        const missedDynInjectie = -1 * usedFromBattery * newOffer.injectie;
-        const effLoss = -1 * usedFromBattery * ((1 / switchAssumptions.roundTripEff) - 1) * currentOffer.afname;
-
-        const remainingInjectie = Math.max(0, baselineInjectie - usedFromBattery);
-        const switchGainOnRemaining = remainingInjectie * (newOffer.injectie - currentOffer.injectie);
-
-        const net = selfVerbruik + peakGain + timingGain + missedDynInjectie + effLoss + switchGainOnRemaining;
-
-        return { label, selfVerbruik, peakGain, timingGain, missedDynInjectie, effLoss, switchGainOnRemaining, net };
-      });
-
-      pvBtn.textContent = `PV ${pvKwp.toFixed(1)} kWp`;
-      const best = dataRows.reduce((a, b) => (b.net > a.net ? b : a), dataRows[0]);
-      switchSummary.textContent = `Switch: ${currentOffer.label} → ${newOffer.label} · Netto jaarimpact incl. opportunity cost: best scenario ${best.label} met ${eur(best.net)}.`;
-
-      const chartData = {
-        labels: dataRows.map(r => r.label),
-        datasets: [
-          { label: 'Zelfverbruik (afname vermeden)', data: dataRows.map(r => r.selfVerbruik), backgroundColor: '#22c55e', stack: 's' },
-          { label: 'Piekafvlakking', data: dataRows.map(r => r.peakGain), backgroundColor: '#0ea5e9', stack: 's' },
-          { label: 'Belpex timingbonus', data: dataRows.map(r => r.timingGain), backgroundColor: '#a78bfa', stack: 's' },
-          { label: 'Switch 3→10 c€ op resterende injectie', data: dataRows.map(r => r.switchGainOnRemaining), backgroundColor: '#14b8a6', stack: 's' },
-          { label: 'Gemiste dynamische injectie (opportunity cost)', data: dataRows.map(r => r.missedDynInjectie), backgroundColor: '#f59e0b', stack: 's' },
-          { label: 'Rendementsverlies batterij', data: dataRows.map(r => r.effLoss), backgroundColor: '#ef4444', stack: 's' }
-        ]
-      };
-
-      if (!switchChart) {
-        switchChart = new Chart(document.getElementById('switchChart'), {
-          type: 'bar',
-          data: chartData,
-          options: {
-            responsive: true,
-            interaction: { mode: 'index', intersect: false },
-            scales: {
-              x: { stacked: true },
-              y: { stacked: true, beginAtZero: true, title: { display: true, text: '€/jaar' } }
-            },
-            plugins: { legend: { position: 'bottom' } }
-          }
-        });
-      } else {
-        switchChart.data = chartData;
-        switchChart.update();
-      }
-    }
-
-    offerCatalog.forEach(o => {
-      const a = document.createElement('option');
-      a.value = o.id; a.textContent = o.label;
-      currentOfferSel?.appendChild(a);
-      const b = document.createElement('option');
-      b.value = o.id; b.textContent = o.label;
-      newOfferSel?.appendChild(b);
-    });
-    if (currentOfferSel) currentOfferSel.value = 'engie-flow-fixed';
-    if (newOfferSel) newOfferSel.value = 'engie-dynamic';
-
-    currentOfferSel?.addEventListener('change', renderSwitch);
-    newOfferSel?.addEventListener('change', renderSwitch);
-    pvMinus?.addEventListener('click', () => { pvKwp = Math.max(2, pvKwp - 0.5); renderSwitch(); });
-    pvPlus?.addEventListener('click', () => { pvKwp = Math.min(20, pvKwp + 0.5); renderSwitch(); });
-    renderSwitch();
+    window.fluviusUiContext = { monthlyData, scenarioData };
   </script>
-  <script>
-    fetch('../projects/fluvius/vision.md')
-      .then(r => r.text())
-      .then(md => {
-        const target = document.getElementById('visionContent');
-        target.innerHTML = md
-          .split('
-
-')
-          .map(block => `<p>${block.replace('
-', '<br>')}</p>`)
-          .join('');
-      })
-      .catch(() => {
-        const target = document.getElementById('visionContent');
-        target.textContent = 'Visietekst kon niet geladen worden.';
-      });
-  </script>
+  <script src="./fluvius-sim-core.js"></script>
+  <script src="./fluvius-sim-ui.js"></script>
   <script src="../part-map.js"></script>
 </body>
 </html>
