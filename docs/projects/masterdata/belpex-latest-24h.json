@@ -2,686 +2,686 @@
   "dataset": "belpex_prices_be_latest_24h",
   "timezone": "Europe/Brussels",
   "granularity": "15m",
-  "updated_at_utc": "2026-02-21T15:00:20.080Z",
+  "updated_at_utc": "2026-02-22T15:00:22.753Z",
   "source": "energy-charts",
   "points": [
     {
-      "timestamp_utc": "2026-02-20T23:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T00:00:00",
-      "price_eur_mwh": 55.42,
+      "timestamp_utc": "2026-02-21T23:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T00:00:00",
+      "price_eur_mwh": 54.67,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-20T23:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T00:15:00",
-      "price_eur_mwh": 48.64,
+      "timestamp_utc": "2026-02-21T23:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T00:15:00",
+      "price_eur_mwh": 47.64,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-20T23:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T00:30:00",
-      "price_eur_mwh": 45.56,
+      "timestamp_utc": "2026-02-21T23:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T00:30:00",
+      "price_eur_mwh": 40,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-20T23:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T00:45:00",
-      "price_eur_mwh": 40.84,
+      "timestamp_utc": "2026-02-21T23:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T00:45:00",
+      "price_eur_mwh": 33.5,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T00:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T01:00:00",
-      "price_eur_mwh": 47.6,
+      "timestamp_utc": "2026-02-22T00:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T01:00:00",
+      "price_eur_mwh": 46.8,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T00:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T01:15:00",
-      "price_eur_mwh": 40.41,
+      "timestamp_utc": "2026-02-22T00:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T01:15:00",
+      "price_eur_mwh": 41.26,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T00:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T01:30:00",
-      "price_eur_mwh": 43.2,
+      "timestamp_utc": "2026-02-22T00:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T01:30:00",
+      "price_eur_mwh": 39.43,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T00:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T01:45:00",
-      "price_eur_mwh": 33.58,
+      "timestamp_utc": "2026-02-22T00:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T01:45:00",
+      "price_eur_mwh": 38.65,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T01:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T02:00:00",
-      "price_eur_mwh": 42.67,
+      "timestamp_utc": "2026-02-22T01:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T02:00:00",
+      "price_eur_mwh": 43.31,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T01:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T02:15:00",
-      "price_eur_mwh": 39.77,
+      "timestamp_utc": "2026-02-22T01:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T02:15:00",
+      "price_eur_mwh": 38.71,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T01:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T02:30:00",
-      "price_eur_mwh": 34.79,
+      "timestamp_utc": "2026-02-22T01:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T02:30:00",
+      "price_eur_mwh": 36.36,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T01:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T02:45:00",
-      "price_eur_mwh": 29.48,
+      "timestamp_utc": "2026-02-22T01:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T02:45:00",
+      "price_eur_mwh": 31.69,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T02:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T03:00:00",
-      "price_eur_mwh": 38.8,
+      "timestamp_utc": "2026-02-22T02:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T03:00:00",
+      "price_eur_mwh": 31.38,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T02:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T03:15:00",
-      "price_eur_mwh": 34.2,
+      "timestamp_utc": "2026-02-22T02:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T03:15:00",
+      "price_eur_mwh": 30.2,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T02:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T03:30:00",
-      "price_eur_mwh": 32.09,
+      "timestamp_utc": "2026-02-22T02:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T03:30:00",
+      "price_eur_mwh": 35.72,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T02:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T03:45:00",
-      "price_eur_mwh": 33.72,
+      "timestamp_utc": "2026-02-22T02:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T03:45:00",
+      "price_eur_mwh": 31.76,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T03:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T04:00:00",
-      "price_eur_mwh": 34.55,
+      "timestamp_utc": "2026-02-22T03:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T04:00:00",
+      "price_eur_mwh": 29.18,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T03:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T04:15:00",
-      "price_eur_mwh": 34.81,
+      "timestamp_utc": "2026-02-22T03:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T04:15:00",
+      "price_eur_mwh": 27.71,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T03:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T04:30:00",
-      "price_eur_mwh": 34.84,
+      "timestamp_utc": "2026-02-22T03:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T04:30:00",
+      "price_eur_mwh": 32.38,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T03:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T04:45:00",
-      "price_eur_mwh": 33.06,
+      "timestamp_utc": "2026-02-22T03:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T04:45:00",
+      "price_eur_mwh": 32.14,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T04:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T05:00:00",
-      "price_eur_mwh": 31.75,
+      "timestamp_utc": "2026-02-22T04:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T05:00:00",
+      "price_eur_mwh": 31,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T04:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T05:15:00",
-      "price_eur_mwh": 31.85,
+      "timestamp_utc": "2026-02-22T04:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T05:15:00",
+      "price_eur_mwh": 30.95,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T04:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T05:30:00",
-      "price_eur_mwh": 38.62,
+      "timestamp_utc": "2026-02-22T04:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T05:30:00",
+      "price_eur_mwh": 29.97,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T04:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T05:45:00",
-      "price_eur_mwh": 39.59,
+      "timestamp_utc": "2026-02-22T04:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T05:45:00",
+      "price_eur_mwh": 28.33,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T05:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T06:00:00",
-      "price_eur_mwh": 25.95,
+      "timestamp_utc": "2026-02-22T05:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T06:00:00",
+      "price_eur_mwh": 26.25,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T05:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T06:15:00",
-      "price_eur_mwh": 29.47,
+      "timestamp_utc": "2026-02-22T05:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T06:15:00",
+      "price_eur_mwh": 27.65,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T05:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T06:30:00",
-      "price_eur_mwh": 37.94,
+      "timestamp_utc": "2026-02-22T05:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T06:30:00",
+      "price_eur_mwh": 28.47,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T05:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T06:45:00",
-      "price_eur_mwh": 48.93,
+      "timestamp_utc": "2026-02-22T05:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T06:45:00",
+      "price_eur_mwh": 30.03,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T06:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T07:00:00",
-      "price_eur_mwh": 37.08,
+      "timestamp_utc": "2026-02-22T06:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T07:00:00",
+      "price_eur_mwh": 30.16,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T06:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T07:15:00",
-      "price_eur_mwh": 38.35,
+      "timestamp_utc": "2026-02-22T06:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T07:15:00",
+      "price_eur_mwh": 34.28,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T06:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T07:30:00",
-      "price_eur_mwh": 50.66,
+      "timestamp_utc": "2026-02-22T06:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T07:30:00",
+      "price_eur_mwh": 30.97,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T06:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T07:45:00",
-      "price_eur_mwh": 56.58,
+      "timestamp_utc": "2026-02-22T06:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T07:45:00",
+      "price_eur_mwh": 32.41,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T07:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T08:00:00",
-      "price_eur_mwh": 56.91,
+      "timestamp_utc": "2026-02-22T07:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T08:00:00",
+      "price_eur_mwh": 34.86,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T07:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T08:15:00",
-      "price_eur_mwh": 56.41,
+      "timestamp_utc": "2026-02-22T07:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T08:15:00",
+      "price_eur_mwh": 33.55,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T07:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T08:30:00",
-      "price_eur_mwh": 59.08,
+      "timestamp_utc": "2026-02-22T07:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T08:30:00",
+      "price_eur_mwh": 35.68,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T07:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T08:45:00",
-      "price_eur_mwh": 60.23,
+      "timestamp_utc": "2026-02-22T07:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T08:45:00",
+      "price_eur_mwh": 39.94,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T08:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T09:00:00",
-      "price_eur_mwh": 59.51,
+      "timestamp_utc": "2026-02-22T08:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T09:00:00",
+      "price_eur_mwh": 39.67,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T08:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T09:15:00",
-      "price_eur_mwh": 53.09,
+      "timestamp_utc": "2026-02-22T08:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T09:15:00",
+      "price_eur_mwh": 42.19,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T08:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T09:30:00",
-      "price_eur_mwh": 53.34,
+      "timestamp_utc": "2026-02-22T08:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T09:30:00",
+      "price_eur_mwh": 40.61,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T08:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T09:45:00",
-      "price_eur_mwh": 50,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T09:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T10:00:00",
-      "price_eur_mwh": 55.58,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T09:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T10:15:00",
-      "price_eur_mwh": 54.21,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T09:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T10:30:00",
-      "price_eur_mwh": 48.67,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T09:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T10:45:00",
-      "price_eur_mwh": 42.41,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T10:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T11:00:00",
-      "price_eur_mwh": 53.03,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T10:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T11:15:00",
-      "price_eur_mwh": 46.29,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T10:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T11:30:00",
-      "price_eur_mwh": 44.11,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T10:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T11:45:00",
-      "price_eur_mwh": 40.45,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T11:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T12:00:00",
-      "price_eur_mwh": 51.87,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T11:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T12:15:00",
-      "price_eur_mwh": 44.39,
-      "bzn": "BE",
-      "source": "energy-charts"
-    },
-    {
-      "timestamp_utc": "2026-02-21T11:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T12:30:00",
+      "timestamp_utc": "2026-02-22T08:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T09:45:00",
       "price_eur_mwh": 40.92,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T11:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T12:45:00",
-      "price_eur_mwh": 39.17,
+      "timestamp_utc": "2026-02-22T09:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T10:00:00",
+      "price_eur_mwh": 45.09,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T12:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T13:00:00",
-      "price_eur_mwh": 42.25,
+      "timestamp_utc": "2026-02-22T09:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T10:15:00",
+      "price_eur_mwh": 43.47,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T12:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T13:15:00",
-      "price_eur_mwh": 42.8,
+      "timestamp_utc": "2026-02-22T09:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T10:30:00",
+      "price_eur_mwh": 41.34,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T12:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T13:30:00",
-      "price_eur_mwh": 43.6,
+      "timestamp_utc": "2026-02-22T09:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T10:45:00",
+      "price_eur_mwh": 38.13,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T12:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T13:45:00",
-      "price_eur_mwh": 43.81,
+      "timestamp_utc": "2026-02-22T10:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T11:00:00",
+      "price_eur_mwh": 40.47,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T13:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T14:00:00",
-      "price_eur_mwh": 42.62,
+      "timestamp_utc": "2026-02-22T10:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T11:15:00",
+      "price_eur_mwh": 41.05,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T13:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T14:15:00",
-      "price_eur_mwh": 47.45,
+      "timestamp_utc": "2026-02-22T10:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T11:30:00",
+      "price_eur_mwh": 39.69,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T13:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T14:30:00",
-      "price_eur_mwh": 53.41,
+      "timestamp_utc": "2026-02-22T10:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T11:45:00",
+      "price_eur_mwh": 37.32,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T13:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T14:45:00",
-      "price_eur_mwh": 60.73,
+      "timestamp_utc": "2026-02-22T11:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T12:00:00",
+      "price_eur_mwh": 38.33,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T14:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T15:00:00",
-      "price_eur_mwh": 45.6,
+      "timestamp_utc": "2026-02-22T11:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T12:15:00",
+      "price_eur_mwh": 41.3,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T14:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T15:15:00",
-      "price_eur_mwh": 52.14,
+      "timestamp_utc": "2026-02-22T11:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T12:30:00",
+      "price_eur_mwh": 36.75,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T14:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T15:30:00",
-      "price_eur_mwh": 62.51,
+      "timestamp_utc": "2026-02-22T11:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T12:45:00",
+      "price_eur_mwh": 31.14,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T14:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T15:45:00",
-      "price_eur_mwh": 71.6,
+      "timestamp_utc": "2026-02-22T12:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T13:00:00",
+      "price_eur_mwh": 40.85,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T15:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T16:00:00",
-      "price_eur_mwh": 52.58,
+      "timestamp_utc": "2026-02-22T12:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T13:15:00",
+      "price_eur_mwh": 34.76,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T15:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T16:15:00",
-      "price_eur_mwh": 65.06,
+      "timestamp_utc": "2026-02-22T12:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T13:30:00",
+      "price_eur_mwh": 30.68,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T15:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T16:30:00",
-      "price_eur_mwh": 69.97,
+      "timestamp_utc": "2026-02-22T12:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T13:45:00",
+      "price_eur_mwh": 28.82,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T15:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T16:45:00",
-      "price_eur_mwh": 80.61,
+      "timestamp_utc": "2026-02-22T13:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T14:00:00",
+      "price_eur_mwh": 32.69,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T16:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T17:00:00",
-      "price_eur_mwh": 68.13,
+      "timestamp_utc": "2026-02-22T13:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T14:15:00",
+      "price_eur_mwh": 31.77,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T16:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T17:15:00",
-      "price_eur_mwh": 75.57,
+      "timestamp_utc": "2026-02-22T13:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T14:30:00",
+      "price_eur_mwh": 32.29,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T16:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T17:30:00",
-      "price_eur_mwh": 84.8,
+      "timestamp_utc": "2026-02-22T13:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T14:45:00",
+      "price_eur_mwh": 33.76,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T16:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T17:45:00",
-      "price_eur_mwh": 94.77,
+      "timestamp_utc": "2026-02-22T14:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T15:00:00",
+      "price_eur_mwh": 34.27,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T17:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T18:00:00",
-      "price_eur_mwh": 88.18,
+      "timestamp_utc": "2026-02-22T14:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T15:15:00",
+      "price_eur_mwh": 32.61,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T17:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T18:15:00",
-      "price_eur_mwh": 92.4,
+      "timestamp_utc": "2026-02-22T14:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T15:30:00",
+      "price_eur_mwh": 34.34,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T17:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T18:30:00",
-      "price_eur_mwh": 93.73,
+      "timestamp_utc": "2026-02-22T14:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T15:45:00",
+      "price_eur_mwh": 43.11,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T17:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T18:45:00",
-      "price_eur_mwh": 101.82,
+      "timestamp_utc": "2026-02-22T15:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T16:00:00",
+      "price_eur_mwh": 40.38,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T18:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T19:00:00",
-      "price_eur_mwh": 101.68,
+      "timestamp_utc": "2026-02-22T15:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T16:15:00",
+      "price_eur_mwh": 41.62,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T18:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T19:15:00",
-      "price_eur_mwh": 99.95,
+      "timestamp_utc": "2026-02-22T15:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T16:30:00",
+      "price_eur_mwh": 48.99,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T18:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T19:30:00",
-      "price_eur_mwh": 97.51,
+      "timestamp_utc": "2026-02-22T15:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T16:45:00",
+      "price_eur_mwh": 55.53,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T18:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T19:45:00",
-      "price_eur_mwh": 91.82,
+      "timestamp_utc": "2026-02-22T16:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T17:00:00",
+      "price_eur_mwh": 55.99,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T19:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T20:00:00",
-      "price_eur_mwh": 90.18,
+      "timestamp_utc": "2026-02-22T16:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T17:15:00",
+      "price_eur_mwh": 60.27,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T19:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T20:15:00",
-      "price_eur_mwh": 79,
+      "timestamp_utc": "2026-02-22T16:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T17:30:00",
+      "price_eur_mwh": 63.88,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T19:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T20:30:00",
-      "price_eur_mwh": 73.61,
+      "timestamp_utc": "2026-02-22T16:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T17:45:00",
+      "price_eur_mwh": 75.89,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T19:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T20:45:00",
-      "price_eur_mwh": 66.79,
+      "timestamp_utc": "2026-02-22T17:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T18:00:00",
+      "price_eur_mwh": 66.41,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T20:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T21:00:00",
-      "price_eur_mwh": 74.44,
+      "timestamp_utc": "2026-02-22T17:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T18:15:00",
+      "price_eur_mwh": 73.99,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T20:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T21:15:00",
-      "price_eur_mwh": 71.47,
+      "timestamp_utc": "2026-02-22T17:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T18:30:00",
+      "price_eur_mwh": 76.14,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T20:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T21:30:00",
-      "price_eur_mwh": 67.2,
+      "timestamp_utc": "2026-02-22T17:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T18:45:00",
+      "price_eur_mwh": 74.89,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T20:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T21:45:00",
-      "price_eur_mwh": 60.47,
+      "timestamp_utc": "2026-02-22T18:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T19:00:00",
+      "price_eur_mwh": 75.83,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T21:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T22:00:00",
-      "price_eur_mwh": 75.05,
+      "timestamp_utc": "2026-02-22T18:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T19:15:00",
+      "price_eur_mwh": 79.53,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T21:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T22:15:00",
-      "price_eur_mwh": 68.48,
+      "timestamp_utc": "2026-02-22T18:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T19:30:00",
+      "price_eur_mwh": 80,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T21:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T22:30:00",
-      "price_eur_mwh": 60,
+      "timestamp_utc": "2026-02-22T18:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T19:45:00",
+      "price_eur_mwh": 74.33,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T21:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T22:45:00",
-      "price_eur_mwh": 56.77,
+      "timestamp_utc": "2026-02-22T19:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T20:00:00",
+      "price_eur_mwh": 72.05,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T22:00:00.000Z",
-      "timestamp_brussels": "2026-02-21T23:00:00",
-      "price_eur_mwh": 64.59,
+      "timestamp_utc": "2026-02-22T19:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T20:15:00",
+      "price_eur_mwh": 62.37,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T22:15:00.000Z",
-      "timestamp_brussels": "2026-02-21T23:15:00",
-      "price_eur_mwh": 53.88,
+      "timestamp_utc": "2026-02-22T19:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T20:30:00",
+      "price_eur_mwh": 65.08,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T22:30:00.000Z",
-      "timestamp_brussels": "2026-02-21T23:30:00",
-      "price_eur_mwh": 57.76,
+      "timestamp_utc": "2026-02-22T19:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T20:45:00",
+      "price_eur_mwh": 60.85,
       "bzn": "BE",
       "source": "energy-charts"
     },
     {
-      "timestamp_utc": "2026-02-21T22:45:00.000Z",
-      "timestamp_brussels": "2026-02-21T23:45:00",
-      "price_eur_mwh": 35.31,
+      "timestamp_utc": "2026-02-22T20:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T21:00:00",
+      "price_eur_mwh": 57.15,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T20:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T21:15:00",
+      "price_eur_mwh": 57,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T20:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T21:30:00",
+      "price_eur_mwh": 55.49,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T20:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T21:45:00",
+      "price_eur_mwh": 51.99,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T21:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T22:00:00",
+      "price_eur_mwh": 64.47,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T21:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T22:15:00",
+      "price_eur_mwh": 55.79,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T21:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T22:30:00",
+      "price_eur_mwh": 60.03,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T21:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T22:45:00",
+      "price_eur_mwh": 45.85,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T22:00:00.000Z",
+      "timestamp_brussels": "2026-02-22T23:00:00",
+      "price_eur_mwh": 54.56,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T22:15:00.000Z",
+      "timestamp_brussels": "2026-02-22T23:15:00",
+      "price_eur_mwh": 42.91,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T22:30:00.000Z",
+      "timestamp_brussels": "2026-02-22T23:30:00",
+      "price_eur_mwh": 43.73,
+      "bzn": "BE",
+      "source": "energy-charts"
+    },
+    {
+      "timestamp_utc": "2026-02-22T22:45:00.000Z",
+      "timestamp_brussels": "2026-02-22T23:45:00",
+      "price_eur_mwh": 28.68,
       "bzn": "BE",
       "source": "energy-charts"
     }
   ],
   "stats": {
     "count": 96,
-    "min_price_eur_mwh": 25.95,
-    "max_price_eur_mwh": 101.82,
-    "avg_price_eur_mwh": 54.96
+    "min_price_eur_mwh": 26.25,
+    "max_price_eur_mwh": 80,
+    "avg_price_eur_mwh": 43.92
   }
 }
