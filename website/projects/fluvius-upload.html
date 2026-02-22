@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digitale Atelier · Fluvius Analyzer</title>
+  <title>Digitale Atelier · Fluvius Analyzer (Upload Demo)</title>
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body class="project">
@@ -11,8 +11,8 @@
     <div class="glow" aria-hidden="true"></div>
     <header>
       <a class="back" href="../index.html">← Digitale Atelier</a>
-      <span class="logo">Fluvius Analyzer · Referentie</span>
-      <span class="tag">Jouw vaste concept</span>
+      <span class="logo">Fluvius Analyzer · Upload Demo</span>
+      <span class="tag">Toekomstige bezoeker</span>
     </header>
     <main>
       <section class="project-hero">
@@ -21,9 +21,9 @@
           <span class="project-chip">Schets</span>
           <h1>Fluvius Analyzer</h1>
           <p class="lede">
-            Dit is je vaste referentieversie op Fluvius 2025 data. Upload-flow voor bezoekers staat apart.
+            Dit is de bezoekersversie met CSV-upload en validatie op volledig recent jaar.
           </p>
-          <p><a class="cta-primary" style="display:inline-block; text-decoration:none; margin-top:.5rem;" href="./fluvius-upload.html">Open upload-versie voor bezoekers</a></p>
+          <p><a class="cta-ghost" style="display:inline-block; text-decoration:none; margin-top:.5rem;" href="./fluvius.html">Terug naar referentieversie</a></p>
         </div>
       </section>
       <section class="story">
@@ -107,9 +107,10 @@
         </header>
         <div class="panel" style="grid-template-columns:1fr; margin-bottom:.8rem;">
           <div class="card">
-            <h3>Datasetmodus</h3>
-            <p class="chart-hint" id="activeDatasetLabel">Actieve dataset: Referentie Fluvius 2025 (vast)</p>
-            <p class="chart-hint" id="uploadStatus">Upload staat uit in deze referentieversie. Gebruik de upload-versie voor bezoekers.</p>
+            <h3>Fluvius CSV upload</h3>
+            <input type="file" id="fluviusCsvUpload" accept=".csv,text/csv" class="usage-select" />
+            <p class="chart-hint" id="activeDatasetLabel">Actieve dataset: Standaard (2025-profiel)</p>
+            <p class="chart-hint" id="uploadStatus">Geen upload actief. Standaarddataset wordt gebruikt.</p>
           </div>
         </div>
         <div class="scenario-switch" style="margin-bottom:.6rem; flex-wrap:wrap; align-items:center;">

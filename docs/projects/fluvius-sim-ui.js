@@ -21,6 +21,7 @@
   const uploadInput = document.getElementById('fluviusCsvUpload');
   const uploadStatus = document.getElementById('uploadStatus');
   const datasetLabel = document.getElementById('activeDatasetLabel');
+  const uploadEnabled = !!uploadInput;
 
   function setStatus(text) {
     if (recalcStatus) recalcStatus.textContent = text;
@@ -38,6 +39,10 @@
 
   function updateDatasetLabel() {
     if (!datasetLabel) return;
+    if (!uploadEnabled) {
+      datasetLabel.textContent = 'Actieve dataset: Referentie Fluvius 2025 (vast)';
+      return;
+    }
     datasetLabel.textContent = activeDataset.type === 'upload'
       ? `Actieve dataset: Upload (${activeDataset.year})`
       : 'Actieve dataset: Standaard (2025-profiel)';
@@ -210,7 +215,12 @@
   setupOffers();
   initWorker();
   updateDatasetLabel();
-  setUploadStatus('Geen upload actief. Standaarddataset wordt gebruikt.', 'ok');
+  setUploadStatus(
+    uploadEnabled
+      ? 'Geen upload actief. Standaarddataset wordt gebruikt.'
+      : 'Upload staat uit in referentieversie. Gebruik de upload-versie voor bezoekers.',
+    'ok'
+  );
 
   uploadInput?.addEventListener('change', (e) => onCsvUpload(e.target.files?.[0]));
   currentOfferSel?.addEventListener('change', recompute);
