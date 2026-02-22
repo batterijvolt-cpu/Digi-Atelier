@@ -150,7 +150,7 @@
       ctx.fillRect(pad.left, pad.top, innerW, innerH);
 
       // Y-as: logische ticks (stap 5 of 10) + subtiele horizontale hulplijnen
-      const step = range <= 40 ? 5 : 10;
+      const step = 5;
       const yMinTick = Math.floor(min / step) * step;
       const yMaxTick = Math.ceil(max / step) * step;
       const yRangeTick = Math.max(step, yMaxTick - yMinTick);
