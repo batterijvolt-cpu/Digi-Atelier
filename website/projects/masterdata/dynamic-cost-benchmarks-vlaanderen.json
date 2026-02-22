@@ -1,0 +1,82 @@
+{
+  "dataset": "dynamic_cost_benchmarks_vlaanderen",
+  "table_id": 304,
+  "updated_at_utc": "2026-02-22T13:39:00.000Z",
+  "scope": "Residentiële dynamische elektriciteitscontracten Vlaanderen (conservatieve componentweergave)",
+  "method": "strict confidence gating: enkel high-confidence numerieke waarden tonen; anders '?'",
+  "update_frequency": "Maandelijks (1x/maand volstaat voor deze tabel)",
+  "rows": [
+    {
+      "component": "Energieprijs gekoppeld aan index/kwartier",
+      "value": "?",
+      "unit": "c€/kWh",
+      "confidence": "medium",
+      "note": "Formule en index verschillen per leveranciersfiche; zonder eenduidige high-confidence geconsolideerde numerieke waarde tonen we '?'.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "Indexatie/afrekenfrequentie",
+      "value": "?",
+      "unit": "periode",
+      "confidence": "medium",
+      "note": "Dynamische prijsvolging gebeurt op korte markthorizon, maar facturatie/afrekening kan leverancier-specifiek zijn; geen uniforme high-confidence periodewaarde in deze tabel.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "Vaste jaarlijkse vergoeding",
+      "value": "?",
+      "unit": "€/jaar",
+      "confidence": "starter",
+      "note": "Productfiches per leverancier nodig voor harde numerieke consolidatie; momenteel niet uniform high-confidence in deze dataset.",
+      "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "Nettarieven",
+      "value": "?",
+      "unit": "c€/kWh",
+      "confidence": "starter",
+      "note": "Nettarieven zijn DNB/profiel/jaarafhankelijk; nog geen high-confidence geconsolideerde c€/kWh waarde in tabel 304.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "Capaciteitstariefcomponent",
+      "value": "?",
+      "unit": "€/jaar",
+      "confidence": "starter",
+      "note": "Capaciteitstarief hangt af van piekvermogen en DNB-context; geen uniforme high-confidence normwaarde voor deze samenvatting.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "Heffingen en toeslagen",
+      "value": "?",
+      "unit": "c€/kWh",
+      "confidence": "starter",
+      "note": "Samenstelling en bedragen wijzigen per beleidsperiode; geen geconsolideerde high-confidence c€/kWh totaalsom in huidige tabel.",
+      "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "BTW",
+      "value": "21",
+      "unit": "%",
+      "confidence": "high",
+      "note": "Standaard Belgisch BTW-tarief.",
+      "source_url": "https://financien.belgium.be/nl/ondernemingen/btw/tarieven-btw",
+      "source_date": "2026-02-22"
+    },
+    {
+      "component": "Eventuele injectievergoeding component",
+      "value": "?",
+      "unit": "c€/kWh",
+      "confidence": "starter",
+      "note": "Injectievergoeding is product- en leverancier-specifiek; geen uniforme high-confidence waarde voor dynamisch segment als geheel.",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers",
+      "source_date": "2026-02-22"
+    }
+  ]
+}

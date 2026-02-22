@@ -11,6 +11,7 @@ async function main() {
   const belpex = await readJson(`${ROOT}/website/projects/masterdata/belpex-latest-24h.json`);
   const fixed = await readJson(`${ROOT}/website/projects/masterdata/fixed-contract-tariff-matrix-vlaanderen.json`);
   const dynamic = await readJson(`${ROOT}/website/projects/masterdata/dynamic-contract-tariff-matrix-vlaanderen.json`);
+  const dynamicCost = await readJson(`${ROOT}/website/projects/masterdata/dynamic-cost-benchmarks-vlaanderen.json`);
   const hefbomen = await readJson(`${ROOT}/data/master/battery/curated/batterij_hefbomen_matrix.json`);
 
   const registry = {
@@ -70,6 +71,25 @@ async function main() {
           { project: 'Masterdata', how: 'Structuurmonitor dynamische contracten.' },
           { project: '€Volt', how: 'Input voor marktvolgende batterijstrategie.' },
           { project: 'Fluvius Analyzer', how: 'Scenariovergelijking op contracttype.' }
+        ]
+      },
+      {
+        id: 'dynamic_cost_benchmarks_vlaanderen',
+        title: 'Dynamische contractcomponenten (Tabel 304) - Vlaanderen',
+        description: 'Conservatieve kostenbenchmarks voor dynamische contractcomponenten met strict confidence gating.',
+        what_we_see: 'Per dynamische component: waarde, eenheid, confidence en bronmetadata (source_url + source_date).',
+        update_frequency: 'Maandelijks (1x/maand volstaat voor deze tabel)',
+        max_age_hours: 24 * 35,
+        last_update: dynamicCost.updated_at_utc,
+        status: 'ok',
+        preview: {
+          columns: ['component', 'waarde', 'eenheid', 'confidence'],
+          rows: (dynamicCost.rows || []).slice(0,6).map(r => [r.component, r.confidence === 'high' ? r.value : '?', r.unit, r.confidence || 'starter'])
+        },
+        usage: [
+          { project: 'Masterdata', how: 'Compact overzicht voor Tabel 304 met confidence-gating.' },
+          { project: '€Volt', how: 'Input voor dynamische all-in kostsimulatie met bronverwijzing.' },
+          { project: 'Fluvius Analyzer', how: 'Dynamische contractcomponenten met expliciete onzekerheidsmarkering (\'?\').' }
         ]
       },
       {
