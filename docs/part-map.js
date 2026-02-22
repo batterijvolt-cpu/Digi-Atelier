@@ -131,8 +131,8 @@
     const versionBadge = document.createElement('button');
     versionBadge.type = 'button';
     versionBadge.className = 'part-version-badge';
-    versionBadge.textContent = 'Versie: laden…';
-    versionBadge.title = 'Live versie van deze pagina';
+    versionBadge.textContent = 'Update: laden…';
+    versionBadge.title = 'Laatste update van deze pagina';
     versionBadge.addEventListener('click', () => {
       const txt = versionBadge.textContent || '';
       navigator.clipboard?.writeText(txt).catch(() => {});
@@ -146,10 +146,19 @@
       .then((r) => (r.ok ? r.json() : null))
       .then((v) => {
         if (!v) throw new Error('no version');
-        versionBadge.textContent = `${v.version || 'v?'} · ${v.label || 'live'}`;
+        const raw = v.updated_at || '';
+        const dt = raw ? new Date(raw) : null;
+        const hhmm = dt && Number.isFinite(dt.getTime())
+          ? dt.toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit' })
+          : '??:??';
+        const ddmm = dt && Number.isFinite(dt.getTime())
+          ? dt.toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit' })
+          : '--/--';
+        versionBadge.textContent = `Update ${ddmm} ${hhmm}`;
+        versionBadge.title = `${v.version || 'v?'} · ${v.label || 'live'}`;
       })
       .catch(() => {
-        versionBadge.textContent = 'Versie: onbekend';
+        versionBadge.textContent = 'Update onbekend';
       });
 
     apply();
