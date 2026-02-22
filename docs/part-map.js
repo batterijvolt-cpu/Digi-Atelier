@@ -12,6 +12,21 @@
     'main > .story'
   ].join(', ');
 
+  const PAGE_BASES = [
+    [/\/index\.html$/, 1],
+    [/\/projects\/evolt\.html$/, 101],
+    [/\/projects\/fluvius\.html$/, 201],
+    [/\/projects\/masterdata\.html$/, 301]
+  ];
+
+  const pageBase = (() => {
+    const p = location.pathname;
+    for (const [rx, base] of PAGE_BASES) {
+      if (rx.test(p)) return base;
+    }
+    return 901;
+  })();
+
   const isVisible = (el) => {
     const s = getComputedStyle(el);
     if (s.display === 'none' || s.visibility === 'hidden' || Number(s.opacity) === 0) return false;
@@ -38,7 +53,7 @@
     const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
     const majorSet = new Set(majorEls);
 
-    let major = 1;
+    let major = pageBase;
     majorEls.forEach((box) => {
       mark(box, String(major));
 
