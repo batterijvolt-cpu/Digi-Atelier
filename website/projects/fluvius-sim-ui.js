@@ -8,6 +8,7 @@
   let worker = null;
   let workerReady = true;
   let computeToken = 0;
+  let activeDataset = { type: 'default', label: 'Standaard (2025-profiel)', intervals: null, year: null };
 
   const pvBtn = document.getElementById('pvCapBtn');
   const pvMinus = document.getElementById('pvMinus');
@@ -17,6 +18,9 @@
   const switchSummary = document.getElementById('switchSummary');
   const recalcStatus = document.getElementById('recalcStatus');
   const recalcWarning = document.getElementById('recalcWarning');
+  const uploadInput = document.getElementById('fluviusCsvUpload');
+  const uploadStatus = document.getElementById('uploadStatus');
+  const datasetLabel = document.getElementById('activeDatasetLabel');
 
   function setStatus(text) {
     if (recalcStatus) recalcStatus.textContent = text;
@@ -24,6 +28,19 @@
 
   function showWarning(text) {
     if (recalcWarning) recalcWarning.textContent = text || '';
+  }
+
+  function setUploadStatus(text, state) {
+    if (!uploadStatus) return;
+    uploadStatus.textContent = text;
+    uploadStatus.style.color = state === 'error' ? '#ef4444' : state === 'warn' ? '#f59e0b' : '#94a3b8';
+  }
+
+  function updateDatasetLabel() {
+    if (!datasetLabel) return;
+    datasetLabel.textContent = activeDataset.type === 'upload'
+      ? `Actieve dataset: Upload (${activeDataset.year})`
+      : 'Actieve dataset: Standaard (2025-profiel)';
   }
 
   function renderRows(rows, summary) {
@@ -59,8 +76,15 @@
     }
   }
 
+  function buildActiveStats() {
+    if (activeDataset.type === 'upload' && Array.isArray(activeDataset.intervals) && activeDataset.intervals.length) {
+      return core.computeStatsFromIntervals(activeDataset.intervals, pvKwp);
+    }
+    return core.buildPreviewStats(ctx.monthlyData, ctx.scenarioData, pvKwp);
+  }
+
   function renderPreview() {
-    const stats = core.buildPreviewStats(ctx.monthlyData, ctx.scenarioData, pvKwp);
+    const stats = buildActiveStats();
     const result = core.computeRowsFromStats(stats, {
       pvKwp,
       currentOfferId: currentOfferSel.value,
@@ -82,15 +106,22 @@
     const token = ++computeToken;
     setStatus('Exacte herberekening bezig…');
 
-    worker.postMessage({
+    const payload = {
       type: 'compute',
-      csvUrl: resolveCsvUrl(),
       params: {
         pvKwp,
         currentOfferId: currentOfferSel.value,
         newOfferId: newOfferSel.value
       }
-    });
+    };
+
+    if (activeDataset.type === 'upload' && activeDataset.intervals) {
+      payload.intervals = activeDataset.intervals;
+    } else {
+      payload.csvUrl = resolveCsvUrl();
+    }
+
+    worker.postMessage(payload);
 
     worker.onmessage = (ev) => {
       if (token !== computeToken) return;
@@ -119,6 +150,7 @@
   }
 
   function recompute() {
+    updateDatasetLabel();
     renderPreview();
     runAccurate();
   }
@@ -143,8 +175,44 @@
     }
   }
 
+  function onCsvUpload(file) {
+    if (!file) return;
+    file.text().then((text) => {
+      const parsed = core.parseFluviusCsv(text);
+      const check = core.validateRecentFullYear(parsed.intervals);
+      if (!check.valid) {
+        activeDataset = { type: 'default', label: 'Standaard (2025-profiel)', intervals: null, year: null };
+        const missingInfo = (check.missingByMonth || []).slice(0, 6).map((m) => `${m.month}:${m.missing}`).join(', ');
+        setUploadStatus(`Upload geweigerd: ${check.reason}${missingInfo ? ` Ontbrekend per maand (kwartieren): ${missingInfo}${(check.missingByMonth || []).length > 6 ? ', …' : ''}.` : ''}`, 'error');
+        recompute();
+        return;
+      }
+
+      const yearIntervals = core.extractYearIntervals(parsed.intervals, check.year);
+      activeDataset = {
+        type: 'upload',
+        label: `Upload (${check.year})`,
+        intervals: yearIntervals,
+        year: check.year
+      };
+
+      if (check.warning) {
+        setUploadStatus(`Upload OK met waarschuwing: ${check.warning}`, 'warn');
+      } else {
+        setUploadStatus(`Upload OK: volledig recent kalenderjaar ${check.year} gedetecteerd (${check.present}/${check.expected} kwartierintervallen).`, 'ok');
+      }
+      recompute();
+    }).catch((err) => {
+      setUploadStatus(`Upload mislukt: ${err.message || err}`, 'error');
+    });
+  }
+
   setupOffers();
   initWorker();
+  updateDatasetLabel();
+  setUploadStatus('Geen upload actief. Standaarddataset wordt gebruikt.', 'ok');
+
+  uploadInput?.addEventListener('change', (e) => onCsvUpload(e.target.files?.[0]));
   currentOfferSel?.addEventListener('change', recompute);
   newOfferSel?.addEventListener('change', recompute);
   pvMinus?.addEventListener('click', () => { pvKwp = Math.max(2, pvKwp - 0.5); recompute(); });
