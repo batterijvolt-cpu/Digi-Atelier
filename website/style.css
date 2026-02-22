@@ -711,6 +711,8 @@ body.project.masterdata-page .kpi-row .card p {
   padding: .45rem .8rem;
   font-size: .78rem;
   cursor: pointer;
+  min-width: 148px;
+  text-align: center;
 }
 .part-version-badge {
   position: fixed;
@@ -724,6 +726,8 @@ body.project.masterdata-page .kpi-row .card p {
   padding: .35rem .72rem;
   font-size: .72rem;
   cursor: pointer;
+  min-width: 148px;
+  text-align: center;
 }
 
 @media (max-width: 640px) {
