@@ -29,7 +29,7 @@
 
       <section class="story compact">
         <div class="section-head">
-          <h3>Belpex prijs — recentste 24u</h3>
+          <h3 id="belpex-title">Belpex prijs — recentste 24u</h3>
           <span class="status-pill" id="belpex-status">controleren…</span>
         </div>
         <p class="table-explainer"><strong>Wat zie je:</strong> Belgische day-ahead prijs (EUR/MWh), laatste 96 kwartieren (24 uur).</p>
@@ -165,12 +165,26 @@
         ctx.fillText(gv, pad.left - 6, gy);
       }
 
+      // x-as ticks (uren)
+      const tickCount = 6;
+      ctx.fillStyle = 'rgba(148,163,184,0.9)';
+      ctx.font = '11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      for (let t = 0; t <= tickCount; t++) {
+        const idx = Math.round((t / tickCount) * (points.length - 1));
+        const ts = points[idx]?.timestamp_brussels || '';
+        const hh = ts.slice(11, 13) || '—';
+        const xTick = x(idx);
+        ctx.fillText(`${hh}:00`, xTick, h - 18);
+      }
+
       // axes labels
       ctx.fillStyle = 'rgba(148,163,184,0.95)';
       ctx.font = '12px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      ctx.fillText('X-as: tijd (laatste 24u)', pad.left + innerW / 2, h - 18);
+      ctx.fillText('X-as: uren', pad.left + innerW / 2, h - 4);
 
       ctx.save();
       ctx.translate(14, pad.top + innerH / 2);
@@ -217,6 +231,12 @@
         document.getElementById('belpex-last-update').textContent = upd;
         document.getElementById('belpex-next-update').textContent = nextUpdateFrom(upd, 'dagelijks') || '—';
         latestUpdateIso = upd;
+
+        const lastTs = points[points.length - 1]?.timestamp_brussels || '';
+        const dataDate = lastTs ? lastTs.slice(0, 10) : upd?.slice(0, 10);
+        if (dataDate) {
+          document.getElementById('belpex-title').textContent = `Belpex prijs — ${dataDate}`;
+        }
 
         const h = hoursAgo(upd);
         belpexState = h <= 30 ? 'ok' : 'warn';
