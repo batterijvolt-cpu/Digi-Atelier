@@ -58,8 +58,9 @@
     const tables = Array.from(document.querySelectorAll('table')).filter(isVisible);
     let t = 1;
     tables.forEach((table) => {
-      table.classList.add('table-numbered');
-      table.setAttribute('data-table-id', `T${t}`);
+      const host = table.closest('.table-scroll') || table;
+      host.classList.add('table-numbered');
+      host.setAttribute('data-table-id', `T${t}`);
       t += 1;
     });
   };
