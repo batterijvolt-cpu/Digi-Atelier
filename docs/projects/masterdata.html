@@ -53,7 +53,7 @@
           <span class="status-pill" id="matrix-status">controleren…</span>
         </div>
         <p class="table-explainer"><strong>Wat zie je:</strong> concrete kostbandbreedtes per component met eenheid (c€/kWh, €/jaar, %).</p>
-        <p class="table-explainer"><strong>Updatefrequentie:</strong> wekelijks (starter-benchmark, te verfijnen met supplier fiches).</p>
+        <p class="table-explainer"><strong>Updatefrequentie:</strong> maandelijks (1x/maand volstaat voor deze tabel).</p>
         <p class="table-explainer"><strong>Laatste update:</strong> <span id="matrix-last-update">—</span></p>
         <p class="table-error" id="matrix-error"></p>
         <div class="table-scroll">
@@ -213,7 +213,9 @@
       const tbody = document.createElement('tbody');
       rows.forEach(r => {
         const tr = document.createElement('tr');
-        [r.component, r.value, r.unit, r.confidence || 'starter', r.note || ''].forEach(v => {
+        const conf = r.confidence || 'starter';
+        const shownValue = conf === 'high' ? r.value : '?';
+        [r.component, shownValue, r.unit, conf, r.note || ''].forEach(v => {
           const td = document.createElement('td');
           td.textContent = String(v ?? '—');
           tr.appendChild(td);
