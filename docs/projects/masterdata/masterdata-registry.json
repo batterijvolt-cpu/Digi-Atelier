@@ -437,7 +437,7 @@
       "what_we_see": "Per leverancier/product: injectietype, tariefwaarde (of ?), confidence en bron.",
       "update_frequency": "Maandelijks",
       "max_age_hours": 192,
-      "last_update": "2026-02-22T16:20:00.000Z",
+      "last_update": "2026-02-22T17:40:00.000Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -451,6 +451,14 @@
         "rows": [
           [
             "ENGIE",
+            "Easy",
+            "vast/variabel",
+            "?",
+            "c€/kWh",
+            "medium"
+          ],
+          [
+            "ENGIE",
             "Flow",
             "variabel",
             "?",
@@ -458,9 +466,41 @@
             "medium"
           ],
           [
-            "Eneco",
-            "Zon & Wind",
+            "ENGIE",
+            "Direct Online",
             "variabel",
+            "?",
+            "c€/kWh",
+            "medium"
+          ],
+          [
+            "ENGIE",
+            "Dynamic",
+            "dynamisch",
+            "?",
+            "c€/kWh",
+            "medium"
+          ],
+          [
+            "ENGIE",
+            "Empower",
+            "vast/variabel",
+            "?",
+            "c€/kWh",
+            "medium"
+          ],
+          [
+            "ENGIE",
+            "Basic Online",
+            "variabel",
+            "?",
+            "c€/kWh",
+            "medium"
+          ],
+          [
+            "Luminus",
+            "Comfy",
+            "vast",
             "?",
             "c€/kWh",
             "starter"
@@ -469,6 +509,30 @@
             "Luminus",
             "ComfyFlex",
             "variabel",
+            "?",
+            "c€/kWh",
+            "starter"
+          ],
+          [
+            "Luminus",
+            "Dynamic Online",
+            "dynamisch",
+            "?",
+            "c€/kWh",
+            "starter"
+          ],
+          [
+            "TotalEnergies",
+            "myDynamic",
+            "dynamisch",
+            "?",
+            "c€/kWh",
+            "starter"
+          ],
+          [
+            "Mega",
+            "Zen Fixed",
+            "vast",
             "?",
             "c€/kWh",
             "starter"

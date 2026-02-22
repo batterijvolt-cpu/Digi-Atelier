@@ -1,29 +1,89 @@
 {
   "dataset": "injection_tariffs_flanders",
-  "updated_at_utc": "2026-02-22T16:20:00.000Z",
-  "fill_status": "partial_enriched",
+  "updated_at_utc": "2026-02-22T17:40:00.000Z",
+  "fill_status": "all_suppliers_covered_pending_high_confidence_numeric",
   "records": [
     {
       "supplier": "ENGIE",
-      "product": "Flow",
-      "tariff_type": "variabel",
-      "source_type": "supplier_product_context",
+      "product": "Easy",
+      "tariff_type": "vast/variabel",
+      "source_type": "official_supplier_page",
       "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
-      "source_date": "2026-02-21",
+      "source_date": "2026-02-22",
       "confidence_level": "medium",
-      "notes": "ENGIE product page explicitly positions Flow with injection compensation proposition; numeric injection tariff values are in linked price fiches and vary by period/indexation.",
+      "notes": "Product officieel bevestigd. Blokker: injectietarief staat in gelinkte prijsfiche (PDF/API) en kon in deze run niet machine-leesbaar naar exact numeriek veld geverifieerd worden.",
       "injection_tariff_value": "?",
       "injection_tariff_unit": "c€/kWh"
     },
     {
-      "supplier": "Eneco",
-      "product": "Zon & Wind",
+      "supplier": "ENGIE",
+      "product": "Flow",
       "tariff_type": "variabel",
-      "source_type": "starter_manual_tag",
-      "source_url": "https://www.eneco.be/nl/",
-      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-22",
+      "confidence_level": "medium",
+      "notes": "Flow en injectievergoeding expliciet vermeld op officiële productpagina. Blokker: exacte numerieke injectiewaarde niet high-confidence uit prijsfiche-PDF geëxtraheerd in deze run.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Direct Online",
+      "tariff_type": "variabel",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-22",
+      "confidence_level": "medium",
+      "notes": "Product officieel bevestigd. Blokker: geen high-confidence numerieke injectiewaarde zonder valideerbare tarieffiche-uitlezing.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Dynamic",
+      "tariff_type": "dynamisch",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-22",
+      "confidence_level": "medium",
+      "notes": "Product officieel bevestigd. Blokker: dynamische injectievergoeding vereist exacte tariefformule of officiële numerieke referentie, niet high-confidence geëxtraheerd in deze run.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Empower",
+      "tariff_type": "vast/variabel",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-22",
+      "confidence_level": "medium",
+      "notes": "Product officieel bevestigd. Blokker: numeriek injectietarief niet betrouwbaar afgeleid zonder parseerbare prijsfiche-data.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Basic Online",
+      "tariff_type": "variabel",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-22",
+      "confidence_level": "medium",
+      "notes": "Product officieel bevestigd. Blokker: numerieke injectiewaarde nog niet high-confidence gevalideerd uit officiële fiche.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "Luminus",
+      "product": "Comfy",
+      "tariff_type": "vast",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-22",
       "confidence_level": "starter",
-      "notes": "Supplier page confirms Belgian green electricity positioning; product-level injection tariff details still missing (official tariff fiche URL not yet resolved).",
+      "notes": "Product op officiële site bevestigd. Blokker: officiële tarieffiche met expliciete numerieke injectievergoeding niet vastgelegd in deze run.",
       "injection_tariff_value": "?",
       "injection_tariff_unit": "c€/kWh"
     },
@@ -33,9 +93,45 @@
       "tariff_type": "variabel",
       "source_type": "official_supplier_page",
       "source_url": "https://www.luminus.be/nl/prive/",
-      "source_date": "2026-02-21",
+      "source_date": "2026-02-22",
       "confidence_level": "starter",
-      "notes": "Product existence confirmed on official Luminus page. Injection remuneration value/formula not captured yet from product fiche.",
+      "notes": "Product op officiële site bevestigd. Blokker: numerieke injectievergoeding nog niet high-confidence uit officiële tarieffiche vastgelegd.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "Luminus",
+      "product": "Dynamic Online",
+      "tariff_type": "dynamisch",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-22",
+      "confidence_level": "starter",
+      "notes": "Product op officiële site bevestigd. Blokker: officiële numerieke/fórmule-definitie van injectietarief niet opgenomen met high-confidence bronextractie.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "TotalEnergies",
+      "product": "myDynamic",
+      "tariff_type": "dynamisch",
+      "source_type": "starter_manual_tag",
+      "source_url": "https://www.totalenergies.be",
+      "source_date": "2026-02-22",
+      "confidence_level": "starter",
+      "notes": "Blokker: geen productspecifieke officiële tarieffiche-URL met expliciete numerieke injectievergoeding vastgelegd in huidige bronset.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "Mega",
+      "product": "Zen Fixed",
+      "tariff_type": "vast",
+      "source_type": "starter_manual_tag",
+      "source_url": "https://www.mega.be",
+      "source_date": "2026-02-22",
+      "confidence_level": "starter",
+      "notes": "Blokker: geen officiële producttarieffiche met eenduidige numerieke injectievergoeding vastgelegd in huidige bronset.",
       "injection_tariff_value": "?",
       "injection_tariff_unit": "c€/kWh"
     }
@@ -43,6 +139,8 @@
   "sources": [
     "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
     "https://www.luminus.be/nl/prive/",
-    "https://www.eneco.be/nl/"
+    "https://www.totalenergies.be",
+    "https://www.mega.be",
+    "https://www.vtest.be/"
   ]
 }
