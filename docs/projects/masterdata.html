@@ -156,7 +156,29 @@
         ctx.moveTo(pad.left, gy);
         ctx.lineTo(pad.left + innerW, gy);
         ctx.stroke();
+
+        const gv = (max - (g / 4) * range).toFixed(0);
+        ctx.fillStyle = 'rgba(148,163,184,0.9)';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(gv, pad.left - 6, gy);
       }
+
+      // axes labels
+      ctx.fillStyle = 'rgba(148,163,184,0.95)';
+      ctx.font = '12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText('X-as: tijd (laatste 24u)', pad.left + innerW / 2, h - 18);
+
+      ctx.save();
+      ctx.translate(14, pad.top + innerH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText('Y-as: prijs (€/MWh)', 0, 0);
+      ctx.restore();
 
       ctx.strokeStyle = '#f2c744';
       ctx.lineWidth = 2;
