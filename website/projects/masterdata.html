@@ -148,21 +148,27 @@
       ctx.fillStyle = 'rgba(255,255,255,0.02)';
       ctx.fillRect(pad.left, pad.top, innerW, innerH);
 
-      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+      // Y-as: logische ticks (stap 5 of 10) + subtiele horizontale hulplijnen
+      const step = range <= 40 ? 5 : 10;
+      const yMinTick = Math.floor(min / step) * step;
+      const yMaxTick = Math.ceil(max / step) * step;
+      const yRangeTick = Math.max(step, yMaxTick - yMinTick);
+      const yFromTick = (v) => pad.top + (1 - (v - yMinTick) / yRangeTick) * innerH;
+
       ctx.lineWidth = 1;
-      for (let g = 0; g <= 4; g++) {
-        const gy = pad.top + (g / 4) * innerH;
+      for (let gv = yMinTick; gv <= yMaxTick; gv += step) {
+        const gy = yFromTick(gv);
+        ctx.strokeStyle = 'rgba(148,163,184,0.12)';
         ctx.beginPath();
         ctx.moveTo(pad.left, gy);
         ctx.lineTo(pad.left + innerW, gy);
         ctx.stroke();
 
-        const gv = (max - (g / 4) * range).toFixed(0);
         ctx.fillStyle = 'rgba(148,163,184,0.9)';
         ctx.font = '11px sans-serif';
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
-        ctx.fillText(gv, pad.left - 6, gy);
+        ctx.fillText(String(gv), pad.left - 6, gy);
       }
 
       // x-as ticks (uren)
