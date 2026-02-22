@@ -477,40 +477,52 @@
     {
       "id": "meter_regimes",
       "title": "Meterregimes en validatieregels",
-      "description": "Technische voorwaarden per tariefregime.",
-      "what_we_see": "Toelaatbaarheid en meetresolutie per meterregime.",
+      "description": "Technische voorwaarden + operationele geschiktheid per meterregime.",
+      "what_we_see": "Per regime: meetresolutie, dynamisch contract mogelijk, en batterij-optimalisatiegeschiktheid.",
       "update_frequency": "Per kwartaal",
       "max_age_hours": 2400,
-      "last_update": "2026-02-22T15:00:22.811Z",
+      "last_update": "2026-02-22T16:10:00.000Z",
       "status": "ok",
       "preview": {
         "columns": [
           "regime",
-          "digitale_meter_verplicht",
-          "meetresolutie"
+          "digitale meter verplicht",
+          "dynamisch contract",
+          "meetresolutie",
+          "batterij-optimalisatie"
         ],
         "rows": [
           [
             "enkel",
             "nee",
-            "maand/jaar"
+            "nee",
+            "maand",
+            "laag"
           ],
           [
             "dag_nacht",
             "nee",
-            "maand/jaar"
+            "nee",
+            "maand",
+            "middel"
           ],
           [
             "dynamisch",
             "ja",
-            "kwartier"
+            "ja",
+            "kwartier",
+            "hoog"
           ]
         ]
       },
       "usage": [
         {
           "project": "Fluvius Analyzer",
-          "how": "Datavalidatie en contracttoelaatbaarheid."
+          "how": "Datavalidatie + contracttoelaatbaarheid + selecteren van haalbare simulatielogica."
+        },
+        {
+          "project": "€Volt",
+          "how": "Snel bepalen of dynamische sturing en kwartieroptimalisatie zinvol/haalbaar is."
         }
       ]
     },

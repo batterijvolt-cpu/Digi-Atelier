@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-02-22T13:39:00.000Z",
+  "generated_at_utc": "2026-02-22T15:00:22.811Z",
   "tables": [
     {
       "id": "belpex_prices_be_24h",
@@ -8,7 +8,7 @@
       "what_we_see": "Belgische day-ahead elektriciteitsprijzen (laatste 24u, kwartierdata).",
       "update_frequency": "Dagelijks 16:00 Europe/Brussels",
       "max_age_hours": 30,
-      "last_update": "2026-02-21T15:00:20.080Z",
+      "last_update": "2026-02-22T15:00:22.753Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -17,36 +17,36 @@
         ],
         "rows": [
           [
-            "2026-02-21T22:00:00",
-            75.05
+            "2026-02-22T22:00:00",
+            64.47
           ],
           [
-            "2026-02-21T22:15:00",
-            68.48
+            "2026-02-22T22:15:00",
+            55.79
           ],
           [
-            "2026-02-21T22:30:00",
-            60
+            "2026-02-22T22:30:00",
+            60.03
           ],
           [
-            "2026-02-21T22:45:00",
-            56.77
+            "2026-02-22T22:45:00",
+            45.85
           ],
           [
-            "2026-02-21T23:00:00",
-            64.59
+            "2026-02-22T23:00:00",
+            54.56
           ],
           [
-            "2026-02-21T23:15:00",
-            53.88
+            "2026-02-22T23:15:00",
+            42.91
           ],
           [
-            "2026-02-21T23:30:00",
-            57.76
+            "2026-02-22T23:30:00",
+            43.73
           ],
           [
-            "2026-02-21T23:45:00",
-            35.31
+            "2026-02-22T23:45:00",
+            28.68
           ]
         ]
       },
@@ -203,6 +203,12 @@
             "medium"
           ],
           [
+            "Vaste jaarlijkse vergoeding",
+            "?",
+            "€/jaar",
+            "starter"
+          ],
+          [
             "Nettarieven",
             "5.48",
             "c€/kWh",
@@ -218,12 +224,6 @@
             "Heffingen en toeslagen",
             "2.90",
             "c€/kWh",
-            "high"
-          ],
-          [
-            "BTW",
-            "21",
-            "%",
             "high"
           ]
         ]
@@ -313,7 +313,7 @@
       "what_we_see": "Nettariefcontext per DNB en tariefjaar.",
       "update_frequency": "Maandelijks (1e maandag 16:30)",
       "max_age_hours": 840,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -353,7 +353,7 @@
       "what_we_see": "Fiscale en reglementaire componenten voor all-in kost.",
       "update_frequency": "Maandelijks (1e maandag 16:35)",
       "max_age_hours": 840,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -397,7 +397,7 @@
       "what_we_see": "Productoverzicht per leverancier met contracttype.",
       "update_frequency": "Wekelijks",
       "max_age_hours": 192,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -437,7 +437,7 @@
       "what_we_see": "Injectievergoeding per leverancier/product.",
       "update_frequency": "Wekelijks",
       "max_age_hours": 192,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -477,40 +477,52 @@
     {
       "id": "meter_regimes",
       "title": "Meterregimes en validatieregels",
-      "description": "Technische voorwaarden per tariefregime.",
-      "what_we_see": "Toelaatbaarheid en meetresolutie per meterregime.",
+      "description": "Technische voorwaarden + operationele geschiktheid per meterregime.",
+      "what_we_see": "Per regime: meetresolutie, dynamisch contract mogelijk, en batterij-optimalisatiegeschiktheid.",
       "update_frequency": "Per kwartaal",
       "max_age_hours": 2400,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T16:10:00.000Z",
       "status": "ok",
       "preview": {
         "columns": [
           "regime",
-          "digitale_meter_verplicht",
-          "meetresolutie"
+          "digitale meter verplicht",
+          "dynamisch contract",
+          "meetresolutie",
+          "batterij-optimalisatie"
         ],
         "rows": [
           [
             "enkel",
             "nee",
-            "maand/jaar"
+            "nee",
+            "maand",
+            "laag"
           ],
           [
             "dag_nacht",
             "nee",
-            "maand/jaar"
+            "nee",
+            "maand",
+            "middel"
           ],
           [
             "dynamisch",
             "ja",
-            "kwartier"
+            "ja",
+            "kwartier",
+            "hoog"
           ]
         ]
       },
       "usage": [
         {
           "project": "Fluvius Analyzer",
-          "how": "Datavalidatie en contracttoelaatbaarheid."
+          "how": "Datavalidatie + contracttoelaatbaarheid + selecteren van haalbare simulatielogica."
+        },
+        {
+          "project": "€Volt",
+          "how": "Snel bepalen of dynamische sturing en kwartieroptimalisatie zinvol/haalbaar is."
         }
       ]
     },
@@ -521,7 +533,7 @@
       "what_we_see": "Default efficiency/DoD/lifecycle voor batterijsimulaties.",
       "update_frequency": "Per kwartaal",
       "max_age_hours": 2400,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -569,7 +581,7 @@
       "what_we_see": "Generieke PV-productieprofielen voor simulaties zonder meetdata.",
       "update_frequency": "Per kwartaal",
       "max_age_hours": 2400,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -613,7 +625,7 @@
       "what_we_see": "Default verbruiksprofielen per huishoudtype.",
       "update_frequency": "Per kwartaal",
       "max_age_hours": 2400,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.811Z",
       "status": "ok",
       "preview": {
         "columns": [
@@ -653,7 +665,7 @@
       "what_we_see": "Tijdsblokken voor tarief- en piekanalyses.",
       "update_frequency": "Jaarlijks + wijzigingstabel ad hoc",
       "max_age_hours": 9600,
-      "last_update": "2026-02-21T17:24:02.400Z",
+      "last_update": "2026-02-22T15:00:22.812Z",
       "status": "ok",
       "preview": {
         "columns": [

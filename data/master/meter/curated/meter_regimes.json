@@ -1,28 +1,46 @@
 {
   "dataset": "meter_regimes",
-  "updated_at_utc": "2026-02-21T16:44:07.192Z",
-  "fill_status": "seeded",
+  "updated_at_utc": "2026-02-22T16:10:00.000Z",
+  "fill_status": "enriched",
   "records": [
     {
       "regime": "enkel",
       "digital_meter_required": false,
       "resolution": "monthly",
       "suited_for_dynamic_contract": false,
-      "source_type": "domain_rules"
+      "interval_data_required": false,
+      "capacity_tariff_relevance": "medium",
+      "recommended_for_battery_optimization": "laag",
+      "source_type": "regulatory_context",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/energiecontracten",
+      "source_date": "2026-02-22",
+      "confidence_level": "high"
     },
     {
       "regime": "dag_nacht",
       "digital_meter_required": false,
       "resolution": "monthly",
       "suited_for_dynamic_contract": false,
-      "source_type": "domain_rules"
+      "interval_data_required": false,
+      "capacity_tariff_relevance": "medium",
+      "recommended_for_battery_optimization": "middel",
+      "source_type": "regulatory_context",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/energiecontracten",
+      "source_date": "2026-02-22",
+      "confidence_level": "high"
     },
     {
       "regime": "dynamisch",
       "digital_meter_required": true,
       "resolution": "quarter_hour",
       "suited_for_dynamic_contract": true,
-      "source_type": "market_rules"
+      "interval_data_required": true,
+      "capacity_tariff_relevance": "high",
+      "recommended_for_battery_optimization": "hoog",
+      "source_type": "regulatory_context",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/energiecontracten",
+      "source_date": "2026-02-22",
+      "confidence_level": "high"
     }
   ],
   "sources": [
