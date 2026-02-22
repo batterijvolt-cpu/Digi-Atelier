@@ -20,6 +20,14 @@
     return 901;
   })();
 
+  const deprecatedPartIds = (() => {
+    const p = location.pathname;
+    // legacy 203-blok verwijderd op beide Fluvius-varianten; nummer niet hergebruiken
+    if (p.includes('/projects/fluvius.html')) return new Set([203]);
+    if (p.includes('/projects/fluvius-upload.html')) return new Set([253]);
+    return new Set();
+  })();
+
   const tableBase = (() => {
     const p = location.pathname;
     if (p.includes('/projects/evolt.html')) return 21;
@@ -83,6 +91,7 @@
     const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
     let nextId = pageBase;
     majorEls.forEach((box) => {
+      while (deprecatedPartIds.has(nextId)) nextId += 1;
       mark(box, String(nextId));
       nextId += 1;
     });
