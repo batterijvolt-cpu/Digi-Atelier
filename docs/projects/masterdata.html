@@ -41,11 +41,12 @@
           <canvas id="belpexChart" height="230" aria-label="Belpex 24 uur prijsgrafiek"></canvas>
         </div>
         <div class="kpi-row">
-          <div class="card"><h3>Laatste</h3><p id="kpi-latest">—</p></div>
+          <div class="card"><h3>Lst</h3><p id="kpi-latest">—</p></div>
           <div class="card"><h3>Min</h3><p id="kpi-min">—</p></div>
           <div class="card"><h3>Max</h3><p id="kpi-max">—</p></div>
-          <div class="card"><h3>Gem.</h3><p id="kpi-avg">—</p></div>
+          <div class="card"><h3>Gem</h3><p id="kpi-avg">—</p></div>
         </div>
+        <p class="table-explainer"><strong>Eenheid KPI:</strong> €/MWh</p>
       </section>
 
       <section class="story compact">
@@ -90,7 +91,7 @@
   </div>
 
   <script>
-    const euro = (v) => `${Number(v).toFixed(2)} €/MWh`;
+    const euro = (v) => `${Number(v).toFixed(1)}`;
 
     function hoursAgo(iso) {
       if (!iso) return Number.POSITIVE_INFINITY;
