@@ -1,6 +1,4 @@
 (() => {
-  const INTERACTIVE = 'a, button, input, select, textarea, [role="button"], [role="slider"], input[type="range"]';
-  const VISUALS = 'table, canvas, svg';
   const MAJORS = [
     'main > section',
     'main > .homegrid > a',
@@ -45,31 +43,10 @@
     clearTags();
 
     const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
-    const majorSet = new Set(majorEls);
 
     let nextId = pageBase;
     majorEls.forEach((box) => {
       mark(box, String(nextId));
-      nextId += 1;
-
-      const childEls = Array.from(box.querySelectorAll(`${INTERACTIVE}, ${VISUALS}, .catalog-card, .table-scroll, .kpi-row .card`))
-        .filter((el) => el !== box && isVisible(el) && !majorSet.has(el));
-
-      const seen = new Set();
-      childEls.forEach((el) => {
-        if (seen.has(el)) return;
-        seen.add(el);
-        mark(el, String(nextId));
-        nextId += 1;
-      });
-    });
-
-    // fallback: interactieve elementen buiten de major-structuur
-    const loose = Array.from(document.querySelectorAll(`${INTERACTIVE}, ${VISUALS}`)).filter(
-      (el) => isVisible(el) && !el.closest('[data-part-id]')
-    );
-    loose.forEach((el) => {
-      mark(el, String(nextId));
       nextId += 1;
     });
   };
