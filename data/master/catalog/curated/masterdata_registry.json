@@ -432,45 +432,57 @@
     },
     {
       "id": "injection_tariffs_flanders",
-      "title": "Injectietarieven per leverancier (starter)",
-      "description": "Vergoeding voor geïnjecteerde energie per product/leverancier.",
-      "what_we_see": "Injectievergoeding per leverancier/product.",
-      "update_frequency": "Wekelijks",
+      "title": "Injectietarieven per leverancier/product (Vlaanderen)",
+      "description": "Injectievergoeding per leverancier en product, met confidence en bronmetadata.",
+      "what_we_see": "Per leverancier/product: injectietype, tariefwaarde (of ?), confidence en bron.",
+      "update_frequency": "Maandelijks",
       "max_age_hours": 192,
-      "last_update": "2026-02-22T15:00:22.811Z",
+      "last_update": "2026-02-22T16:20:00.000Z",
       "status": "ok",
       "preview": {
         "columns": [
           "leverancier",
           "product",
-          "injectietarief_type"
+          "tarieftype",
+          "injectietarief",
+          "eenheid",
+          "confidence"
         ],
         "rows": [
           [
             "ENGIE",
             "Flow",
-            "variabel"
-          ],
-          [
-            "Luminus",
-            "OptiPower",
-            "variabel"
+            "variabel",
+            "?",
+            "c€/kWh",
+            "medium"
           ],
           [
             "Eneco",
             "Zon & Wind",
-            "variabel"
+            "variabel",
+            "?",
+            "c€/kWh",
+            "starter"
+          ],
+          [
+            "Luminus",
+            "ComfyFlex",
+            "variabel",
+            "?",
+            "c€/kWh",
+            "starter"
           ]
         ]
       },
       "usage": [
         {
-          "project": "€Volt",
-          "how": "PV/batterij rendement en terugleveranalyse."
+          "project": "Fluvius Analyzer",
+          "how": "Switch-analyse vast/dynamisch met correcte injectie-opbrengst per leverancier/product."
         },
         {
-          "project": "Fluvius Analyzer",
-          "how": "Netto energiekost met injectiecorrectie."
+          "project": "€Volt",
+          "how": "Rendementsberekening PV+batterij op basis van leverancier-specifieke injectievergoeding."
         }
       ]
     },

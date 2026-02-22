@@ -1,7 +1,7 @@
 {
   "dataset": "injection_tariffs_flanders",
-  "updated_at_utc": "2026-02-21T16:55:00.000Z",
-  "fill_status": "partial",
+  "updated_at_utc": "2026-02-22T16:20:00.000Z",
+  "fill_status": "partial_enriched",
   "records": [
     {
       "supplier": "ENGIE",
@@ -11,17 +11,9 @@
       "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
       "source_date": "2026-02-21",
       "confidence_level": "medium",
-      "notes": "ENGIE product page explicitly positions Flow with injection compensation proposition; numeric injection tariff values are in linked price fiches and vary by period/indexation."
-    },
-    {
-      "supplier": "Luminus",
-      "product": "ComfyFlex",
-      "tariff_type": "variabel",
-      "source_type": "official_supplier_page",
-      "source_url": "https://www.luminus.be/nl/prive/",
-      "source_date": "2026-02-21",
-      "confidence_level": "starter",
-      "notes": "Product existence confirmed on official Luminus page. Injection remuneration value/formula not captured yet from product fiche."
+      "notes": "ENGIE product page explicitly positions Flow with injection compensation proposition; numeric injection tariff values are in linked price fiches and vary by period/indexation.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
     },
     {
       "supplier": "Eneco",
@@ -31,7 +23,21 @@
       "source_url": "https://www.eneco.be/nl/",
       "source_date": "2026-02-21",
       "confidence_level": "starter",
-      "notes": "Supplier page confirms Belgian green electricity positioning; product-level injection tariff details still missing (official tariff fiche URL not yet resolved)."
+      "notes": "Supplier page confirms Belgian green electricity positioning; product-level injection tariff details still missing (official tariff fiche URL not yet resolved).",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
+    },
+    {
+      "supplier": "Luminus",
+      "product": "ComfyFlex",
+      "tariff_type": "variabel",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-21",
+      "confidence_level": "starter",
+      "notes": "Product existence confirmed on official Luminus page. Injection remuneration value/formula not captured yet from product fiche.",
+      "injection_tariff_value": "?",
+      "injection_tariff_unit": "c€/kWh"
     }
   ],
   "sources": [
