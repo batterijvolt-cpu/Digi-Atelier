@@ -13,7 +13,8 @@
       "confidence": "medium",
       "note": "Formule en index verschillen per leveranciersfiche; zonder eenduidige high-confidence geconsolideerde numerieke waarde tonen we '?'.",
       "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers",
-      "source_date": "2026-02-22"
+      "source_date": "2026-02-22",
+      "confidence_level": "medium"
     },
     {
       "component": "Indexatie/afrekenfrequentie",
@@ -22,7 +23,8 @@
       "confidence": "medium",
       "note": "Dynamische prijsvolging gebeurt op korte markthorizon, maar facturatie/afrekening kan leverancier-specifiek zijn; geen uniforme high-confidence periodewaarde in deze tabel.",
       "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers",
-      "source_date": "2026-02-22"
+      "source_date": "2026-02-22",
+      "confidence_level": "medium"
     },
     {
       "component": "Vaste jaarlijkse vergoeding",
@@ -31,34 +33,38 @@
       "confidence": "starter",
       "note": "Productfiches per leverancier nodig voor harde numerieke consolidatie; momenteel niet uniform high-confidence in deze dataset.",
       "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
-      "source_date": "2026-02-22"
+      "source_date": "2026-02-22",
+      "confidence_level": "starter"
     },
     {
       "component": "Nettarieven",
-      "value": "?",
+      "value": "5.48",
       "unit": "c€/kWh",
-      "confidence": "starter",
-      "note": "Nettarieven zijn DNB/profiel/jaarafhankelijk; nog geen high-confidence geconsolideerde c€/kWh waarde in tabel 304.",
-      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
-      "source_date": "2026-02-22"
+      "confidence": "high",
+      "note": "Gemiddelde LS digitale meter 2026 over 8 Fluvius-netgebieden: 'Totaal kWh-tarief' (EUR/MWh) omgerekend naar c€/kWh; toepasbaar als gereguleerde netcomponent, contracttype-onafhankelijk.",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28",
+      "confidence_level": "high"
     },
     {
       "component": "Capaciteitstariefcomponent",
-      "value": "?",
-      "unit": "€/jaar",
-      "confidence": "starter",
-      "note": "Capaciteitstarief hangt af van piekvermogen en DNB-context; geen uniforme high-confidence normwaarde voor deze samenvatting.",
-      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
-      "source_date": "2026-02-22"
+      "value": "53.53",
+      "unit": "€/kW/jaar",
+      "confidence": "high",
+      "note": "Gemiddelde LS digitale meter 2026 over 8 Fluvius-netgebieden: 'Capaciteitstarief - gemiddelde maandpiek' (EUR/kW/jaar); gereguleerde netcomponent, contracttype-onafhankelijk.",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28",
+      "confidence_level": "high"
     },
     {
       "component": "Heffingen en toeslagen",
-      "value": "?",
+      "value": "2.90",
       "unit": "c€/kWh",
-      "confidence": "starter",
-      "note": "Samenstelling en bedragen wijzigen per beleidsperiode; geen geconsolideerde high-confidence c€/kWh totaalsom in huidige tabel.",
-      "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
-      "source_date": "2026-02-22"
+      "confidence": "high",
+      "note": "Gemiddelde LS digitale meter 2026 over 8 Fluvius-netgebieden: som van 'Tarieven voor de openbaredienstverplichtingen' + 'Tarieven voor de toeslagen' (EUR/kWh) omgerekend naar c€/kWh; toepasbaar als gereguleerde component.",
+      "source_url": "https://assets.vlaamsenutsregulator.be/2025-11/Distributienettarieven%20elektriciteit%202026.xlsx?VersionId=yIPLVXG9cytG2_k0HI0ZF_BF4Fa27nV7",
+      "source_date": "2025-11-28",
+      "confidence_level": "high"
     },
     {
       "component": "BTW",
@@ -67,7 +73,8 @@
       "confidence": "high",
       "note": "Standaard Belgisch BTW-tarief.",
       "source_url": "https://financien.belgium.be/nl/ondernemingen/btw/tarieven-btw",
-      "source_date": "2026-02-22"
+      "source_date": "2026-02-22",
+      "confidence_level": "high"
     },
     {
       "component": "Eventuele injectievergoeding component",
@@ -76,7 +83,8 @@
       "confidence": "starter",
       "note": "Injectievergoeding is product- en leverancier-specifiek; geen uniforme high-confidence waarde voor dynamisch segment als geheel.",
       "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers",
-      "source_date": "2026-02-22"
+      "source_date": "2026-02-22",
+      "confidence_level": "starter"
     }
   ]
 }
