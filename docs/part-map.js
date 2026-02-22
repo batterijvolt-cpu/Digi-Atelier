@@ -62,11 +62,26 @@
     return r.width > 20 && r.height > 16;
   };
 
+  const slugify = (txt = '') => String(txt)
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48);
+
+  const sectionKey = (el, idx) => {
+    if (el.id) return `sec-${slugify(el.id)}`;
+    const h = el.querySelector('h1,h2,h3');
+    if (h?.textContent) return `sec-${slugify(h.textContent)}`;
+    return `sec-auto-${idx + 1}`;
+  };
+
   const clearTags = () => {
     document.querySelectorAll('[data-part-id]').forEach((el) => {
       el.classList.remove('part-numbered');
       el.removeAttribute('data-part-id');
       el.removeAttribute('data-part-label');
+      el.removeAttribute('data-section-key');
     });
     document.querySelectorAll('[data-table-id]').forEach((el) => {
       el.classList.remove('table-numbered');
@@ -90,9 +105,10 @@
 
     const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
     let nextId = pageBase;
-    majorEls.forEach((box) => {
+    majorEls.forEach((box, idx) => {
       while (deprecatedPartIds.has(nextId)) nextId += 1;
       mark(box, String(nextId));
+      box.setAttribute('data-section-key', sectionKey(box, idx));
       nextId += 1;
     });
 

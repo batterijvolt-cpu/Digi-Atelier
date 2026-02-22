@@ -687,6 +687,22 @@ body.project.masterdata-page .kpi-row .card p {
   pointer-events: none;
   box-shadow: 0 1px 4px rgba(2,6,23,.25);
 }
+.part-numbered[data-section-key]::before {
+  content: attr(data-section-key);
+  position: absolute;
+  top: 14px;
+  left: 8px;
+  background: rgba(15,23,42,0.55);
+  color: #cbd5e1;
+  border: 1px solid rgba(148,163,184,0.3);
+  border-radius: 6px;
+  padding: 0 6px;
+  height: 16px;
+  line-height: 14px;
+  font-size: 9px;
+  z-index: 39;
+  pointer-events: none;
+}
 .table-numbered {
   position: relative;
 }
@@ -710,6 +726,7 @@ body.project.masterdata-page .kpi-row .card p {
   pointer-events: none;
 }
 .part-map-off .part-numbered::after,
+.part-map-off .part-numbered::before,
 .part-map-off .table-numbered::before {
   display: none;
 }
