@@ -1,6 +1,6 @@
 {
   "dataset": "fixed_cost_benchmarks_vlaanderen",
-  "updated_at_utc": "2026-02-22T13:38:00.000Z",
+  "updated_at_utc": "2026-02-22T12:55:00.000Z",
   "scope": "Residentiële elektriciteit Vlaanderen (conservatieve kostenweergave)",
   "method": "strict confidence gating: enkel high-confidence waarden tonen; anders '?'",
   "sources": [
@@ -72,5 +72,6 @@
       "source_url": "https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/vat-rates_en",
       "source_date": "2026-02-22"
     }
-  ]
+  ],
+  "update_frequency": "Maandelijks (1x/maand volstaat voor deze tabel)"
 }
