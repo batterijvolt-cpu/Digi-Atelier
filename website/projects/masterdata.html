@@ -47,8 +47,7 @@
             </table>
           </div>
         </div>
-        <div class="kpi-row">
-          <div class="card"><h3>Lst</h3><p id="kpi-latest">—</p></div>
+        <div class="kpi-row belpex-kpi-row">
           <div class="card"><h3>Min</h3><p id="kpi-min">—</p></div>
           <div class="card"><h3>Max</h3><p id="kpi-max">—</p></div>
           <div class="card"><h3>Gem</h3><p id="kpi-avg">—</p></div>
@@ -248,7 +247,8 @@
 
         drawLineChart(document.getElementById('belpexChart'), points);
         renderBelpexTable(points);
-        document.getElementById('kpi-latest').textContent = euro(points[points.length - 1].price_eur_mwh);
+        const kpiLatest = document.getElementById('kpi-latest');
+        if (kpiLatest) kpiLatest.textContent = euro(points[points.length - 1].price_eur_mwh);
         document.getElementById('kpi-min').textContent = euro(data.stats.min_price_eur_mwh);
         document.getElementById('kpi-max').textContent = euro(data.stats.max_price_eur_mwh);
         document.getElementById('kpi-avg').textContent = euro(data.stats.avg_price_eur_mwh);

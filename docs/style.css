@@ -523,6 +523,23 @@ p.lede {
   grid-template-columns: 1fr;
   gap: 0.7rem;
   align-items: start;
+  margin-bottom: 0.55rem;
+}
+.belpex-kpi-row {
+  clear: both;
+  margin-top: 0.25rem;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+.belpex-kpi-row .card {
+  padding: 0.5rem 0.6rem;
+}
+.belpex-kpi-row .card h3 {
+  font-size: 0.72rem;
+  margin: 0 0 0.15rem;
+}
+.belpex-kpi-row .card p {
+  font-size: 0.95rem;
 }
 @media (min-width: 1024px) {
   .belpex-split-204 {
