@@ -169,7 +169,7 @@
       });
     }
     const monthlyBody = document.querySelector('#monthlyTable tbody');
-    monthlyBody.innerHTML = monthlyData.labels.map((m,i)=>`<tr><td>${m}</td><td>${monthlyData.afname[i]}</td><td>${monthlyData.injectie[i]}</td><td>${monthlyData.piek[i]}</td></tr>`).join('') + `<tr class="total"><td>JAARTOTAAL</td><td>${monthlyData.afname.reduce((a,b)=>a+b,0).toFixed(1)}</td><td>${monthlyData.injectie.reduce((a,b)=>a+b,0).toFixed(1)}</td><td>${Math.max(...monthlyData.piek).toFixed(2)}</td></tr>`;
+    if (monthlyBody) monthlyBody.innerHTML = monthlyData.labels.map((m,i)=>`<tr><td>${m}</td><td>${monthlyData.afname[i]}</td><td>${monthlyData.injectie[i]}</td><td>${monthlyData.piek[i]}</td></tr>`).join('') + `<tr class="total"><td>JAARTOTAAL</td><td>${monthlyData.afname.reduce((a,b)=>a+b,0).toFixed(1)}</td><td>${monthlyData.injectie.reduce((a,b)=>a+b,0).toFixed(1)}</td><td>${Math.max(...monthlyData.piek).toFixed(2)}</td></tr>`;
     // Gestapelde balken met rendementshefbomen (5 scenario's)
     const baselinePeakKw = Math.max(...monthlyData.piek);
     const tarieven = {
