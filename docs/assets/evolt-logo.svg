@@ -1,0 +1,17 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="evoltGradient" x1="20" y1="30" x2="220" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F2C744"/>
+      <stop offset="45%" stop-color="#F59F45"/>
+      <stop offset="100%" stop-color="#13C4D1"/>
+    </linearGradient>
+    <linearGradient id="pulseGradient" x1="60" y1="140" x2="200" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F8E08E"/>
+      <stop offset="100%" stop-color="#57DAFF"/>
+    </linearGradient>
+  </defs>
+  <path d="M190 65C175 45 150 32 120 32C74 32 36 70 36 116C36 162 74 200 120 200C151 200 176 184 192 160" stroke="url(#evoltGradient)" stroke-width="26" stroke-linecap="round" fill="none"/>
+  <path d="M70 95H38" stroke="url(#pulseGradient)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M80 115H32" stroke="url(#pulseGradient)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M80 140L95 120L110 150L125 110L140 170L155 135L170 150L200 120" stroke="url(#pulseGradient)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
