@@ -550,9 +550,51 @@ body.project.masterdata-page .kpi-row .card p {
   margin: 0.3rem 0 0.5rem;
 }
 
+.part-numbered {
+  position: relative;
+}
+.part-numbered::after {
+  content: "#" attr(data-part-id);
+  position: absolute;
+  top: -9px;
+  left: -9px;
+  background: #ff2d55;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 999px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: .01em;
+  z-index: 40;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+.part-map-off .part-numbered::after {
+  display: none;
+}
+.part-map-toggle {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 70;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  background: rgba(15,23,42,.92);
+  color: #fff;
+  padding: .45rem .8rem;
+  font-size: .78rem;
+  cursor: pointer;
+}
+
 @media (max-width: 640px) {
   body { padding: 2rem 1rem; }
   .frame { padding: 2rem; }
   h1 { font-size: 2.4rem; }
   .matrix { font-size: 0.85rem; }
+  .part-map-toggle { bottom: 8px; right: 8px; }
 }
