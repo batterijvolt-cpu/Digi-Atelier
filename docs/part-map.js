@@ -32,6 +32,10 @@
       el.removeAttribute('data-part-id');
       el.removeAttribute('data-part-label');
     });
+    document.querySelectorAll('[data-table-id]').forEach((el) => {
+      el.classList.remove('table-numbered');
+      el.removeAttribute('data-table-id');
+    });
   };
 
   const mark = (el, id) => {
@@ -48,6 +52,15 @@
     majorEls.forEach((box) => {
       mark(box, String(nextId));
       nextId += 1;
+    });
+
+    // Extra logica voor datatabellen: T1, T2, ... op chronologische DOM-volgorde
+    const tables = Array.from(document.querySelectorAll('table')).filter(isVisible);
+    let t = 1;
+    tables.forEach((table) => {
+      table.classList.add('table-numbered');
+      table.setAttribute('data-table-id', `T${t}`);
+      t += 1;
     });
   };
 

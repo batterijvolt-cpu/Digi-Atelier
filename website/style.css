@@ -637,7 +637,30 @@ body.project.masterdata-page .kpi-row .card p {
   pointer-events: none;
   box-shadow: 0 1px 4px rgba(2,6,23,.25);
 }
-.part-map-off .part-numbered::after {
+.table-numbered {
+  position: relative;
+}
+.table-numbered::before {
+  content: attr(data-table-id);
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  background: rgba(30,41,59,0.9);
+  color: #dbeafe;
+  border: 1px solid rgba(148,163,184,0.55);
+  border-radius: 999px;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 7px;
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+  font-weight: 700;
+  z-index: 41;
+  pointer-events: none;
+}
+.part-map-off .part-numbered::after,
+.part-map-off .table-numbered::before {
   display: none;
 }
 .part-map-toggle {
