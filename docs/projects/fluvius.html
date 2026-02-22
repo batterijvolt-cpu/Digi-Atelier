@@ -97,6 +97,27 @@
         <canvas id="hefbomenStackChart" height="220"></canvas>
         <p class="chart-hint">Hefbomen: zelfverbruik, piekafvlakking, slim laden (dynamisch), verlies op injectie en rendementsverlies batterij.</p>
       </section>
+
+      <section class="analysis" id="switch-vast-dynamisch">
+        <header>
+          <div class="badge">206 · Switch vast → dynamisch</div>
+          <h2>Impact van injectietarief + Belpex timing op jaarwinst</h2>
+          <p class="meta">Model: injectie-opbrengst verschuift van vast contract (bv. 3 c€/kWh) naar dynamisch (bv. 10 c€/kWh), geschaald op PV-capaciteit en seizoensprofiel.</p>
+        </header>
+        <div class="scenario-switch">
+          <button type="button" id="pvMinus">−</button>
+          <button type="button" id="pvCapBtn" class="active">PV 6.0 kWp</button>
+          <button type="button" id="pvPlus">+</button>
+        </div>
+        <p class="chart-hint" id="switchSummary"></p>
+        <canvas id="switchChart" height="210"></canvas>
+        <div class="table-wrapper">
+          <table class="matrix-table compact" id="seasonSwitchTable">
+            <thead><tr><th>Seizoen</th><th>Injectie (kWh)</th><th>Vast (3 c€)</th><th>Dynamisch (10 c€)</th><th>Timingbonus</th><th>Delta</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -224,6 +245,93 @@
         }
       });
     }
+
+    // 206: switch vast -> dynamisch met seizoensimpact
+    const seasonMap = [
+      { name: 'Winter', idx: [11, 0, 1], timing: 0.06 },
+      { name: 'Lente', idx: [2, 3, 4], timing: 0.12 },
+      { name: 'Zomer', idx: [5, 6, 7], timing: 0.15 },
+      { name: 'Herfst', idx: [8, 9, 10], timing: 0.09 }
+    ];
+    const switchAssumptions = {
+      fixedInjectie: 0.03,
+      dynInjectie: 0.10,
+      pvBaseKwp: 6.0
+    };
+
+    let pvKwp = 6.0;
+    let switchChart;
+    const pvBtn = document.getElementById('pvCapBtn');
+    const pvMinus = document.getElementById('pvMinus');
+    const pvPlus = document.getElementById('pvPlus');
+    const switchSummary = document.getElementById('switchSummary');
+    const switchBody = document.querySelector('#seasonSwitchTable tbody');
+
+    function eur(v) { return `€ ${v.toFixed(0)}`; }
+
+    function renderSwitch() {
+      const factor = pvKwp / switchAssumptions.pvBaseKwp;
+      const rows = seasonMap.map(s => {
+        const inj = s.idx.reduce((sum, i) => sum + monthlyData.injectie[i], 0) * factor;
+        const vast = inj * switchAssumptions.fixedInjectie;
+        const dyn = inj * switchAssumptions.dynInjectie;
+        const timingBonus = inj * s.timing;
+        const delta = dyn + timingBonus - vast;
+        return { seizoen: s.name, inj, vast, dyn, timingBonus, delta };
+      });
+
+      const totaal = rows.reduce((a, r) => ({
+        inj: a.inj + r.inj,
+        vast: a.vast + r.vast,
+        dyn: a.dyn + r.dyn,
+        timingBonus: a.timingBonus + r.timingBonus,
+        delta: a.delta + r.delta
+      }), { inj: 0, vast: 0, dyn: 0, timingBonus: 0, delta: 0 });
+
+      pvBtn.textContent = `PV ${pvKwp.toFixed(1)} kWp`;
+      switchSummary.textContent = `Jaarimpact switch 3→10 c€/kWh + timingbonus: ${eur(totaal.delta)} (injectie ${Math.round(totaal.inj)} kWh/jaar).`;
+
+      switchBody.innerHTML = rows.map(r => `
+        <tr>
+          <td>${r.seizoen}</td>
+          <td>${Math.round(r.inj)}</td>
+          <td>${eur(r.vast)}</td>
+          <td>${eur(r.dyn)}</td>
+          <td>${eur(r.timingBonus)}</td>
+          <td><strong>${eur(r.delta)}</strong></td>
+        </tr>`).join('') + `
+        <tr class="total">
+          <td>JAAR</td><td>${Math.round(totaal.inj)}</td><td>${eur(totaal.vast)}</td><td>${eur(totaal.dyn)}</td><td>${eur(totaal.timingBonus)}</td><td><strong>${eur(totaal.delta)}</strong></td>
+        </tr>`;
+
+      const chartData = {
+        labels: rows.map(r => r.seizoen),
+        datasets: [
+          { label: 'Vast injectie-opbrengst (3 c€)', data: rows.map(r => r.vast), backgroundColor: '#64748b', stack: 's' },
+          { label: 'Dynamisch injectie-opbrengst (10 c€)', data: rows.map(r => r.dyn), backgroundColor: '#22c55e', stack: 's2' },
+          { label: 'Belpex timingbonus', data: rows.map(r => r.timingBonus), backgroundColor: '#a78bfa', stack: 's2' }
+        ]
+      };
+
+      if (!switchChart) {
+        switchChart = new Chart(document.getElementById('switchChart'), {
+          type: 'bar',
+          data: chartData,
+          options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true, title: { display: true, text: '€/seizoen' } } },
+            plugins: { legend: { position: 'bottom' } }
+          }
+        });
+      } else {
+        switchChart.data = chartData;
+        switchChart.update();
+      }
+    }
+
+    pvMinus?.addEventListener('click', () => { pvKwp = Math.max(2, pvKwp - 0.5); renderSwitch(); });
+    pvPlus?.addEventListener('click', () => { pvKwp = Math.min(20, pvKwp + 0.5); renderSwitch(); });
+    renderSwitch();
   </script>
   <script>
     fetch('../projects/fluvius/vision.md')
