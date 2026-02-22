@@ -100,9 +100,9 @@
 
       <section class="analysis" id="switch-vast-dynamisch">
         <header>
-          <div class="badge">206 · Switch vast → dynamisch</div>
-          <h2>Impact van injectietarief + Belpex timing op jaarwinst</h2>
-          <p class="meta">Model: injectie-opbrengst verschuift van vast contract (bv. 3 c€/kWh) naar dynamisch (bv. 10 c€/kWh), geschaald op PV-capaciteit en seizoensprofiel.</p>
+          <div class="badge">206 · 1 grafiek: alle hefbomen samen</div>
+          <h2>Netto jaarimpact per scenario (incl. gemiste dynamische injectie)</h2>
+          <p class="meta">Eén gestapelde grafiek met alle opbrengst- en verlieshefbomen. Houdt expliciet rekening met opportunity cost: kWh die je extra zelf verbruikt kan je niet meer aan dynamische injectie verkopen.</p>
         </header>
         <div class="scenario-switch">
           <button type="button" id="pvMinus">−</button>
@@ -110,13 +110,7 @@
           <button type="button" id="pvPlus">+</button>
         </div>
         <p class="chart-hint" id="switchSummary"></p>
-        <canvas id="switchChart" height="210"></canvas>
-        <div class="table-wrapper">
-          <table class="matrix-table compact" id="seasonSwitchTable">
-            <thead><tr><th>Seizoen</th><th>Injectie (kWh)</th><th>Vast (3 c€)</th><th>Dynamisch (10 c€)</th><th>Timingbonus</th><th>Delta</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
+        <canvas id="switchChart" height="230"></canvas>
       </section>
     </main>
   </div>
@@ -246,16 +240,14 @@
       });
     }
 
-    // 206: switch vast -> dynamisch met seizoensimpact
-    const seasonMap = [
-      { name: 'Winter', idx: [11, 0, 1], timing: 0.06 },
-      { name: 'Lente', idx: [2, 3, 4], timing: 0.12 },
-      { name: 'Zomer', idx: [5, 6, 7], timing: 0.15 },
-      { name: 'Herfst', idx: [8, 9, 10], timing: 0.09 }
-    ];
+    // 206: één grafiek met alle hefbomen, incl. gemiste dynamische injectie
     const switchAssumptions = {
-      fixedInjectie: 0.03,
-      dynInjectie: 0.10,
+      afnameEurPerKwh: 0.32,
+      fixedInjectieEurPerKwh: 0.03,
+      dynInjectieEurPerKwh: 0.10,
+      timingBonusEurPerKwh: 0.02,
+      capaciteitEurPerKwJaar: 53.53,
+      roundTripEff: 0.92,
       pvBaseKwp: 6.0
     };
 
@@ -265,51 +257,48 @@
     const pvMinus = document.getElementById('pvMinus');
     const pvPlus = document.getElementById('pvPlus');
     const switchSummary = document.getElementById('switchSummary');
-    const switchBody = document.querySelector('#seasonSwitchTable tbody');
 
     function eur(v) { return `€ ${v.toFixed(0)}`; }
 
     function renderSwitch() {
       const factor = pvKwp / switchAssumptions.pvBaseKwp;
-      const rows = seasonMap.map(s => {
-        const inj = s.idx.reduce((sum, i) => sum + monthlyData.injectie[i], 0) * factor;
-        const vast = inj * switchAssumptions.fixedInjectie;
-        const dyn = inj * switchAssumptions.dynInjectie;
-        const timingBonus = inj * s.timing;
-        const delta = dyn + timingBonus - vast;
-        return { seizoen: s.name, inj, vast, dyn, timingBonus, delta };
+      const baselineInjectie = monthlyData.injectie.reduce((a, b) => a + b, 0) * factor;
+      const baselinePeak = Math.max(...monthlyData.piek);
+
+      const labels = ['0 kWh', '5 kWh', '10 kWh', '20 kWh', '30 kWh'];
+      const geleverd = [0, 1150, scenarioData['10'].total[1], scenarioData['20'].total[1], scenarioData['30'].total[1]];
+      const pieken = [baselinePeak, 7.30, scenarioData['10'].total[2], scenarioData['20'].total[2], scenarioData['30'].total[2]];
+
+      const dataRows = labels.map((label, i) => {
+        const usedFromBattery = geleverd[i] * factor;
+        const selfVerbruik = usedFromBattery * switchAssumptions.afnameEurPerKwh;
+        const peakGain = Math.max(0, baselinePeak - pieken[i]) * switchAssumptions.capaciteitEurPerKwJaar;
+        const timingGain = usedFromBattery * switchAssumptions.timingBonusEurPerKwh;
+
+        const missedDynInjectie = -1 * usedFromBattery * switchAssumptions.dynInjectieEurPerKwh;
+        const effLoss = -1 * usedFromBattery * ((1 / switchAssumptions.roundTripEff) - 1) * switchAssumptions.afnameEurPerKwh;
+
+        const remainingInjectie = Math.max(0, baselineInjectie - usedFromBattery);
+        const switchGainOnRemaining = remainingInjectie * (switchAssumptions.dynInjectieEurPerKwh - switchAssumptions.fixedInjectieEurPerKwh);
+
+        const net = selfVerbruik + peakGain + timingGain + missedDynInjectie + effLoss + switchGainOnRemaining;
+
+        return { label, selfVerbruik, peakGain, timingGain, missedDynInjectie, effLoss, switchGainOnRemaining, net };
       });
 
-      const totaal = rows.reduce((a, r) => ({
-        inj: a.inj + r.inj,
-        vast: a.vast + r.vast,
-        dyn: a.dyn + r.dyn,
-        timingBonus: a.timingBonus + r.timingBonus,
-        delta: a.delta + r.delta
-      }), { inj: 0, vast: 0, dyn: 0, timingBonus: 0, delta: 0 });
-
       pvBtn.textContent = `PV ${pvKwp.toFixed(1)} kWp`;
-      switchSummary.textContent = `Jaarimpact switch 3→10 c€/kWh + timingbonus: ${eur(totaal.delta)} (injectie ${Math.round(totaal.inj)} kWh/jaar).`;
-
-      switchBody.innerHTML = rows.map(r => `
-        <tr>
-          <td>${r.seizoen}</td>
-          <td>${Math.round(r.inj)}</td>
-          <td>${eur(r.vast)}</td>
-          <td>${eur(r.dyn)}</td>
-          <td>${eur(r.timingBonus)}</td>
-          <td><strong>${eur(r.delta)}</strong></td>
-        </tr>`).join('') + `
-        <tr class="total">
-          <td>JAAR</td><td>${Math.round(totaal.inj)}</td><td>${eur(totaal.vast)}</td><td>${eur(totaal.dyn)}</td><td>${eur(totaal.timingBonus)}</td><td><strong>${eur(totaal.delta)}</strong></td>
-        </tr>`;
+      const best = dataRows.reduce((a, b) => (b.net > a.net ? b : a), dataRows[0]);
+      switchSummary.textContent = `Netto jaarimpact incl. opportunity cost (gemiste verkoop aan 10 c€): best scenario ${best.label} met ${eur(best.net)}.`;
 
       const chartData = {
-        labels: rows.map(r => r.seizoen),
+        labels: dataRows.map(r => r.label),
         datasets: [
-          { label: 'Vast injectie-opbrengst (3 c€)', data: rows.map(r => r.vast), backgroundColor: '#64748b', stack: 's' },
-          { label: 'Dynamisch injectie-opbrengst (10 c€)', data: rows.map(r => r.dyn), backgroundColor: '#22c55e', stack: 's2' },
-          { label: 'Belpex timingbonus', data: rows.map(r => r.timingBonus), backgroundColor: '#a78bfa', stack: 's2' }
+          { label: 'Zelfverbruik (afname vermeden)', data: dataRows.map(r => r.selfVerbruik), backgroundColor: '#22c55e', stack: 's' },
+          { label: 'Piekafvlakking', data: dataRows.map(r => r.peakGain), backgroundColor: '#0ea5e9', stack: 's' },
+          { label: 'Belpex timingbonus', data: dataRows.map(r => r.timingGain), backgroundColor: '#a78bfa', stack: 's' },
+          { label: 'Switch 3→10 c€ op resterende injectie', data: dataRows.map(r => r.switchGainOnRemaining), backgroundColor: '#14b8a6', stack: 's' },
+          { label: 'Gemiste dynamische injectie (opportunity cost)', data: dataRows.map(r => r.missedDynInjectie), backgroundColor: '#f59e0b', stack: 's' },
+          { label: 'Rendementsverlies batterij', data: dataRows.map(r => r.effLoss), backgroundColor: '#ef4444', stack: 's' }
         ]
       };
 
@@ -319,7 +308,11 @@
           data: chartData,
           options: {
             responsive: true,
-            scales: { y: { beginAtZero: true, title: { display: true, text: '€/seizoen' } } },
+            interaction: { mode: 'index', intersect: false },
+            scales: {
+              x: { stacked: true },
+              y: { stacked: true, beginAtZero: true, title: { display: true, text: '€/jaar' } }
+            },
             plugins: { legend: { position: 'bottom' } }
           }
         });
