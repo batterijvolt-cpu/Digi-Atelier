@@ -317,10 +317,11 @@ p.lede {
 }
 .matrix-table {
   width: 100%;
-  border-collapse: collapse;
-  background: rgba(3,8,16,0.65);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f8fafc;
+  border: 1px solid rgba(15,23,42,0.14);
+  border-radius: 12px;
   overflow: hidden;
 }
 .matrix-table th,
@@ -341,6 +342,10 @@ p.lede {
 .matrix-table tbody tr:last-child td {
   border-bottom: none;
 }
+.matrix-table thead tr:first-child th:first-child { border-top-left-radius: 12px; }
+.matrix-table thead tr:first-child th:last-child { border-top-right-radius: 12px; }
+.matrix-table tbody tr:last-child td:first-child { border-bottom-left-radius: 12px; }
+.matrix-table tbody tr:last-child td:last-child { border-bottom-right-radius: 12px; }
 .table-wrapper {
   width: min(100%, 900px);
   margin: 0 auto 1.25rem;
@@ -428,8 +433,9 @@ p.lede {
 }
 .table-scroll {
   overflow-x: auto;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,0.14);
+  border-radius: 12px;
+  background: #f5f7fb;
 }
 .table-scroll .matrix-table {
   min-width: 1400px;
@@ -461,8 +467,8 @@ body.project.masterdata-page .story.compact,
 body.project.masterdata-page .card,
 body.project.masterdata-page .chart-shell,
 body.project.masterdata-page .table-scroll {
-  background: rgba(255,255,255,0.92);
-  border-color: rgba(15,23,42,0.12);
+  background: #f5f7fb;
+  border-color: rgba(15,23,42,0.14);
 }
 body.project.masterdata-page .story.compact {
   margin-top: 0.8rem;
