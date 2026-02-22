@@ -1,7 +1,16 @@
 (() => {
   const INTERACTIVE = 'a, button, input, select, textarea, [role="button"], [role="slider"], input[type="range"]';
   const VISUALS = 'table, canvas, svg';
-  const CONTAINERS = '.story, .card, .catalog-card, .matrix article, .section-head, .homegrid a';
+  const MAJORS = [
+    'main > section',
+    'main > .homegrid > a',
+    'main > .project-hero',
+    'main > .headline-carousel',
+    'main > .carousel-nav',
+    'main > .panel > .card',
+    'main > .analysis',
+    'main > .story'
+  ].join(', ');
 
   const isVisible = (el) => {
     const s = getComputedStyle(el);
@@ -10,53 +19,79 @@
     return r.width > 20 && r.height > 16;
   };
 
-  const shortText = (txt = '') => txt.replace(/\s+/g, ' ').trim().slice(0, 42);
-
-  const getLabel = (el) => {
-    return shortText(
-      el.getAttribute('aria-label') ||
-      el.getAttribute('title') ||
-      el.id ||
-      el.name ||
-      el.textContent ||
-      el.tagName.toLowerCase()
-    ) || el.tagName.toLowerCase();
+  const clearTags = () => {
+    document.querySelectorAll('[data-part-id]').forEach((el) => {
+      el.classList.remove('part-numbered');
+      el.removeAttribute('data-part-id');
+      el.removeAttribute('data-part-label');
+    });
   };
 
-  const candidates = Array.from(document.querySelectorAll(`${INTERACTIVE}, ${VISUALS}, ${CONTAINERS}`));
-  const unique = [];
-  const seen = new Set();
-  candidates.forEach((el) => {
-    if (seen.has(el) || !isVisible(el)) return;
-    seen.add(el);
-
-    const interactiveOrVisual = el.matches(INTERACTIVE) || el.matches(VISUALS);
-    if (!interactiveOrVisual) {
-      const parentTagged = el.parentElement?.closest('[data-part-id]');
-      if (parentTagged) return;
-    }
-    unique.push(el);
-  });
-
-  let i = 1;
-  unique.forEach((el) => {
+  const mark = (el, id) => {
     el.classList.add('part-numbered');
-    el.setAttribute('data-part-id', String(i));
-    el.setAttribute('data-part-label', getLabel(el));
-    i += 1;
-  });
+    el.setAttribute('data-part-id', id);
+  };
 
-  const hint = document.createElement('button');
-  hint.type = 'button';
-  hint.className = 'part-map-toggle';
-  hint.textContent = 'Nummermodus: AAN';
-  let on = true;
-  const apply = () => document.documentElement.classList.toggle('part-map-off', !on);
-  hint.addEventListener('click', () => {
-    on = !on;
-    hint.textContent = `Nummermodus: ${on ? 'AAN' : 'UIT'}`;
+  const build = () => {
+    clearTags();
+
+    const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
+    const majorSet = new Set(majorEls);
+
+    let major = 1;
+    majorEls.forEach((box) => {
+      mark(box, String(major));
+
+      let child = 1;
+      const childEls = Array.from(box.querySelectorAll(`${INTERACTIVE}, ${VISUALS}, .catalog-card, .table-scroll, .kpi-row .card`))
+        .filter((el) => el !== box && isVisible(el) && !majorSet.has(el));
+
+      const seen = new Set();
+      childEls.forEach((el) => {
+        if (seen.has(el)) return;
+        seen.add(el);
+        mark(el, `${major}.${child}`);
+        child += 1;
+      });
+
+      major += 1;
+    });
+
+    // fallback: interactieve elementen buiten de major-structuur
+    const loose = Array.from(document.querySelectorAll(`${INTERACTIVE}, ${VISUALS}`)).filter(
+      (el) => isVisible(el) && !el.closest('[data-part-id]')
+    );
+    loose.forEach((el) => {
+      mark(el, String(major));
+      major += 1;
+    });
+  };
+
+  let t;
+  const schedule = () => {
+    clearTimeout(t);
+    t = setTimeout(build, 80);
+  };
+
+  if (!document.querySelector('.part-map-toggle')) {
+    const hint = document.createElement('button');
+    hint.type = 'button';
+    hint.className = 'part-map-toggle';
+    hint.textContent = 'Nummermodus: AAN';
+    let on = true;
+    const apply = () => document.documentElement.classList.toggle('part-map-off', !on);
+    hint.addEventListener('click', () => {
+      on = !on;
+      hint.textContent = `Nummermodus: ${on ? 'AAN' : 'UIT'}`;
+      apply();
+    });
+    document.body.appendChild(hint);
     apply();
-  });
-  document.body.appendChild(hint);
-  apply();
+  }
+
+  const observer = new MutationObserver(schedule);
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  build();
+  window.addEventListener('resize', schedule);
 })();

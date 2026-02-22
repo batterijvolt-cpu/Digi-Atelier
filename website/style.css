@@ -558,9 +558,9 @@ body.project.masterdata-page .kpi-row .card p {
   position: absolute;
   top: -9px;
   left: -9px;
-  background: #ff2d55;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(51, 65, 85, 0.9);
+  color: #e2e8f0;
+  border: 1px solid rgba(148,163,184,0.55);
   border-radius: 999px;
   min-width: 22px;
   height: 22px;
@@ -572,7 +572,7 @@ body.project.masterdata-page .kpi-row .card p {
   letter-spacing: .01em;
   z-index: 40;
   pointer-events: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  box-shadow: 0 1px 4px rgba(2,6,23,.25);
 }
 .part-map-off .part-numbered::after {
   display: none;
