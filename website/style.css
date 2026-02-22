@@ -646,17 +646,17 @@ body.project.masterdata-page .kpi-row .card p {
 .table-numbered::before {
   content: attr(data-table-id);
   position: absolute;
-  top: -9px;
-  right: -9px;
-  background: rgba(30,41,59,0.9);
-  color: #dbeafe;
-  border: 1px solid rgba(148,163,184,0.55);
-  border-radius: 999px;
-  min-width: 26px;
-  height: 22px;
-  padding: 0 7px;
-  font-size: 11px;
-  line-height: 20px;
+  top: 6px;
+  right: 8px;
+  background: rgba(51,65,85,0.82);
+  color: #e2e8f0;
+  border: 1px solid rgba(148,163,184,0.45);
+  border-radius: 8px;
+  min-width: 28px;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 10px;
+  line-height: 16px;
   text-align: center;
   font-weight: 700;
   z-index: 41;
