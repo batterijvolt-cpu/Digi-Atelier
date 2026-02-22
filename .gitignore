@@ -11,6 +11,11 @@ __pycache__/
 .env
 .env.*
 
+# Private/local content (never publish)
+memory/
+data/Fluvius/
+*.Zone.Identifier
+
 # OS/editor noise
 .DS_Store
 .vscode/
