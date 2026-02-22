@@ -1,0 +1,62 @@
+{
+  "dataset": "fixed_cost_benchmarks_vlaanderen",
+  "updated_at_utc": "2026-02-22T13:40:00.000Z",
+  "scope": "Residentiële elektriciteit Vlaanderen (indicatieve benchmark, geen leveranciersspecifieke offerte)",
+  "method": "starter-benchmark met bandbreedtes op basis van regulatorcontext en recente marktobservatie",
+  "sources": [
+    "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers"
+  ],
+  "rows": [
+    {
+      "component": "Energieprijs (vast contract)",
+      "value": "10.0 – 18.0",
+      "unit": "c€/kWh",
+      "confidence": "starter",
+      "note": "Indicatieve bandbreedte; exacte waarde hangt af van leverancier, volume en looptijd."
+    },
+    {
+      "component": "Vaste jaarlijkse vergoeding",
+      "value": "30 – 90",
+      "unit": "€/jaar",
+      "confidence": "starter",
+      "note": "Abonnementskost varieert per product."
+    },
+    {
+      "component": "Nettarieven (distributie + transmissie)",
+      "value": "9.0 – 16.0",
+      "unit": "c€/kWh",
+      "confidence": "starter",
+      "note": "Afhankelijk van netgebied, profiel en tariefcomponenten."
+    },
+    {
+      "component": "Capaciteitstariefcomponent",
+      "value": "120 – 260",
+      "unit": "€/jaar",
+      "confidence": "starter",
+      "note": "Indicatieve jaarkost voor residentieel profiel; piekgedrag bepaalt effectieve kost."
+    },
+    {
+      "component": "Heffingen en toeslagen",
+      "value": "1.5 – 3.5",
+      "unit": "c€/kWh",
+      "confidence": "starter",
+      "note": "Component actief; precieze opbouw kan beleidsmatig wijzigen."
+    },
+    {
+      "component": "BTW residentieel",
+      "value": "6",
+      "unit": "%",
+      "confidence": "medium",
+      "note": "Volgens huidige beleidscontext voor residentiële elektriciteit."
+    },
+    {
+      "component": "BTW standaard",
+      "value": "21",
+      "unit": "%",
+      "confidence": "high",
+      "note": "Standaard BTW-tarief in BE."
+    }
+  ]
+}

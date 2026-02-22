@@ -52,8 +52,8 @@
           <h3>Vaste contractcomponenten — Vlaanderen</h3>
           <span class="status-pill" id="matrix-status">controleren…</span>
         </div>
-        <p class="table-explainer"><strong>Wat zie je:</strong> componenten op rij, leveranciers in kolommen (vergunningssnapshot).</p>
-        <p class="table-explainer"><strong>Updatefrequentie:</strong> 1x per week (maandag 16:10, Europe/Brussels).</p>
+        <p class="table-explainer"><strong>Wat zie je:</strong> concrete kostbandbreedtes per component met eenheid (c€/kWh, €/jaar, %).</p>
+        <p class="table-explainer"><strong>Updatefrequentie:</strong> wekelijks (starter-benchmark, te verfijnen met supplier fiches).</p>
         <p class="table-explainer"><strong>Laatste update:</strong> <span id="matrix-last-update">—</span></p>
         <p class="table-error" id="matrix-error"></p>
         <div class="table-scroll">
@@ -197,6 +197,35 @@
         refreshGlobal();
       });
 
+    function renderCostTable(tableId, data) {
+      const table = document.getElementById(tableId);
+      const rows = data.rows || [];
+
+      const thead = document.createElement('thead');
+      const hr = document.createElement('tr');
+      ['Component', 'Waarde', 'Eenheid', 'Confidence', 'Notitie'].forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+
+      const tbody = document.createElement('tbody');
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+        [r.component, r.value, r.unit, r.confidence || 'starter', r.note || ''].forEach(v => {
+          const td = document.createElement('td');
+          td.textContent = String(v ?? '—');
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+
+      table.innerHTML = '';
+      table.appendChild(thead);
+      table.appendChild(tbody);
+    }
+
     function renderMatrixTable(tableId, data) {
       const table = document.getElementById(tableId);
       const suppliers = data.suppliers || [];
@@ -233,10 +262,10 @@
       table.appendChild(tbody);
     }
 
-    fetch('./masterdata/fixed-contract-tariff-matrix-vlaanderen.json')
-      .then(r => { if (!r.ok) throw new Error('Matrixbestand niet gevonden'); return r.json(); })
+    fetch('./masterdata/fixed-cost-benchmarks-vlaanderen.json')
+      .then(r => { if (!r.ok) throw new Error('Kostbestand niet gevonden'); return r.json(); })
       .then(data => {
-        renderMatrixTable('tariffMatrixTable', data);
+        renderCostTable('tariffMatrixTable', data);
 
         const upd = data.updated_at_utc;
         document.getElementById('matrix-last-update').textContent = upd;
@@ -249,14 +278,16 @@
           warn: 'vastgelopen/vertraagd',
           fail: 'hard fail'
         });
-        document.getElementById('matrix-error').textContent = '';
+        document.getElementById('matrix-error').textContent = data.method
+          ? `Methodiek: ${data.method}`
+          : '';
         refreshGlobal();
       })
       .catch(err => {
         matrixState = 'fail';
         setStatus(document.getElementById('matrix-status'), 'fail', { fail: 'hard fail' });
         document.getElementById('matrix-last-update').textContent = '—';
-        document.getElementById('matrix-error').textContent = `Vaste matrix updatefout: ${err.message}`;
+        document.getElementById('matrix-error').textContent = `Vaste kosten updatefout: ${err.message}`;
         refreshGlobal();
       });
 
