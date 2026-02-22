@@ -87,6 +87,16 @@
         </div>
         <p class="chart-hint" id="scenarioSummary"></p>
       </section>
+
+      <section class="analysis" id="hefbomen-stack">
+        <header>
+          <div class="badge">Rendementshefbomen per scenario</div>
+          <h2>Gestapelde besparing per scenario (EAN 541448820066881528)</h2>
+          <p class="meta">5 scenario’s met kleur per hefboom. Positief = besparing, negatief = kostdruk. Waarden zijn werkhypothese op basis van Fluvius-profiel + tariefaannames.</p>
+        </header>
+        <canvas id="hefbomenStackChart" height="220"></canvas>
+        <p class="chart-hint">Hefbomen: zelfverbruik, piekafvlakking, slim laden (dynamisch), verlies op injectie en rendementsverlies batterij.</p>
+      </section>
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -157,6 +167,63 @@
       renderScenario(btn.dataset.scenario);
     }));
     renderScenario('10');
+
+    // Gestapelde balken met rendementshefbomen (5 scenario's)
+    const baselinePeakKw = Math.max(...monthlyData.piek);
+    const tarieven = {
+      afnameEurPerKwh: 0.32,
+      injectieEurPerKwh: 0.06,
+      capaciteitEurPerKwJaar: 53.53,
+      roundTripEff: 0.92,
+      dynamischBonusEurPerKwh: 0.02
+    };
+
+    const scenarioMix = [
+      { label: '0 kWh', geleverdKwh: 0, piekKw: baselinePeakKw, dynamischAandeel: 0.0 },
+      { label: '5 kWh', geleverdKwh: 1150, piekKw: 7.30, dynamischAandeel: 0.25 },
+      { label: '10 kWh', geleverdKwh: scenarioData['10'].total[1], piekKw: scenarioData['10'].total[2], dynamischAandeel: 0.35 },
+      { label: '20 kWh', geleverdKwh: scenarioData['20'].total[1], piekKw: scenarioData['20'].total[2], dynamischAandeel: 0.45 },
+      { label: '30 kWh', geleverdKwh: scenarioData['30'].total[1], piekKw: scenarioData['30'].total[2], dynamischAandeel: 0.55 }
+    ];
+
+    const hefboomRows = scenarioMix.map(s => {
+      const zelfverbruik = s.geleverdKwh * tarieven.afnameEurPerKwh;
+      const piekafvlakking = Math.max(0, baselinePeakKw - s.piekKw) * tarieven.capaciteitEurPerKwJaar;
+      const slimLaden = s.geleverdKwh * s.dynamischAandeel * tarieven.dynamischBonusEurPerKwh;
+      const verliesInjectie = -1 * s.geleverdKwh * tarieven.injectieEurPerKwh;
+      const rendementsverlies = -1 * s.geleverdKwh * ((1 / tarieven.roundTripEff) - 1) * tarieven.afnameEurPerKwh;
+      return { label: s.label, zelfverbruik, piekafvlakking, slimLaden, verliesInjectie, rendementsverlies };
+    });
+
+    const stackCtx = document.getElementById('hefbomenStackChart');
+    if (stackCtx) {
+      new Chart(stackCtx, {
+        type: 'bar',
+        data: {
+          labels: hefboomRows.map(r => r.label),
+          datasets: [
+            { label: 'Zelfverbruik', data: hefboomRows.map(r => r.zelfverbruik), backgroundColor: '#22c55e', stack: 's' },
+            { label: 'Piekafvlakking', data: hefboomRows.map(r => r.piekafvlakking), backgroundColor: '#0ea5e9', stack: 's' },
+            { label: 'Slim laden (dynamisch)', data: hefboomRows.map(r => r.slimLaden), backgroundColor: '#a78bfa', stack: 's' },
+            { label: 'Verlies op injectie', data: hefboomRows.map(r => r.verliesInjectie), backgroundColor: '#f59e0b', stack: 's' },
+            { label: 'Rendementsverlies batterij', data: hefboomRows.map(r => r.rendementsverlies), backgroundColor: '#ef4444', stack: 's' }
+          ]
+        },
+        options: {
+          responsive: true,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            x: { stacked: true },
+            y: {
+              stacked: true,
+              beginAtZero: true,
+              title: { display: true, text: '€/jaar' }
+            }
+          },
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
   </script>
   <script>
     fetch('../projects/fluvius/vision.md')
