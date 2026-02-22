@@ -444,32 +444,80 @@
     function renderCatalogTablePreview(table) {
       const cols = table.preview?.columns || [];
       const rows = table.preview?.rows || [];
-      const wrap = document.createElement('div');
-      wrap.className = 'table-scroll';
-      const t = document.createElement('table');
-      t.className = 'matrix-table compact';
-      const thead = document.createElement('thead');
-      const trh = document.createElement('tr');
-      cols.forEach(c => {
-        const th = document.createElement('th');
-        th.textContent = c;
-        trh.appendChild(th);
-      });
-      thead.appendChild(trh);
-      const tbody = document.createElement('tbody');
-      rows.forEach(r => {
-        const tr = document.createElement('tr');
-        r.forEach(v => {
-          const td = document.createElement('td');
-          td.textContent = String(v);
-          tr.appendChild(td);
+      const outer = document.createElement('div');
+
+      const buildTable = (filteredRows) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'table-scroll';
+        const t = document.createElement('table');
+        t.className = 'matrix-table compact';
+        const thead = document.createElement('thead');
+        const trh = document.createElement('tr');
+        cols.forEach(c => {
+          const th = document.createElement('th');
+          th.textContent = c;
+          trh.appendChild(th);
         });
-        tbody.appendChild(tr);
-      });
-      t.appendChild(thead);
-      t.appendChild(tbody);
-      wrap.appendChild(t);
-      return wrap;
+        thead.appendChild(trh);
+        const tbody = document.createElement('tbody');
+        filteredRows.forEach(r => {
+          const tr = document.createElement('tr');
+          r.forEach(v => {
+            const td = document.createElement('td');
+            td.textContent = String(v);
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        t.appendChild(thead);
+        t.appendChild(tbody);
+        wrap.appendChild(t);
+        return wrap;
+      };
+
+      if (table.id === 'supplier_relevance_ranking_vlaanderen') {
+        const rankIdx = cols.indexOf('rank_top15');
+        const controls = document.createElement('div');
+        controls.className = 'table-explainer';
+        controls.style.marginBottom = '8px';
+
+        const label = document.createElement('label');
+        label.innerHTML = '<strong>Filter:</strong> ';
+        const select = document.createElement('select');
+        select.className = 'usage-select';
+        ['Top 10', 'Top 15', 'Alles'].forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v;
+          opt.textContent = v;
+          select.appendChild(opt);
+        });
+        label.appendChild(select);
+        controls.appendChild(label);
+        outer.appendChild(controls);
+
+        const slot = document.createElement('div');
+        outer.appendChild(slot);
+
+        const renderFiltered = () => {
+          const mode = select.value;
+          const filtered = rows.filter(r => {
+            const rank = Number(r[rankIdx]);
+            if (!Number.isFinite(rank)) return mode === 'Alles';
+            if (mode === 'Top 10') return rank <= 10;
+            if (mode === 'Top 15') return rank <= 15;
+            return true;
+          });
+          slot.innerHTML = '';
+          slot.appendChild(buildTable(filtered));
+        };
+
+        select.addEventListener('change', renderFiltered);
+        renderFiltered();
+        return outer;
+      }
+
+      outer.appendChild(buildTable(rows));
+      return outer;
     }
 
     fetch('./masterdata/masterdata-registry.json')

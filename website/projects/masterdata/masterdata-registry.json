@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-02-22T18:36:00.000Z",
+  "generated_at_utc": "2026-02-22T20:45:00.000Z",
   "tables": [
     {
       "id": "belpex_prices_be_24h",
@@ -775,6 +775,130 @@
         {
           "project": "€Volt",
           "how": "Strategie voor slim laden/ontladen."
+        }
+      ]
+    },
+    {
+      "id": "supplier_relevance_ranking_vlaanderen",
+      "title": "Leveranciersranking Vlaanderen (relevantie-ranking operationeel)",
+      "description": "Top 15 operationele relevantieranking voor leveranciers in Vlaanderen (niet: officieel marktaandeel).",
+      "what_we_see": "Top 10 + Net buiten top 10 (11–15) op basis van regulatorcontext en interne masterdata-dekking. Gelabeld als relevantie-ranking (operationeel).",
+      "update_frequency": "Maandelijks",
+      "max_age_hours": 840,
+      "last_update": "2026-02-22T20:45:00.000Z",
+      "status": "ok",
+      "preview": {
+        "columns": [
+          "rank_top15",
+          "supplier_name",
+          "segment",
+          "ranking_type"
+        ],
+        "rows": [
+          [
+            1,
+            "ENGIE",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            2,
+            "Luminus",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            3,
+            "TotalEnergies",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            4,
+            "Eneco",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            5,
+            "Mega",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            6,
+            "Octa+",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            7,
+            "Bolt",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            8,
+            "Aspiravi Energy",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            9,
+            "elegant",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            10,
+            "energie.be",
+            "Top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            11,
+            "Trevion",
+            "Net buiten top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            12,
+            "Cociter",
+            "Net buiten top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            13,
+            "EBEM",
+            "Net buiten top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            14,
+            "Energie 2030",
+            "Net buiten top 10",
+            "relevantie-ranking (operationeel)"
+          ],
+          [
+            15,
+            "Frank Energie",
+            "Net buiten top 10",
+            "relevantie-ranking (operationeel)"
+          ]
+        ]
+      },
+      "usage": [
+        {
+          "project": "Masterdata",
+          "how": "Snel overzicht voor leveranciersprioritering met filter Top 10 / Top 15 / Alles."
+        },
+        {
+          "project": "Fluvius Analyzer",
+          "how": "Operationele shortlist voor product- en contractverrijking."
+        },
+        {
+          "project": "€Volt",
+          "how": "Pragmatische leveranciersfocus voor simulatie-integraties zonder marktaandeelclaim."
         }
       ]
     }

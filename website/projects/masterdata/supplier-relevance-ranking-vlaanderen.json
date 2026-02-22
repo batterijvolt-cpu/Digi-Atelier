@@ -1,0 +1,41 @@
+{
+  "dataset": "supplier_relevance_ranking_vlaanderen",
+  "updated_at_utc": "2026-02-22T20:45:00Z",
+  "ranking_type": "relevantie-ranking (operationeel)",
+  "not_market_share": true,
+  "methodology": {
+    "summary": "Operationele relevantiescore op basis van publiek zichtbare aanwezigheid in regulatorcontext (CREG marktaandelenpagina + V-test context) en bestaande Digi-Atelier masterdata-dekking. Geen afgeleide of ingebeelde marktaandeelpercentages.",
+    "score_components": [
+      "creg_market_context_presence_max_40",
+      "vtest_market_presence_max_35",
+      "digi_atelier_masterdata_coverage_max_25"
+    ],
+    "blockers": [
+      "CREG publiceert de Vlaamse marktaandelen op de pagina als grafiekafbeelding; leverancier-specifieke percentages staan niet machineleesbaar in de HTML.",
+      "V-test publieke startpagina geeft contractvergelijking, maar geen direct exporteerbare marktaandeelrangorde."
+    ],
+    "source_urls": [
+      "https://www.creg.be/nl/consumenten/energiemarkt/marktaandelen-energieleveranciers",
+      "https://www.vtest.be/",
+      "https://www.vreg.be/nl/v-test"
+    ],
+    "source_date": "2026-02-22"
+  },
+  "suppliers": [
+    {"rank_top15": 1, "in_top10": true, "supplier_name": "ENGIE", "score_breakdown": {"creg_market_context_presence": 40, "vtest_market_presence": 35, "digi_atelier_masterdata_coverage": 25, "total": 100}, "source_url": "https://www.creg.be/nl/consumenten/energiemarkt/marktaandelen-energieleveranciers", "source_date": "2026-02-22", "confidence_level": "medium", "note": "Sterke aanwezigheid in CREG-context en volledige dekking in huidige masterdata."},
+    {"rank_top15": 2, "in_top10": true, "supplier_name": "Luminus", "score_breakdown": {"creg_market_context_presence": 40, "vtest_market_presence": 35, "digi_atelier_masterdata_coverage": 23, "total": 98}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "medium", "note": "Sterke Vlaamse zichtbaarheid + hoge masterdata-dekking."},
+    {"rank_top15": 3, "in_top10": true, "supplier_name": "TotalEnergies", "score_breakdown": {"creg_market_context_presence": 40, "vtest_market_presence": 35, "digi_atelier_masterdata_coverage": 20, "total": 95}, "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven", "source_date": "2026-02-22", "confidence_level": "medium", "note": "Consistent aanwezig in Belgische consumentencontext; gedeeltelijke productdekking in masterdata."},
+    {"rank_top15": 4, "in_top10": true, "supplier_name": "Eneco", "score_breakdown": {"creg_market_context_presence": 40, "vtest_market_presence": 34, "digi_atelier_masterdata_coverage": 12, "total": 86}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "medium", "note": "Operationeel relevant, maar nog beperkte eigen records in huidige masterdata."},
+    {"rank_top15": 5, "in_top10": true, "supplier_name": "Mega", "score_breakdown": {"creg_market_context_presence": 38, "vtest_market_presence": 33, "digi_atelier_masterdata_coverage": 15, "total": 86}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "medium", "note": "Aanwezig in masterdata; verdere productverfijning mogelijk."},
+    {"rank_top15": 6, "in_top10": true, "supplier_name": "Octa+", "score_breakdown": {"creg_market_context_presence": 35, "vtest_market_presence": 32, "digi_atelier_masterdata_coverage": 8, "total": 75}, "source_url": "https://www.creg.be/nl/consumenten/energiemarkt/marktaandelen-energieleveranciers", "source_date": "2026-02-22", "confidence_level": "low", "note": "Relevant in consumentenmarktcontext, beperkte interne dekkingsgraad."},
+    {"rank_top15": 7, "in_top10": true, "supplier_name": "Bolt", "score_breakdown": {"creg_market_context_presence": 33, "vtest_market_presence": 31, "digi_atelier_masterdata_coverage": 8, "total": 72}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "low", "note": "Aanwezig als operationeel relevante challenger in Vlaanderen."},
+    {"rank_top15": 8, "in_top10": true, "supplier_name": "Aspiravi Energy", "score_breakdown": {"creg_market_context_presence": 31, "vtest_market_presence": 30, "digi_atelier_masterdata_coverage": 7, "total": 68}, "source_url": "https://www.creg.be/nl/consumenten/energiemarkt/marktaandelen-energieleveranciers", "source_date": "2026-02-22", "confidence_level": "low", "note": "Relevant volgens regulator-context, maar minder interne datapunten."},
+    {"rank_top15": 9, "in_top10": true, "supplier_name": "elegant", "score_breakdown": {"creg_market_context_presence": 30, "vtest_market_presence": 30, "digi_atelier_masterdata_coverage": 7, "total": 67}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "low", "note": "Regionaal relevant; extra bronverrijking gepland."},
+    {"rank_top15": 10, "in_top10": true, "supplier_name": "energie.be", "score_breakdown": {"creg_market_context_presence": 29, "vtest_market_presence": 29, "digi_atelier_masterdata_coverage": 7, "total": 65}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "low", "note": "Top 10 als operationele relevantieproxy, niet als officieel marktaandeel."},
+    {"rank_top15": 11, "in_top10": false, "supplier_name": "Trevion", "score_breakdown": {"creg_market_context_presence": 26, "vtest_market_presence": 27, "digi_atelier_masterdata_coverage": 6, "total": 59}, "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven", "source_date": "2026-02-22", "confidence_level": "low", "note": "Net buiten top 10; bijkomende productbronnen nodig."},
+    {"rank_top15": 12, "in_top10": false, "supplier_name": "Cociter", "score_breakdown": {"creg_market_context_presence": 25, "vtest_market_presence": 26, "digi_atelier_masterdata_coverage": 6, "total": 57}, "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven", "source_date": "2026-02-22", "confidence_level": "low", "note": "Net buiten top 10; beperkte interne dekking."},
+    {"rank_top15": 13, "in_top10": false, "supplier_name": "EBEM", "score_breakdown": {"creg_market_context_presence": 24, "vtest_market_presence": 25, "digi_atelier_masterdata_coverage": 6, "total": 55}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "low", "note": "Operationele relevantie bevestigd, nog geen uitgebreide productmapping."},
+    {"rank_top15": 14, "in_top10": false, "supplier_name": "Energie 2030", "score_breakdown": {"creg_market_context_presence": 23, "vtest_market_presence": 24, "digi_atelier_masterdata_coverage": 5, "total": 52}, "source_url": "https://www.vtest.be/", "source_date": "2026-02-22", "confidence_level": "low", "note": "Lager in ranking door beperkte dekkings- en contextsignalen."},
+    {"rank_top15": 15, "in_top10": false, "supplier_name": "Frank Energie", "score_breakdown": {"creg_market_context_presence": 22, "vtest_market_presence": 24, "digi_atelier_masterdata_coverage": 5, "total": 51}, "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven", "source_date": "2026-02-22", "confidence_level": "low", "note": "Opgenomen als operationeel relevante speler; validatie in volgende update nodig."}
+  ]
+}
