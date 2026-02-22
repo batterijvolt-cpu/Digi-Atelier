@@ -193,6 +193,7 @@
 
         const upd = data.updated_at_utc;
         document.getElementById('belpex-last-update').textContent = upd;
+        document.getElementById('belpex-next-update').textContent = nextUpdateFrom(upd, 'dagelijks') || '—';
         latestUpdateIso = upd;
 
         const h = hoursAgo(upd);
@@ -211,6 +212,7 @@
           fail: 'hard fail'
         });
         document.getElementById('belpex-last-update').textContent = '—';
+        document.getElementById('belpex-next-update').textContent = '—';
         document.getElementById('belpex-error').textContent = `Belpex updatefout: ${err.message}`;
         refreshGlobal();
       });
@@ -306,6 +308,7 @@
 
         const upd = data.updated_at_utc;
         document.getElementById('matrix-last-update').textContent = upd;
+        document.getElementById('matrix-next-update').textContent = nextUpdateFrom(upd, 'maandelijks') || '—';
         if (!latestUpdateIso || new Date(upd) > new Date(latestUpdateIso)) latestUpdateIso = upd;
 
         const h = hoursAgo(upd);
@@ -324,34 +327,39 @@
         matrixState = 'fail';
         setStatus(document.getElementById('matrix-status'), 'fail', { fail: 'hard fail' });
         document.getElementById('matrix-last-update').textContent = '—';
+        document.getElementById('matrix-next-update').textContent = '—';
         document.getElementById('matrix-error').textContent = `Vaste kosten updatefout: ${err.message}`;
         refreshGlobal();
       });
 
-    fetch('./masterdata/dynamic-contract-tariff-matrix-vlaanderen.json')
-      .then(r => { if (!r.ok) throw new Error('Dynamisch matrixbestand niet gevonden'); return r.json(); })
+    fetch('./masterdata/dynamic-cost-benchmarks-vlaanderen.json')
+      .then(r => { if (!r.ok) throw new Error('Dynamisch kostenbestand niet gevonden'); return r.json(); })
       .then(data => {
-        renderMatrixTable('dynamicMatrixTable', data);
+        renderCostTable('dynamicMatrixTable', data);
 
         const upd = data.updated_at_utc;
         document.getElementById('dynamic-last-update').textContent = upd;
+        document.getElementById('dynamic-next-update').textContent = nextUpdateFrom(upd, 'maandelijks') || '—';
         if (!latestUpdateIso || new Date(upd) > new Date(latestUpdateIso)) latestUpdateIso = upd;
 
         const h = hoursAgo(upd);
-        dynamicState = h <= (24 * 8) ? 'ok' : 'warn';
+        dynamicState = h <= (24 * 35) ? 'ok' : 'warn';
         setStatus(document.getElementById('dynamic-status'), dynamicState, {
           ok: 'loopt goed',
           warn: 'vastgelopen/vertraagd',
           fail: 'hard fail'
         });
-        document.getElementById('dynamic-error').textContent = '';
+        document.getElementById('dynamic-error').textContent = data.method
+          ? `Methodiek: ${data.method}`
+          : '';
         refreshGlobal();
       })
       .catch(err => {
         dynamicState = 'fail';
         setStatus(document.getElementById('dynamic-status'), 'fail', { fail: 'hard fail' });
         document.getElementById('dynamic-last-update').textContent = '—';
-        document.getElementById('dynamic-error').textContent = `Dynamische matrix updatefout: ${err.message}`;
+        document.getElementById('dynamic-next-update').textContent = '—';
+        document.getElementById('dynamic-error').textContent = `Dynamische kosten updatefout: ${err.message}`;
         refreshGlobal();
       });
 
@@ -434,7 +442,8 @@
 
           const meta = document.createElement('p');
           meta.className = 'table-explainer';
-          meta.innerHTML = `<strong>Updatefrequentie:</strong> ${table.update_frequency || '—'} · <strong>Laatste update:</strong> ${table.last_update || '—'}`;
+          const nextUpdate = nextUpdateFrom(table.last_update, table.update_frequency);
+          meta.innerHTML = `<strong>Updatefrequentie:</strong> ${table.update_frequency || '—'} · <strong>Laatste update:</strong> ${table.last_update || '—'} · <strong>Volgende update:</strong> ${nextUpdate || '—'}`;
           card.appendChild(meta);
 
           const usageLabel = document.createElement('label');
