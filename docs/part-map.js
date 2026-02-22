@@ -14,8 +14,19 @@
     const p = location.pathname;
     if (p.includes('/projects/evolt.html')) return 101;
     if (p.includes('/projects/fluvius.html')) return 201;
+    if (p.includes('/projects/fluvius-upload.html')) return 251;
     if (p.includes('/projects/masterdata.html')) return 301;
     if (p.endsWith('/Digi-Atelier/') || p.endsWith('/index.html') || p === '/' ) return 1;
+    return 901;
+  })();
+
+  const tableBase = (() => {
+    const p = location.pathname;
+    if (p.includes('/projects/evolt.html')) return 21;
+    if (p.includes('/projects/fluvius.html')) return 41;
+    if (p.includes('/projects/fluvius-upload.html')) return 61;
+    if (p.includes('/projects/masterdata.html')) return 81;
+    if (p.endsWith('/Digi-Atelier/') || p.endsWith('/index.html') || p === '/') return 1;
     return 901;
   })();
 
@@ -56,7 +67,7 @@
 
     // Extra logica voor datatabellen: T1, T2, ... op chronologische DOM-volgorde
     const tables = Array.from(document.querySelectorAll('table')).filter(isVisible);
-    let t = 1;
+    let t = tableBase;
     tables.forEach((table) => {
       const host = table.closest('.table-scroll') || table;
       host.classList.add('table-numbered');
