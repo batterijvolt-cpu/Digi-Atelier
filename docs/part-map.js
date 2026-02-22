@@ -47,11 +47,11 @@
     const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
     const majorSet = new Set(majorEls);
 
-    let major = pageBase;
+    let nextId = pageBase;
     majorEls.forEach((box) => {
-      mark(box, String(major));
+      mark(box, String(nextId));
+      nextId += 1;
 
-      let child = 1;
       const childEls = Array.from(box.querySelectorAll(`${INTERACTIVE}, ${VISUALS}, .catalog-card, .table-scroll, .kpi-row .card`))
         .filter((el) => el !== box && isVisible(el) && !majorSet.has(el));
 
@@ -59,11 +59,9 @@
       childEls.forEach((el) => {
         if (seen.has(el)) return;
         seen.add(el);
-        mark(el, `${major}.${child}`);
-        child += 1;
+        mark(el, String(nextId));
+        nextId += 1;
       });
-
-      major += 1;
     });
 
     // fallback: interactieve elementen buiten de major-structuur
@@ -71,8 +69,8 @@
       (el) => isVisible(el) && !el.closest('[data-part-id]')
     );
     loose.forEach((el) => {
-      mark(el, String(major));
-      major += 1;
+      mark(el, String(nextId));
+      nextId += 1;
     });
   };
 
