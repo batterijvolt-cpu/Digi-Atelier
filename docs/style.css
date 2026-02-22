@@ -386,6 +386,29 @@ p.lede {
   grid-template-columns: 1fr;
   gap: 0.5rem;
 }
+.hefbomen-split-205 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+.hefbomen-table-scroll .matrix-table {
+  min-width: 420px;
+}
+@media (min-width: 1024px) {
+  .hefbomen-split-205 {
+    grid-template-columns: 1.65fr 1fr;
+    align-items: stretch;
+  }
+  .hefbomen-split-205 .chart-shell,
+  .hefbomen-split-205 .table-scroll {
+    margin: 0;
+  }
+  .hefbomen-table-scroll {
+    max-height: 260px;
+    overflow-y: auto;
+  }
+}
 .dataset-mode-grid .chart-hint {
   margin-top: 0;
   padding: 0.7rem 0.9rem;

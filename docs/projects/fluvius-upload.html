@@ -41,7 +41,17 @@
           <h2>Gestapelde besparing per scenario (EAN 541448820066881528)</h2>
           <p class="meta">5 scenario’s met kleur per hefboom. Positief = besparing, negatief = kostdruk. Waarden zijn werkhypothese op basis van Fluvius-profiel + tariefaannames.</p>
         </header>
-        <canvas id="hefbomenStackChart" height="220"></canvas>
+        <div class="hefbomen-split-205">
+          <div class="chart-shell">
+            <canvas id="hefbomenStackChart" height="220"></canvas>
+          </div>
+          <div class="table-scroll hefbomen-table-scroll">
+            <table class="matrix-table compact" id="hefbomenTable">
+              <thead><tr><th>Scenario</th><th>Zelfv</th><th>Piek</th><th>Slim</th><th>Inj verlies</th><th>Eff verlies</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
         <p class="chart-hint">Hefbomen: zelfverbruik, piekafvlakking, slim laden (dynamisch), verlies op injectie en rendementsverlies batterij.</p>
       </section>
 
@@ -163,6 +173,19 @@
       const rendementsverlies = -1 * s.geleverdKwh * ((1 / tarieven.roundTripEff) - 1) * tarieven.afnameEurPerKwh;
       return { label: s.label, zelfverbruik, piekafvlakking, slimLaden, verliesInjectie, rendementsverlies };
     });
+
+    const hefboomTbody = document.querySelector('#hefbomenTable tbody');
+    if (hefboomTbody) {
+      hefboomTbody.innerHTML = hefboomRows.map(r => `
+        <tr>
+          <td>${r.label}</td>
+          <td>${r.zelfverbruik.toFixed(0)}</td>
+          <td>${r.piekafvlakking.toFixed(0)}</td>
+          <td>${r.slimLaden.toFixed(0)}</td>
+          <td>${r.verliesInjectie.toFixed(0)}</td>
+          <td>${r.rendementsverlies.toFixed(0)}</td>
+        </tr>`).join('');
+    }
 
     const stackCtx = document.getElementById('hefbomenStackChart');
     if (stackCtx) {
