@@ -1,0 +1,22 @@
+{
+  "dataset": "slp_profiles",
+  "updated_at_utc": "2026-02-21T16:44:07.192Z",
+  "fill_status": "seeded",
+  "records": [
+    {
+      "profile": "SLP_RES_BASE",
+      "segment": "residential",
+      "purpose": "default household profile"
+    },
+    {
+      "profile": "SLP_RES_HEATPUMP",
+      "segment": "residential",
+      "purpose": "heat-pump-heavy profile"
+    },
+    {
+      "profile": "SLP_RES_EV",
+      "segment": "residential",
+      "purpose": "EV charging load profile"
+    }
+  ]
+}

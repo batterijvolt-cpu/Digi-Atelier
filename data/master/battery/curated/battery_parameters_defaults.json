@@ -1,0 +1,21 @@
+{
+  "dataset": "battery_parameters_defaults",
+  "updated_at_utc": "2026-02-21T16:44:07.192Z",
+  "fill_status": "seeded",
+  "records": [
+    {
+      "chemistry": "LFP",
+      "roundtrip_efficiency": 0.92,
+      "dod_range": "0.8-0.95",
+      "lifecycle_cycles_range": "4000-7000",
+      "source_type": "engineering_defaults"
+    },
+    {
+      "chemistry": "NMC",
+      "roundtrip_efficiency": 0.9,
+      "dod_range": "0.8-0.9",
+      "lifecycle_cycles_range": "3000-6000",
+      "source_type": "engineering_defaults"
+    }
+  ]
+}

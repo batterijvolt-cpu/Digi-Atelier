@@ -1,0 +1,509 @@
+{
+  "dataset": "fixed_contract_tariff_matrix_vlaanderen",
+  "updated_at_utc": "2026-02-21T13:44:34.728Z",
+  "scope": "Vlaanderen - leveranciers met leveringsvergunning (snapshot VNR)",
+  "source": {
+    "name": "Vlaamse Nutsregulator (VNR)",
+    "url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/overzicht-energieleveranciers-met-leveringsvergunning",
+    "note": "Deze matrix geeft het tariefMODEL voor vaste elektriciteitscontracten. Commerciële beschikbaarheid per leverancier/product kan afwijken."
+  },
+  "legend": {
+    "JA*": "Onderdeel van het vaste-contract factuurmodel voor elektriciteit.",
+    "n.v.t.": "Niet van toepassing voor elektriciteit (geen elektriciteitsvergunning in snapshot)."
+  },
+  "suppliers": [
+    {
+      "name": "Alix bv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "Aspiravi Energy nv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "Axpo Benelux nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Belgian Eco Energy nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Belvus bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Bolt Energie bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Codel bv",
+      "electricity": false,
+      "gas": true
+    },
+    {
+      "name": "Dats 24 nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Dots Energy bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Ecofix Gas & Power bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Ecopower cv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "Electrabel nv (ENGIE Electrabel)",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Elegant bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Elektriciteitsbedrijf Merksplas bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Elexys nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Elindus nv/bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Eneco Belgium nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Energie.be nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Energy Knights bv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "Energy Together bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "EnergyVision nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Eni S.p.A.",
+      "electricity": false,
+      "gas": true
+    },
+    {
+      "name": "Enwyse Belgium bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Frank Energie België bv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "GETEC Energie GmbH",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Luminus nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "OCTA+ Energie nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Power Online nv (Mega)",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "RWE Supply & Trading GmbH",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Scholt Energy nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "SEFE Energy GmbH",
+      "electricity": false,
+      "gas": true
+    },
+    {
+      "name": "TotalEnergies Gas & Power Limited",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "TotalEnergies Gas & Power Western Europe nv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "TotalEnergies Power & Gas Belgium nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Trevion nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Ukko Energy nv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "Vlaams Energiebedrijf nv",
+      "electricity": true,
+      "gas": true
+    },
+    {
+      "name": "Wase Wind cv",
+      "electricity": true,
+      "gas": false
+    },
+    {
+      "name": "Yuso bv",
+      "electricity": true,
+      "gas": false
+    }
+  ],
+  "components": [
+    "Vaste energieprijs (€/kWh)",
+    "Vaste jaarlijkse vergoeding (abonnement)",
+    "Nettarieven (distributie + transmissie)",
+    "Capaciteitstariefcomponent in nettarief",
+    "Heffingen en toeslagen",
+    "BTW",
+    "Meterregime: enkel of dag/nacht"
+  ],
+  "matrix": {
+    "Vaste energieprijs (€/kWh)": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    },
+    "Vaste jaarlijkse vergoeding (abonnement)": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    },
+    "Nettarieven (distributie + transmissie)": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    },
+    "Capaciteitstariefcomponent in nettarief": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    },
+    "Heffingen en toeslagen": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    },
+    "BTW": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    },
+    "Meterregime: enkel of dag/nacht": {
+      "Alix bv": "JA*",
+      "Aspiravi Energy nv": "JA*",
+      "Axpo Benelux nv": "JA*",
+      "Belgian Eco Energy nv": "JA*",
+      "Belvus bv": "JA*",
+      "Bolt Energie bv": "JA*",
+      "Codel bv": "n.v.t. (geen elektriciteitsvergunning)",
+      "Dats 24 nv": "JA*",
+      "Dots Energy bv": "JA*",
+      "Ecofix Gas & Power bv": "JA*",
+      "Ecopower cv": "JA*",
+      "Electrabel nv (ENGIE Electrabel)": "JA*",
+      "Elegant bv": "JA*",
+      "Elektriciteitsbedrijf Merksplas bv": "JA*",
+      "Elexys nv": "JA*",
+      "Elindus nv/bv": "JA*",
+      "Eneco Belgium nv": "JA*",
+      "Energie.be nv": "JA*",
+      "Energy Knights bv": "JA*",
+      "Energy Together bv": "JA*",
+      "EnergyVision nv": "JA*",
+      "Eni S.p.A.": "n.v.t. (geen elektriciteitsvergunning)",
+      "Enwyse Belgium bv": "JA*",
+      "Frank Energie België bv": "JA*",
+      "GETEC Energie GmbH": "JA*",
+      "Luminus nv": "JA*",
+      "OCTA+ Energie nv": "JA*",
+      "Power Online nv (Mega)": "JA*",
+      "RWE Supply & Trading GmbH": "JA*",
+      "Scholt Energy nv": "JA*",
+      "SEFE Energy GmbH": "n.v.t. (geen elektriciteitsvergunning)",
+      "TotalEnergies Gas & Power Limited": "JA*",
+      "TotalEnergies Gas & Power Western Europe nv": "JA*",
+      "TotalEnergies Power & Gas Belgium nv": "JA*",
+      "Trevion nv": "JA*",
+      "Ukko Energy nv": "JA*",
+      "Vlaams Energiebedrijf nv": "JA*",
+      "Wase Wind cv": "JA*",
+      "Yuso bv": "JA*"
+    }
+  }
+}

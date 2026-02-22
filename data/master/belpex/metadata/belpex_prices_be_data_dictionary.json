@@ -1,0 +1,56 @@
+{
+  "dataset": "belpex_prices_be",
+  "description": "Belgian day-ahead wholesale electricity price time series (Belpex / EPEX equivalent market reference for BE bidding zone).",
+  "grain": "Market time interval from source (typically 15m or 60m depending period).",
+  "timezone_storage": "UTC (primary), Europe/Brussels (derived column)",
+  "columns": [
+    {
+      "name": "timestamp_utc",
+      "type": "datetime (ISO-8601)",
+      "nullable": false,
+      "description": "Interval timestamp in UTC from source unix epoch."
+    },
+    {
+      "name": "timestamp_brussels",
+      "type": "datetime",
+      "nullable": false,
+      "description": "Converted local timestamp (Europe/Brussels) for business reporting."
+    },
+    {
+      "name": "price_eur_mwh",
+      "type": "number",
+      "nullable": false,
+      "description": "Price in EUR/MWh."
+    },
+    {
+      "name": "bzn",
+      "type": "string",
+      "nullable": false,
+      "description": "Bidding zone code (BE)."
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "nullable": false,
+      "description": "Source identifier: energy-charts."
+    }
+  ],
+  "source": {
+    "provider": "Energy-Charts API",
+    "endpoint": "https://api.energy-charts.info/price",
+    "params": {
+      "bzn": "BE",
+      "start": "2025-02-21",
+      "end": "2026-02-21"
+    },
+    "license_info": "CC BY 4.0 (creativecommons.org/licenses/by/4.0) from Bundesnetzagentur | SMARD.de",
+    "unit": "EUR / MWh"
+  },
+  "quality_checks": {
+    "row_count": 19155,
+    "equal_length_arrays": true,
+    "missing_price_count": 24,
+    "duplicate_timestamp_count": 0
+  },
+  "generated_at_utc": "2026-02-21T15:00:19.986Z"
+}

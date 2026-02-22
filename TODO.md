@@ -1,0 +1,2 @@
+- Bespreken hoe we de Fluvius-scenario-setup opzetten (testcases, workflow, tooling).
+- Voeg bij Fluvius analyses standaard een check toe: som overeengebrachte waarden (per maand) = som van de ruwe kwartierwaarden.

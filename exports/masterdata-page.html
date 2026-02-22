@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digitale Atelier · Masterdata</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="project">
+  <div class="frame masterdata-frame">
+    <header>
+      <a class="back" href="../index.html">← Digitale Atelier</a>
+      <span class="logo">MASTERDATA</span>
+      <span class="tag">Minimal · overzicht op 1 scherm</span>
+    </header>
+
+    <main>
+      <section class="story compact">
+        <h3>Masterdata cockpit</h3>
+        <p>Overzicht van datasets met update-informatie en operationele status.</p>
+        <div class="kpi-row" id="globalStatusRow">
+          <div class="card"><h3>Datasets</h3><p id="global-datasets">3</p></div>
+          <div class="card"><h3>Status OK</h3><p id="global-ok">—</p></div>
+          <div class="card"><h3>Waarschuwing</h3><p id="global-warn">—</p></div>
+          <div class="card"><h3>Hard fail</h3><p id="global-fail">—</p></div>
+          <div class="card"><h3>Laatst gerefresht</h3><p id="global-latest">—</p></div>
+        </div>
+      </section>
+
+      <section class="story compact">
+        <div class="section-head">
+          <h3>Belpex prijs — recentste 24u</h3>
+          <span class="status-pill" id="belpex-status">controleren…</span>
+        </div>
+        <p class="table-explainer"><strong>Wat zie je:</strong> Belgische day-ahead prijs (EUR/MWh), laatste 96 kwartieren (24 uur).</p>
+        <p class="table-explainer"><strong>Updatefrequentie:</strong> dagelijks om 16:00 (Europe/Brussels).</p>
+        <p class="table-explainer"><strong>Laatste update:</strong> <span id="belpex-last-update">—</span></p>
+        <p class="table-error" id="belpex-error"></p>
+        <div class="chart-shell">
+          <canvas id="belpexChart" height="230" aria-label="Belpex 24 uur prijsgrafiek"></canvas>
+        </div>
+        <div class="kpi-row">
+          <div class="card"><h3>Laatste</h3><p id="kpi-latest">—</p></div>
+          <div class="card"><h3>Min</h3><p id="kpi-min">—</p></div>
+          <div class="card"><h3>Max</h3><p id="kpi-max">—</p></div>
+          <div class="card"><h3>Gem.</h3><p id="kpi-avg">—</p></div>
+        </div>
+      </section>
+
+      <section class="story compact">
+        <div class="section-head">
+          <h3>Vaste contractcomponenten — Vlaanderen</h3>
+          <span class="status-pill" id="matrix-status">controleren…</span>
+        </div>
+        <p class="table-explainer"><strong>Wat zie je:</strong> componenten op rij, leveranciers in kolommen (vergunningssnapshot).</p>
+        <p class="table-explainer"><strong>Updatefrequentie:</strong> 1x per week (maandag 16:10, Europe/Brussels).</p>
+        <p class="table-explainer"><strong>Laatste update:</strong> <span id="matrix-last-update">—</span></p>
+        <p class="table-error" id="matrix-error"></p>
+        <div class="table-scroll">
+          <table class="matrix-table compact" id="tariffMatrixTable"></table>
+        </div>
+      </section>
+
+      <section class="story compact">
+        <div class="section-head">
+          <h3>Dynamische contractcomponenten — Vlaanderen</h3>
+          <span class="status-pill" id="dynamic-status">controleren…</span>
+        </div>
+        <p class="table-explainer"><strong>Wat zie je:</strong> componenten op rij, leveranciers in kolommen (vergunningssnapshot) voor dynamisch/variabel contractmodel.</p>
+        <p class="table-explainer"><strong>Updatefrequentie:</strong> 1x per week (maandag 16:20, Europe/Brussels).</p>
+        <p class="table-explainer"><strong>Laatste update:</strong> <span id="dynamic-last-update">—</span></p>
+        <p class="table-error" id="dynamic-error"></p>
+        <div class="table-scroll">
+          <table class="matrix-table compact" id="dynamicMatrixTable"></table>
+        </div>
+      </section>
+
+      <section class="story compact">
+        <div class="section-head">
+          <h3>Masterdata catalogus (alle tabellen)</h3>
+          <span class="status-pill ok">overzicht</span>
+        </div>
+        <p class="table-explainer"><strong>Wat zie je:</strong> alle masterdata tabellen met preview en usage dropdown per project.</p>
+        <div id="catalogContainer"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const euro = (v) => `${Number(v).toFixed(2)} €/MWh`;
+
+    function hoursAgo(iso) {
+      if (!iso) return Number.POSITIVE_INFINITY;
+      const t = new Date(iso).getTime();
+      if (!Number.isFinite(t)) return Number.POSITIVE_INFINITY;
+      return (Date.now() - t) / 36e5;
+    }
+
+    function setStatus(el, mode, textByMode = {}) {
+      const label = textByMode[mode] || mode;
+      el.textContent = label;
+      el.classList.remove('ok', 'warn', 'fail');
+      if (mode === 'ok') el.classList.add('ok');
+      else if (mode === 'warn') el.classList.add('warn');
+      else if (mode === 'fail') el.classList.add('fail');
+    }
+
+    function drawLineChart(canvas, points) {
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.clientWidth || canvas.width;
+      const h = canvas.clientHeight || 230;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+
+      const pad = { top: 16, right: 16, bottom: 24, left: 46 };
+      const innerW = w - pad.left - pad.right;
+      const innerH = h - pad.top - pad.bottom;
+
+      const vals = points.map(p => p.price_eur_mwh);
+      const min = Math.min(...vals);
+      const max = Math.max(...vals);
+      const range = (max - min) || 1;
+
+      const x = (i) => pad.left + (i / (points.length - 1)) * innerW;
+      const y = (v) => pad.top + (1 - (v - min) / range) * innerH;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(255,255,255,0.02)';
+      ctx.fillRect(pad.left, pad.top, innerW, innerH);
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const gy = pad.top + (g / 4) * innerH;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, gy);
+        ctx.lineTo(pad.left + innerW, gy);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = '#f2c744';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const px = x(i), py = y(p.price_eur_mwh);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+
+      ctx.fillStyle = '#f2c744';
+      const lp = points[points.length - 1];
+      ctx.beginPath();
+      ctx.arc(x(points.length - 1), y(lp.price_eur_mwh), 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    let belpexState = 'warn';
+    let matrixState = 'warn';
+    let dynamicState = 'warn';
+    let latestUpdateIso = null;
+
+    fetch('./masterdata/belpex-latest-24h.json')
+      .then(r => { if (!r.ok) throw new Error('Belpex datafile niet gevonden'); return r.json(); })
+      .then(data => {
+        const points = data.points || [];
+        if (!points.length) throw new Error('Geen Belpex punten');
+
+        drawLineChart(document.getElementById('belpexChart'), points);
+        document.getElementById('kpi-latest').textContent = euro(points[points.length - 1].price_eur_mwh);
+        document.getElementById('kpi-min').textContent = euro(data.stats.min_price_eur_mwh);
+        document.getElementById('kpi-max').textContent = euro(data.stats.max_price_eur_mwh);
+        document.getElementById('kpi-avg').textContent = euro(data.stats.avg_price_eur_mwh);
+
+        const upd = data.updated_at_utc;
+        document.getElementById('belpex-last-update').textContent = upd;
+        latestUpdateIso = upd;
+
+        const h = hoursAgo(upd);
+        belpexState = h <= 30 ? 'ok' : 'warn';
+        setStatus(document.getElementById('belpex-status'), belpexState, {
+          ok: 'loopt goed',
+          warn: 'vastgelopen/vertraagd',
+          fail: 'hard fail'
+        });
+        document.getElementById('belpex-error').textContent = '';
+        refreshGlobal();
+      })
+      .catch(err => {
+        belpexState = 'fail';
+        setStatus(document.getElementById('belpex-status'), 'fail', {
+          fail: 'hard fail'
+        });
+        document.getElementById('belpex-last-update').textContent = '—';
+        document.getElementById('belpex-error').textContent = `Belpex updatefout: ${err.message}`;
+        refreshGlobal();
+      });
+
+    function renderMatrixTable(tableId, data) {
+      const table = document.getElementById(tableId);
+      const suppliers = data.suppliers || [];
+      const components = data.components || [];
+
+      const thead = document.createElement('thead');
+      const hr = document.createElement('tr');
+      const first = document.createElement('th');
+      first.textContent = 'Component';
+      hr.appendChild(first);
+      suppliers.forEach(s => {
+        const th = document.createElement('th');
+        th.textContent = s.name;
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+
+      const tbody = document.createElement('tbody');
+      components.forEach(c => {
+        const tr = document.createElement('tr');
+        const tdComp = document.createElement('td');
+        tdComp.textContent = c;
+        tr.appendChild(tdComp);
+        suppliers.forEach(s => {
+          const td = document.createElement('td');
+          td.textContent = (data.matrix?.[c]?.[s.name]) || '—';
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+
+      table.innerHTML = '';
+      table.appendChild(thead);
+      table.appendChild(tbody);
+    }
+
+    fetch('./masterdata/fixed-contract-tariff-matrix-vlaanderen.json')
+      .then(r => { if (!r.ok) throw new Error('Matrixbestand niet gevonden'); return r.json(); })
+      .then(data => {
+        renderMatrixTable('tariffMatrixTable', data);
+
+        const upd = data.updated_at_utc;
+        document.getElementById('matrix-last-update').textContent = upd;
+        if (!latestUpdateIso || new Date(upd) > new Date(latestUpdateIso)) latestUpdateIso = upd;
+
+        const h = hoursAgo(upd);
+        matrixState = h <= (24 * 8) ? 'ok' : 'warn';
+        setStatus(document.getElementById('matrix-status'), matrixState, {
+          ok: 'loopt goed',
+          warn: 'vastgelopen/vertraagd',
+          fail: 'hard fail'
+        });
+        document.getElementById('matrix-error').textContent = '';
+        refreshGlobal();
+      })
+      .catch(err => {
+        matrixState = 'fail';
+        setStatus(document.getElementById('matrix-status'), 'fail', { fail: 'hard fail' });
+        document.getElementById('matrix-last-update').textContent = '—';
+        document.getElementById('matrix-error').textContent = `Vaste matrix updatefout: ${err.message}`;
+        refreshGlobal();
+      });
+
+    fetch('./masterdata/dynamic-contract-tariff-matrix-vlaanderen.json')
+      .then(r => { if (!r.ok) throw new Error('Dynamisch matrixbestand niet gevonden'); return r.json(); })
+      .then(data => {
+        renderMatrixTable('dynamicMatrixTable', data);
+
+        const upd = data.updated_at_utc;
+        document.getElementById('dynamic-last-update').textContent = upd;
+        if (!latestUpdateIso || new Date(upd) > new Date(latestUpdateIso)) latestUpdateIso = upd;
+
+        const h = hoursAgo(upd);
+        dynamicState = h <= (24 * 8) ? 'ok' : 'warn';
+        setStatus(document.getElementById('dynamic-status'), dynamicState, {
+          ok: 'loopt goed',
+          warn: 'vastgelopen/vertraagd',
+          fail: 'hard fail'
+        });
+        document.getElementById('dynamic-error').textContent = '';
+        refreshGlobal();
+      })
+      .catch(err => {
+        dynamicState = 'fail';
+        setStatus(document.getElementById('dynamic-status'), 'fail', { fail: 'hard fail' });
+        document.getElementById('dynamic-last-update').textContent = '—';
+        document.getElementById('dynamic-error').textContent = `Dynamische matrix updatefout: ${err.message}`;
+        refreshGlobal();
+      });
+
+    function refreshGlobal() {
+      const states = [belpexState, matrixState, dynamicState];
+      const okCount = states.filter(s => s === 'ok').length;
+      const warnCount = states.filter(s => s === 'warn').length;
+      const failCount = states.filter(s => s === 'fail').length;
+      document.getElementById('global-ok').textContent = okCount;
+      document.getElementById('global-warn').textContent = warnCount;
+      document.getElementById('global-fail').textContent = failCount;
+      document.getElementById('global-latest').textContent = latestUpdateIso || '—';
+    }
+
+    function renderCatalogTablePreview(table) {
+      const cols = table.preview?.columns || [];
+      const rows = table.preview?.rows || [];
+      const wrap = document.createElement('div');
+      wrap.className = 'table-scroll';
+      const t = document.createElement('table');
+      t.className = 'matrix-table compact';
+      const thead = document.createElement('thead');
+      const trh = document.createElement('tr');
+      cols.forEach(c => {
+        const th = document.createElement('th');
+        th.textContent = c;
+        trh.appendChild(th);
+      });
+      thead.appendChild(trh);
+      const tbody = document.createElement('tbody');
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+        r.forEach(v => {
+          const td = document.createElement('td');
+          td.textContent = String(v);
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      t.appendChild(thead);
+      t.appendChild(tbody);
+      wrap.appendChild(t);
+      return wrap;
+    }
+
+    fetch('./masterdata/masterdata-registry.json')
+      .then(r => { if (!r.ok) throw new Error('catalogusbestand ontbreekt'); return r.json(); })
+      .then(data => {
+        const container = document.getElementById('catalogContainer');
+        container.innerHTML = '';
+        const tables = data.tables || [];
+        document.getElementById('global-datasets').textContent = String(tables.length);
+
+        tables.forEach((table, i) => {
+          const card = document.createElement('div');
+          card.className = 'catalog-card';
+
+          const head = document.createElement('div');
+          head.className = 'section-head';
+          const h = document.createElement('h4');
+          h.textContent = `${i + 1}. ${table.title}`;
+          head.appendChild(h);
+
+          const pill = document.createElement('span');
+          pill.className = 'status-pill';
+          const maxAge = Number(table.max_age_hours || 24 * 30);
+          const age = hoursAgo(table.last_update);
+          let mode = 'ok';
+          if (!table.last_update || !Number.isFinite(age)) mode = 'fail';
+          else if (age > maxAge * 2) mode = 'fail';
+          else if (age > maxAge) mode = 'warn';
+          setStatus(pill, mode, { ok: 'loopt goed', warn: 'vastgelopen/vertraagd', fail: 'hard fail' });
+          head.appendChild(pill);
+          card.appendChild(head);
+
+          const what = document.createElement('p');
+          what.className = 'table-explainer';
+          what.innerHTML = `<strong>Wat zie je:</strong> ${table.what_we_see || table.description || '—'}`;
+          card.appendChild(what);
+
+          const meta = document.createElement('p');
+          meta.className = 'table-explainer';
+          meta.innerHTML = `<strong>Updatefrequentie:</strong> ${table.update_frequency || '—'} · <strong>Laatste update:</strong> ${table.last_update || '—'}`;
+          card.appendChild(meta);
+
+          const usageLabel = document.createElement('label');
+          usageLabel.className = 'table-explainer';
+          usageLabel.innerHTML = '<strong>Gebruik in projecten:</strong>';
+          card.appendChild(usageLabel);
+
+          const select = document.createElement('select');
+          select.className = 'usage-select';
+          (table.usage || []).forEach((u, idx) => {
+            const opt = document.createElement('option');
+            opt.value = String(idx);
+            opt.textContent = u.project;
+            select.appendChild(opt);
+          });
+          card.appendChild(select);
+
+          const usageOut = document.createElement('p');
+          usageOut.className = 'table-explainer';
+          const updateUsage = () => {
+            const u = table.usage?.[Number(select.value)] || null;
+            usageOut.innerHTML = u ? `<strong>${u.project}:</strong> ${u.how}` : '<em>Geen usage info</em>';
+          };
+          select.addEventListener('change', updateUsage);
+          updateUsage();
+          card.appendChild(usageOut);
+
+          card.appendChild(renderCatalogTablePreview(table));
+          container.appendChild(card);
+        });
+      })
+      .catch(err => {
+        const container = document.getElementById('catalogContainer');
+        container.innerHTML = `<p class="table-error">Catalogus fout: ${err.message}</p>`;
+      });
+
+    window.addEventListener('resize', () => {
+      fetch('./masterdata/belpex-latest-24h.json')
+        .then(r => r.json())
+        .then(data => drawLineChart(document.getElementById('belpexChart'), data.points || []))
+        .catch(() => {});
+    });
+  </script>
+</body>
+</html>

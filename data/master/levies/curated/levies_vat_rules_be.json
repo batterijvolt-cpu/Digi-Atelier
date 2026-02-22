@@ -1,0 +1,42 @@
+{
+  "dataset": "levies_vat_rules_be",
+  "updated_at_utc": "2026-02-21T16:55:00.000Z",
+  "fill_status": "partial",
+  "records": [
+    {
+      "rule": "btw_elektriciteit_residentieel_pct",
+      "value": 6,
+      "unit": "%",
+      "valid_from": "2026-01-01",
+      "source_type": "regulatory_context",
+      "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
+      "source_date": "2026-02-21",
+      "confidence_level": "starter",
+      "notes": "Residential electricity VAT commonly applied at 6% in current Belgian policy context; exact legal scope/timebox should be confirmed against FPS Finance legal publication before financial settlement use."
+    },
+    {
+      "rule": "btw_elektriciteit_standaard_pct",
+      "value": 21,
+      "unit": "%",
+      "valid_from": "2026-01-01",
+      "source_type": "regulatory_context",
+      "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
+      "source_date": "2026-02-21",
+      "confidence_level": "starter",
+      "notes": "Standard Belgian VAT rate reference for energy billing context; legal applicability per customer segment remains to be verified on fiscal source text."
+    },
+    {
+      "rule": "federale_bijdrage_elektriciteit",
+      "value": "active",
+      "valid_from": "2026-01-01",
+      "source_type": "regulatory_context",
+      "source_url": "https://www.creg.be/nl/consumenten/prijzen-en-tarieven",
+      "source_date": "2026-02-21",
+      "confidence_level": "starter",
+      "notes": "Federal contribution component exists in Belgian electricity invoice stack; exact €/kWh values and exemptions still to source from official tariff/legal table."
+    }
+  ],
+  "sources": [
+    "https://www.creg.be/nl/consumenten/prijzen-en-tarieven"
+  ]
+}

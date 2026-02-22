@@ -1,0 +1,40 @@
+{
+  "dataset": "net_tariffs_flanders",
+  "updated_at_utc": "2026-02-21T16:55:00.000Z",
+  "fill_status": "partial",
+  "records": [
+    {
+      "dnb": "Fluvius Antwerpen",
+      "tariff_year": 2026,
+      "capacity_tariff_active": true,
+      "source_type": "regulatory_context",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+      "source_date": "2026-02-21",
+      "confidence_level": "medium",
+      "notes": "VNR confirms capacity tariff framework is active in Flemish distribution tariffs; detailed per-component euro values are published via tariff documents and can vary by profile/net area."
+    },
+    {
+      "dnb": "Fluvius Limburg",
+      "tariff_year": 2026,
+      "capacity_tariff_active": true,
+      "source_type": "regulatory_context",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+      "source_date": "2026-02-21",
+      "confidence_level": "medium",
+      "notes": "VNR confirms capacity tariff framework is active in Flemish distribution tariffs; detailed per-component euro values are published via tariff documents and can vary by profile/net area."
+    },
+    {
+      "dnb": "Fluvius West",
+      "tariff_year": 2026,
+      "capacity_tariff_active": true,
+      "source_type": "regulatory_context",
+      "source_url": "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+      "source_date": "2026-02-21",
+      "confidence_level": "medium",
+      "notes": "VNR confirms capacity tariff framework is active in Flemish distribution tariffs; detailed per-component euro values are published via tariff documents and can vary by profile/net area."
+    }
+  ],
+  "sources": [
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven"
+  ]
+}

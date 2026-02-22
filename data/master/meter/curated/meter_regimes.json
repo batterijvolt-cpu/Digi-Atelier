@@ -1,0 +1,31 @@
+{
+  "dataset": "meter_regimes",
+  "updated_at_utc": "2026-02-21T16:44:07.192Z",
+  "fill_status": "seeded",
+  "records": [
+    {
+      "regime": "enkel",
+      "digital_meter_required": false,
+      "resolution": "monthly",
+      "suited_for_dynamic_contract": false,
+      "source_type": "domain_rules"
+    },
+    {
+      "regime": "dag_nacht",
+      "digital_meter_required": false,
+      "resolution": "monthly",
+      "suited_for_dynamic_contract": false,
+      "source_type": "domain_rules"
+    },
+    {
+      "regime": "dynamisch",
+      "digital_meter_required": true,
+      "resolution": "quarter_hour",
+      "suited_for_dynamic_contract": true,
+      "source_type": "market_rules"
+    }
+  ],
+  "sources": [
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/energiecontracten-en-leveranciers/energiecontracten"
+  ]
+}

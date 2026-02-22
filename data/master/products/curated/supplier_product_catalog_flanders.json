@@ -1,0 +1,107 @@
+{
+  "dataset": "supplier_product_catalog_flanders",
+  "updated_at_utc": "2026-02-21T16:55:00.000Z",
+  "fill_status": "partial",
+  "notes": "Phase 2: official supplier pages used to enrich product catalog metadata and per-record source traceability.",
+  "records": [
+    {
+      "supplier": "ENGIE",
+      "product": "Easy",
+      "contract_type": "vast/variabel",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "high"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Flow",
+      "contract_type": "variabel",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "high"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Direct Online",
+      "contract_type": "variabel",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "high"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Dynamic",
+      "contract_type": "dynamisch",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "high"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Empower",
+      "contract_type": "vast/variabel",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "high"
+    },
+    {
+      "supplier": "ENGIE",
+      "product": "Basic Online",
+      "contract_type": "variabel",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "high"
+    },
+    {
+      "supplier": "Luminus",
+      "product": "Comfy",
+      "contract_type": "vast",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "medium"
+    },
+    {
+      "supplier": "Luminus",
+      "product": "ComfyFlex",
+      "contract_type": "variabel",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "medium"
+    },
+    {
+      "supplier": "Luminus",
+      "product": "Dynamic Online",
+      "contract_type": "dynamisch",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-21",
+      "source_type": "official_supplier_page",
+      "confidence_level": "medium"
+    },
+    {
+      "supplier": "TotalEnergies",
+      "product": "myDynamic",
+      "contract_type": "dynamisch",
+      "source_url": "https://www.totalenergies.be",
+      "source_date": "2026-02-21",
+      "source_type": "starter_manual_tag",
+      "confidence_level": "starter"
+    },
+    {
+      "supplier": "Mega",
+      "product": "Zen Fixed",
+      "contract_type": "vast",
+      "source_url": "https://www.mega.be",
+      "source_date": "2026-02-21",
+      "source_type": "starter_manual_tag",
+      "confidence_level": "starter"
+    }
+  ]
+}

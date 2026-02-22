@@ -1,0 +1,22 @@
+{
+  "dataset": "pv_profiles_be_defaults",
+  "updated_at_utc": "2026-02-21T16:44:07.192Z",
+  "fill_status": "seeded",
+  "records": [
+    {
+      "profile": "PV_SOUTH_35",
+      "orientation": "south",
+      "yearly_index": 1
+    },
+    {
+      "profile": "PV_EAST_WEST_20",
+      "orientation": "east-west",
+      "yearly_index": 0.92
+    },
+    {
+      "profile": "PV_FLAT_10",
+      "orientation": "flat",
+      "yearly_index": 0.9
+    }
+  ]
+}

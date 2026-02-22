@@ -1,0 +1,17 @@
+# Local Netlify folder
+.netlify
+
+# Local/runtime artifacts
+.openclaw/
+.venv/
+__pycache__/
+*.pyc
+
+# Local machine/env files
+.env
+.env.*
+
+# OS/editor noise
+.DS_Store
+.vscode/
+.idea/

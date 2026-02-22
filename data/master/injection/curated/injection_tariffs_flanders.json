@@ -1,0 +1,42 @@
+{
+  "dataset": "injection_tariffs_flanders",
+  "updated_at_utc": "2026-02-21T16:55:00.000Z",
+  "fill_status": "partial",
+  "records": [
+    {
+      "supplier": "ENGIE",
+      "product": "Flow",
+      "tariff_type": "variabel",
+      "source_type": "supplier_product_context",
+      "source_url": "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+      "source_date": "2026-02-21",
+      "confidence_level": "medium",
+      "notes": "ENGIE product page explicitly positions Flow with injection compensation proposition; numeric injection tariff values are in linked price fiches and vary by period/indexation."
+    },
+    {
+      "supplier": "Luminus",
+      "product": "ComfyFlex",
+      "tariff_type": "variabel",
+      "source_type": "official_supplier_page",
+      "source_url": "https://www.luminus.be/nl/prive/",
+      "source_date": "2026-02-21",
+      "confidence_level": "starter",
+      "notes": "Product existence confirmed on official Luminus page. Injection remuneration value/formula not captured yet from product fiche."
+    },
+    {
+      "supplier": "Eneco",
+      "product": "Zon & Wind",
+      "tariff_type": "variabel",
+      "source_type": "starter_manual_tag",
+      "source_url": "https://www.eneco.be/nl/",
+      "source_date": "2026-02-21",
+      "confidence_level": "starter",
+      "notes": "Supplier page confirms Belgian green electricity positioning; product-level injection tariff details still missing (official tariff fiche URL not yet resolved)."
+    }
+  ],
+  "sources": [
+    "https://www.engie.be/nl/energie/elektriciteit-gas/prijzen-voorwaarden/",
+    "https://www.luminus.be/nl/prive/",
+    "https://www.eneco.be/nl/"
+  ]
+}

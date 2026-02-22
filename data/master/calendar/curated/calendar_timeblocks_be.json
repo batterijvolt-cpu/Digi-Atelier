@@ -1,0 +1,25 @@
+{
+  "dataset": "calendar_timeblocks_be",
+  "updated_at_utc": "2026-02-21T16:44:07.192Z",
+  "fill_status": "seeded",
+  "records": [
+    {
+      "block": "nacht",
+      "start": "22:00",
+      "end": "07:00",
+      "scope": "default_analysis_block"
+    },
+    {
+      "block": "dag",
+      "start": "07:00",
+      "end": "22:00",
+      "scope": "default_analysis_block"
+    },
+    {
+      "block": "weekend",
+      "start": "Saturday 00:00",
+      "end": "Sunday 23:59",
+      "scope": "default_analysis_block"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "dataset": "batterij_rendementshefbomen_matrix",
+  "updated_at_utc": "2026-02-21T17:10:00Z",
+  "fill_status": "seeded",
+  "term": "rendementshefbomen",
+  "description": "Koppelt contractkostcomponenten aan batterij-hefbomen en verwachte impact.",
+  "columns": [
+    "hefboom",
+    "contract_component",
+    "impact_type",
+    "impact_direction",
+    "notes",
+    "confidence_level"
+  ],
+  "records": [
+    {
+      "hefboom": "zelfverbruik verhogen",
+      "contract_component": "energiekost afname (€/kWh)",
+      "impact_type": "financieel",
+      "impact_direction": "dalend",
+      "notes": "Meer eigen PV direct of via batterij gebruiken verlaagt netafname.",
+      "confidence_level": "high"
+    },
+    {
+      "hefboom": "zelfverbruik verhogen",
+      "contract_component": "heffingen + btw op afname",
+      "impact_type": "financieel",
+      "impact_direction": "dalend",
+      "notes": "Door lagere afname daalt ook belastinggrondslag op afgenomen kWh.",
+      "confidence_level": "medium"
+    },
+    {
+      "hefboom": "piek afvlakken",
+      "contract_component": "capaciteitstariefcomponent",
+      "impact_type": "financieel",
+      "impact_direction": "dalend",
+      "notes": "Batterij kan kwartierpieken dempen en zo nettarief beïnvloeden.",
+      "confidence_level": "high"
+    },
+    {
+      "hefboom": "goedkoop laden, duur vermijden",
+      "contract_component": "energieprijs bij dynamisch contract",
+      "impact_type": "financieel",
+      "impact_direction": "dalend",
+      "notes": "Laad in lage prijsuren, vermijd afname in dure uren.",
+      "confidence_level": "high"
+    },
+    {
+      "hefboom": "injectie slimmer sturen",
+      "contract_component": "injectievergoeding",
+      "impact_type": "financieel",
+      "impact_direction": "stijgend",
+      "notes": "Minder verlies op lage injectiemomenten door opslag en timing.",
+      "confidence_level": "medium"
+    },
+    {
+      "hefboom": "comfort en back-up",
+      "contract_component": "niet-factuurgebonden comfortwaarde",
+      "impact_type": "operationeel",
+      "impact_direction": "stijgend",
+      "notes": "Niet rechtstreeks factuur, wel relevant in beslissingskader.",
+      "confidence_level": "medium"
+    }
+  ],
+  "sources": [
+    "https://www.vlaamsenutsregulator.be/elektriciteit-en-aardgas/nettarieven",
+    "https://www.creg.be/nl/consumenten/prijzen-en-tarieven"
+  ]
+}

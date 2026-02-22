@@ -1,0 +1,20 @@
+{
+  "dataset": "belpex_prices_be",
+  "generated_at_utc": "2026-02-21T13:06:22.242Z",
+  "rows": 54219,
+  "checks": {
+    "missing_price_count": 0,
+    "invalid_timestamp_count": 0,
+    "duplicate_timestamp_count": 0,
+    "observed_intervals_seconds": {
+      "900": 13827,
+      "3600": 40391
+    },
+    "min_price_eur_mwh": -462.33,
+    "max_price_eur_mwh": 871,
+    "mean_price_eur_mwh": 114.9391,
+    "stddev_price_eur_mwh": 92.2728,
+    "outlier_count_z_gte_4": 540
+  },
+  "status": "ok"
+}
