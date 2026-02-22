@@ -16,7 +16,7 @@
     if (p.includes('/projects/fluvius.html')) return 201;
     if (p.includes('/projects/fluvius-upload.html')) return 251;
     if (p.includes('/projects/masterdata.html')) return 301;
-    if (p.endsWith('/Digi-Atelier/') || p.endsWith('/index.html') || p === '/' ) return 1;
+    if (p.endsWith('/Digi-Atelier/') || p.endsWith('/index.html') || p === '/') return 1;
     return 901;
   })();
 
@@ -29,6 +29,23 @@
     if (p.endsWith('/Digi-Atelier/') || p.endsWith('/index.html') || p === '/') return 1;
     return 901;
   })();
+
+  const normalizePath = (pathname) => {
+    const p = pathname || '/';
+    const i = p.indexOf('/Digi-Atelier/');
+    return i >= 0 ? p.slice(i + '/Digi-Atelier'.length) : p;
+  };
+
+  const scriptEl = document.currentScript || document.querySelector('script[src*="part-map.js"]');
+  const registryUrl = scriptEl?.src
+    ? new URL('table-id-registry.json', scriptEl.src).toString()
+    : 'table-id-registry.json';
+
+  let registry = null;
+  fetch(registryUrl)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((json) => { registry = json; schedule(); })
+    .catch(() => { registry = null; });
 
   const isVisible = (el) => {
     const s = getComputedStyle(el);
@@ -54,24 +71,30 @@
     el.setAttribute('data-part-id', id);
   };
 
+  const getRegistryIdsForPage = () => {
+    if (!registry?.pages) return null;
+    const p = normalizePath(location.pathname);
+    return registry.pages[p] || null;
+  };
+
   const build = () => {
     clearTags();
 
     const majorEls = Array.from(document.querySelectorAll(MAJORS)).filter(isVisible);
-
     let nextId = pageBase;
     majorEls.forEach((box) => {
       mark(box, String(nextId));
       nextId += 1;
     });
 
-    // Extra logica voor datatabellen: T1, T2, ... op chronologische DOM-volgorde
     const tables = Array.from(document.querySelectorAll('table')).filter(isVisible);
+    const registryIds = getRegistryIdsForPage();
     let t = tableBase;
-    tables.forEach((table) => {
+    tables.forEach((table, idx) => {
       const host = table.closest('.table-scroll') || table;
       host.classList.add('table-numbered');
-      host.setAttribute('data-table-id', `T${t}`);
+      const id = registryIds?.[idx] || `T${t}`;
+      host.setAttribute('data-table-id', id);
       t += 1;
     });
   };
