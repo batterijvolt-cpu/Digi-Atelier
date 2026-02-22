@@ -36,8 +36,16 @@
         <p class="table-explainer"><strong>Laatste update:</strong> <span id="belpex-last-update">—</span></p>
         <p class="table-explainer"><strong>Volgende update:</strong> <span id="belpex-next-update">—</span></p>
         <p class="table-error" id="belpex-error"></p>
-        <div class="chart-shell belpex-chart-shell">
-          <canvas id="belpexChart" height="120" aria-label="Belpex 24 uur prijsgrafiek"></canvas>
+        <div class="belpex-split-204">
+          <div class="chart-shell belpex-chart-shell">
+            <canvas id="belpexChart" height="120" aria-label="Belpex 24 uur prijsgrafiek"></canvas>
+          </div>
+          <div class="table-scroll belpex-table-scroll">
+            <table class="matrix-table compact" id="belpexTable">
+              <thead><tr><th>Tijd (BE)</th><th>€/MWh</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
         <div class="kpi-row">
           <div class="card"><h3>Lst</h3><p id="kpi-latest">—</p></div>
@@ -216,6 +224,17 @@
       ctx.fill();
     }
 
+    function renderBelpexTable(points) {
+      const tbody = document.querySelector('#belpexTable tbody');
+      if (!tbody) return;
+      const rows = (points || []).slice(-24).reverse();
+      tbody.innerHTML = rows.map(p => {
+        const ts = p.timestamp_brussels || '';
+        const hhmm = ts.slice(11, 16) || ts;
+        return `<tr><td>${hhmm}</td><td>${Number(p.price_eur_mwh).toFixed(1)}</td></tr>`;
+      }).join('');
+    }
+
     let belpexState = 'warn';
     let matrixState = 'warn';
     let dynamicState = 'warn';
@@ -228,6 +247,7 @@
         if (!points.length) throw new Error('Geen Belpex punten');
 
         drawLineChart(document.getElementById('belpexChart'), points);
+        renderBelpexTable(points);
         document.getElementById('kpi-latest').textContent = euro(points[points.length - 1].price_eur_mwh);
         document.getElementById('kpi-min').textContent = euro(data.stats.min_price_eur_mwh);
         document.getElementById('kpi-max').textContent = euro(data.stats.max_price_eur_mwh);

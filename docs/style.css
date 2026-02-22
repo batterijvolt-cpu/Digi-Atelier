@@ -440,6 +440,24 @@ p.lede {
 .table-scroll .matrix-table {
   min-width: 1400px;
 }
+.belpex-table-scroll .matrix-table {
+  min-width: 220px;
+}
+.belpex-split-204 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .belpex-split-204 {
+    grid-template-columns: 1.8fr 0.9fr;
+  }
+  .belpex-split-204 .chart-shell,
+  .belpex-split-204 .table-scroll {
+    margin: 0;
+  }
+}
 .masterdata-frame {
   max-width: 1400px;
 }
