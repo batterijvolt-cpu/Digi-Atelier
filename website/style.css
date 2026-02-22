@@ -527,6 +527,21 @@ body.project.masterdata-page .chart-shell {
   margin-bottom: 0.7rem;
   padding: 0.55rem;
 }
+.belpex-chart-shell {
+  position: relative;
+}
+.chart-overlay-note {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  z-index: 6;
+  font-size: 0.72rem;
+  color: rgba(51,65,85,0.92);
+  background: linear-gradient(90deg, rgba(241,245,249,0.92), rgba(241,245,249,0.55), rgba(241,245,249,0));
+  padding: 0.2rem 0.45rem;
+  border-radius: 8px;
+  pointer-events: none;
+}
 body.project.masterdata-page .story.compact p,
 body.project.masterdata-page .table-explainer,
 body.project.masterdata-page .metric-row,

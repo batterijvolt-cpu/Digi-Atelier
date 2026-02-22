@@ -32,13 +32,13 @@
           <h3 id="belpex-title">Belpex prijs — recentste 24u</h3>
           <span class="status-pill" id="belpex-status">controleren…</span>
         </div>
-        <p class="table-explainer"><strong>Wat zie je:</strong> Belgische day-ahead prijs (EUR/MWh), laatste 96 kwartieren (24 uur).</p>
         <p class="table-explainer"><strong>Updatefrequentie:</strong> dagelijks om 16:00 (Europe/Brussels).</p>
         <p class="table-explainer"><strong>Laatste update:</strong> <span id="belpex-last-update">—</span></p>
         <p class="table-explainer"><strong>Volgende update:</strong> <span id="belpex-next-update">—</span></p>
         <p class="table-error" id="belpex-error"></p>
-        <div class="chart-shell">
-          <canvas id="belpexChart" height="150" aria-label="Belpex 24 uur prijsgrafiek"></canvas>
+        <div class="chart-shell belpex-chart-shell">
+          <div class="chart-overlay-note">Belpex day-ahead prijs (€/MWh) · laatste 96 kwartieren (24u)</div>
+          <canvas id="belpexChart" height="120" aria-label="Belpex 24 uur prijsgrafiek"></canvas>
         </div>
         <div class="kpi-row">
           <div class="card"><h3>Lst</h3><p id="kpi-latest">—</p></div>
