@@ -104,10 +104,21 @@
           <h2>Netto jaarimpact per scenario (incl. gemiste dynamische injectie)</h2>
           <p class="meta">Eén gestapelde grafiek met alle opbrengst- en verlieshefbomen. Houdt expliciet rekening met opportunity cost: kWh die je extra zelf verbruikt kan je niet meer aan dynamische injectie verkopen.</p>
         </header>
-        <div class="scenario-switch">
+        <div class="scenario-switch" style="margin-bottom:.6rem; flex-wrap:wrap; align-items:center;">
           <button type="button" id="pvMinus">−</button>
           <button type="button" id="pvCapBtn" class="active">PV 6.0 kWp</button>
           <button type="button" id="pvPlus">+</button>
+          <span class="badge" style="margin-left:.5rem;">Fluvius basisjaar: 2025</span>
+        </div>
+        <div class="panel" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-bottom:1rem;">
+          <div class="card">
+            <h3>Huidig contract</h3>
+            <select id="currentOffer" class="usage-select"></select>
+          </div>
+          <div class="card">
+            <h3>Nieuw contract</h3>
+            <select id="newOffer" class="usage-select"></select>
+          </div>
         </div>
         <p class="chart-hint" id="switchSummary"></p>
         <canvas id="switchChart" height="230"></canvas>
@@ -241,11 +252,14 @@
     }
 
     // 206: één grafiek met alle hefbomen, incl. gemiste dynamische injectie
+    const offerCatalog = [
+      { id:'engie-flow-fixed', label:'ENGIE Flow (huidig vast) · afname 0.32 · injectie 0.03', afname:0.32, injectie:0.03, timingBonus:0.00 },
+      { id:'engie-dynamic', label:'ENGIE Dynamic · afname 0.30 · injectie 0.10', afname:0.30, injectie:0.10, timingBonus:0.02 },
+      { id:'luminus-comfyflex', label:'Luminus ComfyFlex · afname 0.31 · injectie 0.08', afname:0.31, injectie:0.08, timingBonus:0.015 },
+      { id:'octa-dynamic', label:'OCTA+ Dynamic · afname 0.30 · injectie 0.09', afname:0.30, injectie:0.09, timingBonus:0.018 }
+    ];
+
     const switchAssumptions = {
-      afnameEurPerKwh: 0.32,
-      fixedInjectieEurPerKwh: 0.03,
-      dynInjectieEurPerKwh: 0.10,
-      timingBonusEurPerKwh: 0.02,
       capaciteitEurPerKwJaar: 53.53,
       roundTripEff: 0.92,
       pvBaseKwp: 6.0
@@ -256,11 +270,20 @@
     const pvBtn = document.getElementById('pvCapBtn');
     const pvMinus = document.getElementById('pvMinus');
     const pvPlus = document.getElementById('pvPlus');
+    const currentOfferSel = document.getElementById('currentOffer');
+    const newOfferSel = document.getElementById('newOffer');
     const switchSummary = document.getElementById('switchSummary');
 
     function eur(v) { return `€ ${v.toFixed(0)}`; }
 
+    function getOfferById(id) {
+      return offerCatalog.find(o => o.id === id) || offerCatalog[0];
+    }
+
     function renderSwitch() {
+      const currentOffer = getOfferById(currentOfferSel.value);
+      const newOffer = getOfferById(newOfferSel.value);
+
       const factor = pvKwp / switchAssumptions.pvBaseKwp;
       const baselineInjectie = monthlyData.injectie.reduce((a, b) => a + b, 0) * factor;
       const baselinePeak = Math.max(...monthlyData.piek);
@@ -271,15 +294,15 @@
 
       const dataRows = labels.map((label, i) => {
         const usedFromBattery = geleverd[i] * factor;
-        const selfVerbruik = usedFromBattery * switchAssumptions.afnameEurPerKwh;
+        const selfVerbruik = usedFromBattery * currentOffer.afname;
         const peakGain = Math.max(0, baselinePeak - pieken[i]) * switchAssumptions.capaciteitEurPerKwJaar;
-        const timingGain = usedFromBattery * switchAssumptions.timingBonusEurPerKwh;
+        const timingGain = usedFromBattery * Math.max(0, (newOffer.timingBonus - currentOffer.timingBonus));
 
-        const missedDynInjectie = -1 * usedFromBattery * switchAssumptions.dynInjectieEurPerKwh;
-        const effLoss = -1 * usedFromBattery * ((1 / switchAssumptions.roundTripEff) - 1) * switchAssumptions.afnameEurPerKwh;
+        const missedDynInjectie = -1 * usedFromBattery * newOffer.injectie;
+        const effLoss = -1 * usedFromBattery * ((1 / switchAssumptions.roundTripEff) - 1) * currentOffer.afname;
 
         const remainingInjectie = Math.max(0, baselineInjectie - usedFromBattery);
-        const switchGainOnRemaining = remainingInjectie * (switchAssumptions.dynInjectieEurPerKwh - switchAssumptions.fixedInjectieEurPerKwh);
+        const switchGainOnRemaining = remainingInjectie * (newOffer.injectie - currentOffer.injectie);
 
         const net = selfVerbruik + peakGain + timingGain + missedDynInjectie + effLoss + switchGainOnRemaining;
 
@@ -288,7 +311,7 @@
 
       pvBtn.textContent = `PV ${pvKwp.toFixed(1)} kWp`;
       const best = dataRows.reduce((a, b) => (b.net > a.net ? b : a), dataRows[0]);
-      switchSummary.textContent = `Netto jaarimpact incl. opportunity cost (gemiste verkoop aan 10 c€): best scenario ${best.label} met ${eur(best.net)}.`;
+      switchSummary.textContent = `Switch: ${currentOffer.label} → ${newOffer.label} · Netto jaarimpact incl. opportunity cost: best scenario ${best.label} met ${eur(best.net)}.`;
 
       const chartData = {
         labels: dataRows.map(r => r.label),
@@ -322,6 +345,19 @@
       }
     }
 
+    offerCatalog.forEach(o => {
+      const a = document.createElement('option');
+      a.value = o.id; a.textContent = o.label;
+      currentOfferSel?.appendChild(a);
+      const b = document.createElement('option');
+      b.value = o.id; b.textContent = o.label;
+      newOfferSel?.appendChild(b);
+    });
+    if (currentOfferSel) currentOfferSel.value = 'engie-flow-fixed';
+    if (newOfferSel) newOfferSel.value = 'engie-dynamic';
+
+    currentOfferSel?.addEventListener('change', renderSwitch);
+    newOfferSel?.addEventListener('change', renderSwitch);
     pvMinus?.addEventListener('click', () => { pvKwp = Math.max(2, pvKwp - 0.5); renderSwitch(); });
     pvPlus?.addEventListener('click', () => { pvKwp = Math.min(20, pvKwp + 0.5); renderSwitch(); });
     renderSwitch();
