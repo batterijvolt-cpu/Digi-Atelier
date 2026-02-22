@@ -422,25 +422,26 @@ p.lede {
 }
 .monthly-table-scroll .matrix-table th,
 .monthly-table-scroll .matrix-table td {
-  padding: 0.4rem 0.48rem;
-  font-size: 0.82rem;
+  padding: 0.3rem 0.38rem;
+  font-size: 0.78rem;
   white-space: nowrap;
 }
 .monthly-table-scroll .matrix-table th {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
 }
 @media (min-width: 1024px) {
   .monthly-split {
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1.35fr 1fr;
     align-items: stretch;
   }
   .monthly-split .chart-shell,
   .monthly-split .table-scroll {
     margin: 0;
-    height: 340px;
+    height: 420px;
   }
   .monthly-table-scroll {
-    overflow-y: auto;
+    overflow-y: visible;
   }
 }
 .dataset-mode-grid .chart-hint {
