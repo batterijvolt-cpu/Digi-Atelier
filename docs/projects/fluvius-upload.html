@@ -69,26 +69,6 @@
         </div>
         <canvas id="monthlyChart" height="200"></canvas>
       </section>
-      <section class="analysis" id="battery-scenarios">
-        <header>
-          <div class="badge">Scenariovergelijking</div>
-          <h2>Extra zelfverbruik vs. pieken per batterijconfig</h2>
-          <p class="meta">Aanname: 92% round-trip, capaciteitstarief ≈ €40/kW/j (min. 2,5 kW).</p>
-        </header>
-        <div class="scenario-switch">
-          <button data-scenario="10" class="active">10 kWh / 5 kW</button>
-          <button data-scenario="20">20 kWh / 7 kW</button>
-          <button data-scenario="30">30 kWh / 10 kW</button>
-        </div>
-        <div class="table-wrapper">
-          <table class="matrix-table compact" id="scenarioTable">
-            <thead><tr><th>Maand</th><th>Extra kWh vastgehouden</th><th>Uit batterij geleverd</th><th>Nieuwe piek (kW)</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
-        <p class="chart-hint" id="scenarioSummary"></p>
-      </section>
-
       <section class="analysis" id="hefbomen-stack">
         <header>
           <div class="badge">Rendementshefbomen per scenario</div>
@@ -189,22 +169,6 @@
     }
     const monthlyBody = document.querySelector('#monthlyTable tbody');
     monthlyBody.innerHTML = monthlyData.labels.map((m,i)=>`<tr><td>${m}</td><td>${monthlyData.afname[i]}</td><td>${monthlyData.injectie[i]}</td><td>${monthlyData.piek[i]}</td></tr>`).join('') + `<tr class="total"><td>JAARTOTAAL</td><td>${monthlyData.afname.reduce((a,b)=>a+b,0).toFixed(1)}</td><td>${monthlyData.injectie.reduce((a,b)=>a+b,0).toFixed(1)}</td><td>${Math.max(...monthlyData.piek).toFixed(2)}</td></tr>`;
-    const buttons = document.querySelectorAll('.scenario-switch button');
-    const scenarioBody = document.querySelector('#scenarioTable tbody');
-    const summary = document.getElementById('scenarioSummary');
-    function renderScenario(key) {
-      const data = scenarioData[key];
-      scenarioBody.innerHTML = data.rows.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`).join('') + `<tr class="total"><td>JAARTOTAAL</td><td>${data.total[0]}</td><td>${data.total[1]}</td><td>${data.total[2]}</td></tr>`;
-      const capKw = Math.max(2.5, data.total[2]);
-      summary.textContent = `${data.label} → extra zelfverbruik: ${data.total[0]} kWh/jaar · capaciteitstarief ≈ €${Math.round(capKw*40)}/jaar (piek ${data.total[2]} kW)`;
-    }
-    buttons.forEach(btn => btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderScenario(btn.dataset.scenario);
-    }));
-    renderScenario('10');
-
     // Gestapelde balken met rendementshefbomen (5 scenario's)
     const baselinePeakKw = Math.max(...monthlyData.piek);
     const tarieven = {
