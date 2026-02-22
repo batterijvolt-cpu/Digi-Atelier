@@ -491,6 +491,33 @@ body.project.masterdata-page .kpi-row .card {
   padding: 0.7rem 0.8rem;
   border-radius: 10px;
 }
+#section-301 {
+  padding: 0.7rem 0.85rem;
+}
+#section-301 h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+#section-301 p {
+  font-size: 0.82rem;
+  margin: 0.1rem 0 0.35rem;
+}
+#section-301 .kpi-row {
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+}
+#section-301 .kpi-row .card {
+  padding: 0.45rem 0.55rem;
+}
+#section-301 .kpi-row .card h3 {
+  font-size: 0.72rem;
+  margin: 0 0 0.18rem;
+}
+#section-301 .kpi-row .card p {
+  font-size: 0.95rem;
+  margin: 0;
+}
 body.project.masterdata-page .table-explainer {
   margin: 0.22rem 0;
   line-height: 1.35;
