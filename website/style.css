@@ -319,8 +319,8 @@ p.lede {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background: #f8fafc;
-  border: 1px solid rgba(15,23,42,0.14);
+  background: rgba(3,8,16,0.65);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -433,9 +433,9 @@ p.lede {
 }
 .table-scroll {
   overflow-x: auto;
-  border: 1px solid rgba(15,23,42,0.14);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
-  background: #f5f7fb;
+  background: rgba(3,8,16,0.5);
 }
 .table-scroll .matrix-table {
   min-width: 1400px;
@@ -469,6 +469,14 @@ body.project.masterdata-page .chart-shell,
 body.project.masterdata-page .table-scroll {
   background: #f5f7fb;
   border-color: rgba(15,23,42,0.14);
+}
+body.project.masterdata-page .matrix-table {
+  background: #f8fafc;
+  border-color: rgba(15,23,42,0.14);
+}
+body.project.masterdata-page .matrix-table th,
+body.project.masterdata-page .matrix-table td {
+  border-bottom-color: rgba(15,23,42,0.08);
 }
 body.project.masterdata-page .story.compact {
   margin-top: 0.8rem;
