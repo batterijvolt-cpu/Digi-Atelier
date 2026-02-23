@@ -24,8 +24,10 @@
   const finAnnual = document.getElementById('finAnnual');
   const finMonthly = document.getElementById('finMonthly');
   const finPerKwh = document.getElementById('finPerKwh');
-  const finBreakdownBody = document.querySelector('#financialBreakdownTable tbody');
+  const finCompact = document.getElementById('finComponentsCompact');
   const uploadEnabled = !!uploadInput;
+
+  const costInputs = { netTariff: 0.0548, levies: 0.0290, capacity: 53.53, vatRate: 0.06 };
 
   function setStatus(text) {
     if (recalcStatus) recalcStatus.textContent = text;
@@ -93,24 +95,17 @@
   }
 
   function renderFinancialSnapshot(stats) {
-    if (!finAnnual || !finMonthly || !finPerKwh || !finBreakdownBody) return;
-    const fin = core.computeFinancialSnapshot(stats, { currentOfferId: currentOfferSel.value });
+    if (!finAnnual || !finMonthly || !finPerKwh) return;
+    const fin = core.computeFinancialSnapshot(stats, { currentOfferId: currentOfferSel.value }, costInputs);
     const eur = (v) => `€ ${Number(v).toFixed(0)}`;
     finAnnual.textContent = eur(fin.annualTotal);
     finMonthly.textContent = eur(fin.monthlyAvg);
     finPerKwh.textContent = `€ ${Number(fin.costPerNetKwh).toFixed(3)}`;
 
-    const b = fin.breakdown;
-    const rows = [
-      ['Energie afname', b.energyCost],
-      ['Netkosten', b.netCost],
-      ['Heffingen', b.leviesCost],
-      ['Capaciteitstarief', b.capacityCost],
-      ['Vaste vergoeding', b.fixedYear],
-      ['Injectie-opbrengst', -b.injectieRevenue],
-      ['BTW', b.vat]
-    ];
-    finBreakdownBody.innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${eur(r[1])}</td></tr>`).join('');
+    if (finCompact) {
+      const b = fin.breakdown;
+      finCompact.textContent = `Comp.: energie ${eur(b.energyCost)} · net ${eur(b.netCost)} · heff ${eur(b.leviesCost)} · cap ${eur(b.capacityCost)} · vast ${eur(b.fixedYear)} · injectie -${eur(b.injectieRevenue)} · btw ${eur(b.vat)} (bron: masterdata)`;
+    }
   }
 
   function renderPreview() {
@@ -197,6 +192,28 @@
     newOfferSel.value = 'engie-dynamic';
   }
 
+  function loadCostInputsFromMasterdata() {
+    fetch('./masterdata/fixed-cost-benchmarks-vlaanderen.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data?.rows) return;
+        const byName = Object.fromEntries(data.rows.map((r) => [String(r.component || '').toLowerCase(), r]));
+        const pickNum = (v) => {
+          const m = String(v ?? '').match(/\d+(?:[\.,]\d+)?/);
+          return m ? Number(m[0].replace(',', '.')) : null;
+        };
+        const net = pickNum(byName['nettarieven (distributie + transmissie)']?.value);
+        const lev = pickNum(byName['heffingen en toeslagen']?.value);
+        const cap = pickNum(byName['capaciteitstariefcomponent']?.value);
+        const vat = pickNum(byName['btw residentieel']?.value);
+        if (net != null) costInputs.netTariff = net / 100;
+        if (lev != null) costInputs.levies = lev / 100;
+        if (cap != null) costInputs.capacity = cap;
+        if (vat != null) costInputs.vatRate = vat / 100;
+      })
+      .catch(() => {});
+  }
+
   function initWorker() {
     try {
       worker = new Worker('./fluvius-sim-worker.js');
@@ -240,6 +257,7 @@
 
   setupOffers();
   initWorker();
+  loadCostInputsFromMasterdata();
   updateDatasetLabel();
   setUploadStatus(
     uploadEnabled

@@ -291,17 +291,17 @@
     return { baselineInjectieKwh, baselineAfnameKwh, baselinePeakKw, avgMonthlyPeakKw, scenarioDeliveryKwh, scenarioPeakKw };
   }
 
-  function computeFinancialSnapshot(stats, params) {
+  function computeFinancialSnapshot(stats, params, costInputs = {}) {
     const offer = getOfferById(params.currentOfferId);
     const afname = Number(stats.baselineAfnameKwh || 0);
     const injectie = Number(stats.baselineInjectieKwh || 0);
     const avgPeak = Number(stats.avgMonthlyPeakKw || stats.baselinePeakKw || 0);
 
-    const netTariff = 0.0548;
-    const levies = 0.0290;
-    const capacity = 53.53;
-    const vatRate = 0.06;
-    const fixedYear = Number(offer.fixedYear || 0);
+    const netTariff = Number(costInputs.netTariff ?? 0.0548);
+    const levies = Number(costInputs.levies ?? 0.0290);
+    const capacity = Number(costInputs.capacity ?? 53.53);
+    const vatRate = Number(costInputs.vatRate ?? 0.06);
+    const fixedYear = Number(offer.fixedYear || costInputs.fixedYear || 0);
 
     const energyCost = afname * offer.afname;
     const netCost = afname * netTariff;
