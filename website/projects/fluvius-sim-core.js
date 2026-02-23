@@ -2,10 +2,11 @@
   const MONTHS = ['JAN','FEB','MAA','APR','MEI','JUN','JUL','AUG','SEP','OKT','NOV','DEC'];
 
   const OFFER_CATALOG = [
-    { id:'engie-flow-fixed', label:'ENGIE Flow (huidig vast) · afname 0.32 · injectie 0.03', afname:0.32, injectie:0.03, timingBonus:0.00 },
-    { id:'engie-dynamic', label:'ENGIE Dynamic · afname 0.30 · injectie 0.10', afname:0.30, injectie:0.10, timingBonus:0.02 },
-    { id:'luminus-comfyflex', label:'Luminus ComfyFlex · afname 0.31 · injectie 0.08', afname:0.31, injectie:0.08, timingBonus:0.015 },
-    { id:'octa-dynamic', label:'OCTA+ Dynamic · afname 0.30 · injectie 0.09', afname:0.30, injectie:0.09, timingBonus:0.018 }
+    { id:'luminus-comfy', label:'Luminus Comfy (huidig) · afname 0.31 · injectie 0.085', afname:0.31, injectie:0.085, timingBonus:0.00, fixedYear:72 },
+    { id:'engie-flow-fixed', label:'ENGIE Flow (vast) · afname 0.32 · injectie 0.03', afname:0.32, injectie:0.03, timingBonus:0.00, fixedYear:60 },
+    { id:'engie-dynamic', label:'ENGIE Dynamic · afname 0.30 · injectie 0.10', afname:0.30, injectie:0.10, timingBonus:0.02, fixedYear:60 },
+    { id:'luminus-comfyflex', label:'Luminus ComfyFlex · afname 0.31 · injectie 0.085', afname:0.31, injectie:0.085, timingBonus:0.015, fixedYear:72 },
+    { id:'octa-dynamic', label:'OCTA+ Dynamic · afname 0.30 · injectie 0.09', afname:0.30, injectie:0.09, timingBonus:0.018, fixedYear:55 }
   ];
 
   const BATTERY_SCENARIOS = [
@@ -63,10 +64,14 @@
   function buildPreviewStats(monthlyData, scenarioData, pvKwp) {
     const factor = pvKwp / ASSUMPTIONS.pvBaseKwp;
     const baselineInjectieKwh = monthlyData.injectie.reduce((a, b) => a + b, 0) * factor;
+    const baselineAfnameKwh = monthlyData.afname.reduce((a, b) => a + b, 0);
     const baselinePeakKw = Math.max(...monthlyData.piek);
+    const avgMonthlyPeakKw = monthlyData.piek.reduce((a, b) => a + b, 0) / monthlyData.piek.length;
     return {
       baselineInjectieKwh,
+      baselineAfnameKwh,
       baselinePeakKw,
+      avgMonthlyPeakKw,
       scenarioDeliveryKwh: {
         '0 kWh': 0,
         '5 kWh': 1150 * factor,
@@ -210,6 +215,7 @@
     let soc = 0;
     let delivered = 0;
     let baselineInjectie = 0;
+    let baselineAfname = 0;
     let maxNetImport = 0;
     let maxNetImportWithBattery = 0;
 
@@ -217,6 +223,7 @@
       const importKwh = step.afname;
       const exportKwh = step.injectie * factor;
       baselineInjectie += exportKwh;
+      baselineAfname += importKwh;
 
       const loadNeed = Math.max(0, importKwh);
       const pvSurplus = Math.max(0, exportKwh);
@@ -244,15 +251,31 @@
     return {
       delivered,
       baselineInjectie,
+      baselineAfname,
       baselinePeakKw: maxNetImport,
       scenarioPeakKw: maxNetImportWithBattery
     };
+  }
+
+  function computeAvgMonthlyPeakFromIntervals(intervals) {
+    const byMonth = new Map();
+    for (const step of intervals || []) {
+      const d = new Date(step.ts);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      const kw = Math.max(0, step.afname) * 4;
+      const prev = byMonth.get(key) || 0;
+      if (kw > prev) byMonth.set(key, kw);
+    }
+    const vals = Array.from(byMonth.values());
+    if (!vals.length) return 0;
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
   }
 
   function computeStatsFromIntervals(intervals, pvKwp) {
     const scenarioDeliveryKwh = {};
     const scenarioPeakKw = {};
     let baselineInjectieKwh = 0;
+    let baselineAfnameKwh = 0;
     let baselinePeakKw = 0;
 
     for (const scenario of BATTERY_SCENARIOS) {
@@ -260,10 +283,51 @@
       scenarioDeliveryKwh[scenario.label] = result.delivered;
       scenarioPeakKw[scenario.label] = result.scenarioPeakKw;
       baselineInjectieKwh = result.baselineInjectie;
+      baselineAfnameKwh = result.baselineAfname;
       baselinePeakKw = result.baselinePeakKw;
     }
 
-    return { baselineInjectieKwh, baselinePeakKw, scenarioDeliveryKwh, scenarioPeakKw };
+    const avgMonthlyPeakKw = computeAvgMonthlyPeakFromIntervals(intervals);
+    return { baselineInjectieKwh, baselineAfnameKwh, baselinePeakKw, avgMonthlyPeakKw, scenarioDeliveryKwh, scenarioPeakKw };
+  }
+
+  function computeFinancialSnapshot(stats, params) {
+    const offer = getOfferById(params.currentOfferId);
+    const afname = Number(stats.baselineAfnameKwh || 0);
+    const injectie = Number(stats.baselineInjectieKwh || 0);
+    const avgPeak = Number(stats.avgMonthlyPeakKw || stats.baselinePeakKw || 0);
+
+    const netTariff = 0.0548;
+    const levies = 0.0290;
+    const capacity = 53.53;
+    const vatRate = 0.06;
+    const fixedYear = Number(offer.fixedYear || 0);
+
+    const energyCost = afname * offer.afname;
+    const netCost = afname * netTariff;
+    const leviesCost = afname * levies;
+    const capacityCost = avgPeak * capacity;
+    const injectieRevenue = injectie * offer.injectie;
+
+    const exVat = energyCost + netCost + leviesCost + capacityCost + fixedYear - injectieRevenue;
+    const vat = Math.max(0, exVat) * vatRate;
+    const total = exVat + vat;
+    const netKwh = Math.max(1, afname - injectie);
+
+    return {
+      annualTotal: total,
+      monthlyAvg: total / 12,
+      costPerNetKwh: total / netKwh,
+      breakdown: {
+        energyCost,
+        netCost,
+        leviesCost,
+        capacityCost,
+        fixedYear,
+        injectieRevenue,
+        vat
+      }
+    };
   }
 
   root.FluviusSimCore = {
@@ -278,6 +342,7 @@
     parseFluviusCsv,
     validateRecentFullYear,
     extractYearIntervals,
-    computeStatsFromIntervals
+    computeStatsFromIntervals,
+    computeFinancialSnapshot
   };
 })(typeof self !== 'undefined' ? self : window);

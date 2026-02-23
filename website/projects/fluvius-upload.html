@@ -106,6 +106,17 @@
             <select id="newOffer" class="usage-select"></select>
           </div>
         </div>
+        <div class="panel" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); margin-bottom:.7rem;" id="financialSnapshot">
+          <div class="card"><h3>Jaarkost</h3><p id="finAnnual">—</p></div>
+          <div class="card"><h3>Gem./maand</h3><p id="finMonthly">—</p></div>
+          <div class="card"><h3>Kost/netto kWh</h3><p id="finPerKwh">—</p></div>
+        </div>
+        <div class="table-scroll" style="margin-bottom:.7rem;">
+          <table class="matrix-table compact" id="financialBreakdownTable">
+            <thead><tr><th>Component</th><th>€/jaar</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
         <p class="chart-hint" id="switchSummary"></p>
         <p class="chart-hint" id="recalcStatus">Preview klaar</p>
         <p class="chart-hint" id="recalcWarning" style="color:#f59e0b;"></p>

@@ -21,6 +21,10 @@
   const uploadInput = document.getElementById('fluviusCsvUpload');
   const uploadStatus = document.getElementById('uploadStatus');
   const datasetLabel = document.getElementById('activeDatasetLabel');
+  const finAnnual = document.getElementById('finAnnual');
+  const finMonthly = document.getElementById('finMonthly');
+  const finPerKwh = document.getElementById('finPerKwh');
+  const finBreakdownBody = document.querySelector('#financialBreakdownTable tbody');
   const uploadEnabled = !!uploadInput;
 
   function setStatus(text) {
@@ -88,6 +92,27 @@
     return core.buildPreviewStats(ctx.monthlyData, ctx.scenarioData, pvKwp);
   }
 
+  function renderFinancialSnapshot(stats) {
+    if (!finAnnual || !finMonthly || !finPerKwh || !finBreakdownBody) return;
+    const fin = core.computeFinancialSnapshot(stats, { currentOfferId: currentOfferSel.value });
+    const eur = (v) => `€ ${Number(v).toFixed(0)}`;
+    finAnnual.textContent = eur(fin.annualTotal);
+    finMonthly.textContent = eur(fin.monthlyAvg);
+    finPerKwh.textContent = `€ ${Number(fin.costPerNetKwh).toFixed(3)}`;
+
+    const b = fin.breakdown;
+    const rows = [
+      ['Energie afname', b.energyCost],
+      ['Netkosten', b.netCost],
+      ['Heffingen', b.leviesCost],
+      ['Capaciteitstarief', b.capacityCost],
+      ['Vaste vergoeding', b.fixedYear],
+      ['Injectie-opbrengst', -b.injectieRevenue],
+      ['BTW', b.vat]
+    ];
+    finBreakdownBody.innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${eur(r[1])}</td></tr>`).join('');
+  }
+
   function renderPreview() {
     const stats = buildActiveStats();
     const result = core.computeRowsFromStats(stats, {
@@ -96,6 +121,7 @@
       newOfferId: newOfferSel.value
     });
     renderRows(result.rows, result.summary);
+    renderFinancialSnapshot(stats);
     setStatus('Preview klaar');
   }
 
@@ -167,7 +193,7 @@
       const b = document.createElement('option');
       b.value = o.id; b.textContent = o.label; newOfferSel?.appendChild(b);
     });
-    currentOfferSel.value = 'engie-flow-fixed';
+    currentOfferSel.value = 'luminus-comfy';
     newOfferSel.value = 'engie-dynamic';
   }
 
