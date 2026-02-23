@@ -25,6 +25,7 @@
   const finAnnual = document.getElementById('finAnnual');
   const finMonthly = document.getElementById('finMonthly');
   const finCompact = document.getElementById('finComponentsCompact');
+  const costLadderBody = document.querySelector('#costLadderTable tbody');
   const uploadEnabled = !!uploadInput;
 
   const costInputs = { netTariff: null, levies: null, capacity: null, vatRate: null };
@@ -146,6 +147,41 @@
     }
   }
 
+  function renderCostLadder(stats, rows) {
+    if (!costLadderBody) return;
+    const missing = [costInputs.netTariff, costInputs.levies, costInputs.capacity, costInputs.vatRate].some(v => v == null);
+    if (missing) {
+      costLadderBody.innerHTML = `<tr><td colspan="6">Masterdata onvolledig: kostladder wacht op volledige kostcomponenten.</td></tr>`;
+      return;
+    }
+    const fin = core.computeFinancialSnapshot(stats, { currentOfferId: currentOfferSel.value }, costInputs);
+    const base = Number(fin.annualTotal || 0);
+    const rByLabel = Object.fromEntries((rows || []).map(r => [r.label, r]));
+    const labels = ['0 kWh','5 kWh','10 kWh','20 kWh','30 kWh'];
+
+    const val = (lbl, fn) => {
+      const r = rByLabel[lbl];
+      return r ? fn(r) : 0;
+    };
+
+    const euro = (v) => `€ ${Math.round(v)}`;
+    const mkRow = (name, calc) => `<tr><td>${name}</td>${labels.map(l => `<td>${euro(calc(l))}</td>`).join('')}</tr>`;
+
+    const s1 = (l) => base;
+    const s2 = (l) => base - val(l, r => r.selfVerbruik);
+    const s3 = (l) => s2(l) - val(l, r => r.peakGain);
+    const s4 = (l) => s3(l) - val(l, r => r.switchGainOnRemaining + r.missedDynInjectie);
+    const s5 = (l) => s4(l) - val(l, r => r.timingGain + r.effLoss);
+
+    costLadderBody.innerHTML = [
+      mkRow('1) Huidige kost', s1),
+      mkRow('2) + Zelfverbruik', s2),
+      mkRow('3) + Piekafvlakking', s3),
+      mkRow('4) + Dynamische injectie', s4),
+      mkRow('5) + Slim afnemen/buffer', s5)
+    ].join('');
+  }
+
   function renderPreview() {
     const stats = buildActiveStats();
     const result = core.computeRowsFromStats(stats, {
@@ -155,6 +191,7 @@
     });
     renderRows(result.rows, result.summary);
     renderFinancialSnapshot(stats);
+    renderCostLadder(stats, result.rows);
     health.recompute = true;
     refreshHealth();
     setStatus('Preview klaar');

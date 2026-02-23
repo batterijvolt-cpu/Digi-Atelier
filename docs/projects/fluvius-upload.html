@@ -117,6 +117,30 @@
         <p class="chart-hint" id="recalcWarning" style="color:#f59e0b;"></p>
         <canvas id="switchChart" height="230"></canvas>
       </section>
+
+      <section class="analysis" id="cost-ladder">
+        <header>
+          <div class="badge">Volgende oefening · Kostladder</div>
+          <h2>Stappenplan kostreductie per batterij/omvormer scenario</h2>
+          <p class="meta">Van boven naar beneden cumulatief: baseline → zelfverbruik → piekafvlakking → dynamische injectie → slim afnemen/bufferen.</p>
+        </header>
+        <div class="table-scroll">
+          <table class="matrix-table compact" id="costLadderTable">
+            <thead>
+              <tr>
+                <th>Stap</th>
+                <th>0 kWh</th>
+                <th>5 kWh</th>
+                <th>10 kWh</th>
+                <th>20 kWh</th>
+                <th>30 kWh</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="chart-hint" id="costLadderHint">Prototype: bedragen worden automatisch opgebouwd uit huidige contractkeuze en Fluvius-data. Doel is deze matrix verder te verfijnen op je schets.</p>
+      </section>
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -245,8 +269,8 @@
     // 206: één grafiek met alle hefbomen, incl. gemiste dynamische injectie
     window.fluviusUiContext = { monthlyData, scenarioData };
   </script>
-  <script src="./fluvius-sim-core.js?v=20260223091132"></script>
-  <script src="./fluvius-sim-ui.js?v=20260223091132"></script>
-  <script src="../part-map.js?v=20260223091132"></script>
+  <script src="./fluvius-sim-core.js?v=20260223112020"></script>
+  <script src="./fluvius-sim-ui.js?v=20260223112020"></script>
+  <script src="../part-map.js?v=20260223112020"></script>
 </body>
 </html>
