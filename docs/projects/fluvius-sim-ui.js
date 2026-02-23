@@ -18,6 +18,7 @@
   const switchSummary = document.getElementById('switchSummary');
   const recalcStatus = document.getElementById('recalcStatus');
   const recalcWarning = document.getElementById('recalcWarning');
+  const healthStatus = document.getElementById('healthStatus');
   const uploadInput = document.getElementById('fluviusCsvUpload');
   const uploadStatus = document.getElementById('uploadStatus');
   const datasetLabel = document.getElementById('activeDatasetLabel');
@@ -27,6 +28,19 @@
   const uploadEnabled = !!uploadInput;
 
   const costInputs = { netTariff: null, levies: null, capacity: null, vatRate: null };
+  const health = { core: true, masterdata: false, recompute: false, worker: true };
+
+  function refreshHealth() {
+    if (!healthStatus) return;
+    const ok = health.core && health.masterdata && health.recompute && health.worker;
+    healthStatus.textContent = ok
+      ? 'Health: OK (core/masterdata/recalc/worker)'
+      : `Health: waarschuwing (${[
+          !health.masterdata ? 'masterdata' : null,
+          !health.recompute ? 'recalc' : null,
+          !health.worker ? 'worker' : null
+        ].filter(Boolean).join(', ')})`;
+  }
 
   function setStatus(text) {
     if (recalcStatus) recalcStatus.textContent = text;
@@ -141,6 +155,8 @@
     });
     renderRows(result.rows, result.summary);
     renderFinancialSnapshot(stats);
+    health.recompute = true;
+    refreshHealth();
     setStatus('Preview klaar');
   }
 
@@ -182,11 +198,15 @@
           newOfferId: newOfferSel.value
         });
         renderRows(result.rows, result.summary);
+        health.worker = true;
+        refreshHealth();
         showWarning('');
         setStatus('Exacte herberekening klaar');
       }
       if (ev.data?.type === 'error') {
         workerReady = false;
+        health.worker = false;
+        refreshHealth();
         showWarning(`Waarschuwing: exacte herberekening niet beschikbaar (${ev.data.error}). Preview actief.`);
         setStatus('Preview klaar');
       }
@@ -194,6 +214,8 @@
 
     worker.onerror = (err) => {
       workerReady = false;
+      health.worker = false;
+      refreshHealth();
       showWarning(`Waarschuwing: workerfout (${err.message || 'onbekend'}). Preview actief.`);
       setStatus('Preview klaar');
     };
@@ -234,9 +256,13 @@
         if (lev != null) costInputs.levies = lev / 100;
         if (cap != null) costInputs.capacity = cap;
         if (vat != null) costInputs.vatRate = vat / 100;
+        health.masterdata = [costInputs.netTariff, costInputs.levies, costInputs.capacity, costInputs.vatRate].every(v => v != null);
+        refreshHealth();
         recompute();
       })
       .catch(() => {
+        health.masterdata = false;
+        refreshHealth();
         recompute();
       });
   }
@@ -244,8 +270,12 @@
   function initWorker() {
     try {
       worker = new Worker('./fluvius-sim-worker.js');
+      health.worker = true;
+      refreshHealth();
     } catch (e) {
       workerReady = false;
+      health.worker = false;
+      refreshHealth();
       showWarning(`Waarschuwing: worker niet gestart (${e.message}). Preview actief.`);
     }
   }
@@ -286,6 +316,7 @@
   initWorker();
   loadCostInputsFromMasterdata();
   updateDatasetLabel();
+  refreshHealth();
   setUploadStatus(
     uploadEnabled
       ? 'Geen upload actief. Standaarddataset wordt gebruikt.'

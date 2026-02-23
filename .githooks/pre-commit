@@ -2,6 +2,8 @@
 set -euo pipefail
 TS="$(date '+%Y-%m-%dT%H:%M:%S%:z')"
 VER="v$(date '+%Y-%m-%d')"
+CACHE="$(date '+%Y%m%d%H%M%S')"
+
 cat > website/version.json <<EOF
 {
   "version": "${VER}",
@@ -10,7 +12,12 @@ cat > website/version.json <<EOF
 }
 EOF
 cp website/version.json docs/version.json
-# stage automatically if present
+
+for f in website/projects/fluvius.html website/projects/fluvius-upload.html docs/projects/fluvius.html docs/projects/fluvius-upload.html; do
+  [ -f "$f" ] || continue
+  perl -0777 -i -pe "s#(fluvius-sim-core\.js\?v=)[^\"\n]+#\${1}${CACHE}#g; s#(fluvius-sim-ui\.js\?v=)[^\"\n]+#\${1}${CACHE}#g; s#(part-map\.js\?v=)[^\"\n]+#\${1}${CACHE}#g" "$f"
+done
+
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  git add website/version.json docs/version.json >/dev/null 2>&1 || true
+  git add website/version.json docs/version.json website/projects/fluvius.html website/projects/fluvius-upload.html docs/projects/fluvius.html docs/projects/fluvius-upload.html >/dev/null 2>&1 || true
 fi
