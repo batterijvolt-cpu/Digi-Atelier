@@ -23,7 +23,6 @@
   const datasetLabel = document.getElementById('activeDatasetLabel');
   const finAnnual = document.getElementById('finAnnual');
   const finMonthly = document.getElementById('finMonthly');
-  const finPerKwh = document.getElementById('finPerKwh');
   const finCompact = document.getElementById('finComponentsCompact');
   const uploadEnabled = !!uploadInput;
 
@@ -95,7 +94,7 @@
   }
 
   function renderFinancialSnapshot(stats) {
-    if (!finAnnual || !finMonthly || !finPerKwh) return;
+    if (!finAnnual || !finMonthly) return;
 
     const missing = [];
     if (costInputs.netTariff == null) missing.push('nettarief');
@@ -106,7 +105,6 @@
     if (missing.length) {
       finAnnual.textContent = '?';
       finMonthly.textContent = '?';
-      finPerKwh.textContent = '?';
       if (finCompact) finCompact.textContent = `Waarschuwing: ontbrekende masterdata (${missing.join(', ')}). Financiële snapshot niet berekend.`;
       showWarning(`Masterdata onvolledig: ${missing.join(', ')}.`);
       return;
@@ -116,11 +114,21 @@
     const eur = (v) => `€ ${Number(v).toFixed(0)}`;
     finAnnual.textContent = eur(fin.annualTotal);
     finMonthly.textContent = eur(fin.monthlyAvg);
-    finPerKwh.textContent = `€ ${Number(fin.costPerNetKwh).toFixed(3)}`;
 
     if (finCompact) {
       const b = fin.breakdown;
-      finCompact.textContent = `Comp.: energie ${eur(b.energyCost)} · net ${eur(b.netCost)} · heff ${eur(b.leviesCost)} · cap ${eur(b.capacityCost)} · vast ${eur(b.fixedYear)} · injectie -${eur(b.injectieRevenue)} · btw ${eur(b.vat)} (bron: masterdata)`;
+      const afn = Number(stats.baselineAfnameKwh || 0);
+      const inj = Number(stats.baselineInjectieKwh || 0);
+      const avgPeak = Number(stats.avgMonthlyPeakKw || 0);
+      const offer = core.getOfferById(currentOfferSel.value);
+      finCompact.textContent =
+        `Energie: ${afn.toFixed(0)} kWh × €${offer.afname.toFixed(3)} = ${eur(b.energyCost)} · ` +
+        `Net: ${afn.toFixed(0)} kWh × €${costInputs.netTariff.toFixed(4)} = ${eur(b.netCost)} · ` +
+        `Heff: ${afn.toFixed(0)} kWh × €${costInputs.levies.toFixed(4)} = ${eur(b.leviesCost)} · ` +
+        `Cap: ${avgPeak.toFixed(2)} kW × €${costInputs.capacity.toFixed(2)} = ${eur(b.capacityCost)} · ` +
+        `Vast: ${eur(b.fixedYear)} · ` +
+        `Injectie: ${inj.toFixed(0)} kWh × €${offer.injectie.toFixed(3)} = -${eur(b.injectieRevenue)} · ` +
+        `BTW (${(costInputs.vatRate*100).toFixed(0)}%): ${eur(b.vat)}.`;
     }
   }
 
