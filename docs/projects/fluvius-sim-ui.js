@@ -27,7 +27,7 @@
   const finCompact = document.getElementById('finComponentsCompact');
   const uploadEnabled = !!uploadInput;
 
-  const costInputs = { netTariff: 0.0548, levies: 0.0290, capacity: 53.53, vatRate: 0.06 };
+  const costInputs = { netTariff: null, levies: null, capacity: null, vatRate: null };
 
   function setStatus(text) {
     if (recalcStatus) recalcStatus.textContent = text;
@@ -96,6 +96,22 @@
 
   function renderFinancialSnapshot(stats) {
     if (!finAnnual || !finMonthly || !finPerKwh) return;
+
+    const missing = [];
+    if (costInputs.netTariff == null) missing.push('nettarief');
+    if (costInputs.levies == null) missing.push('heffingen');
+    if (costInputs.capacity == null) missing.push('capaciteitstarief');
+    if (costInputs.vatRate == null) missing.push('btw');
+
+    if (missing.length) {
+      finAnnual.textContent = '?';
+      finMonthly.textContent = '?';
+      finPerKwh.textContent = '?';
+      if (finCompact) finCompact.textContent = `Waarschuwing: ontbrekende masterdata (${missing.join(', ')}). Financiële snapshot niet berekend.`;
+      showWarning(`Masterdata onvolledig: ${missing.join(', ')}.`);
+      return;
+    }
+
     const fin = core.computeFinancialSnapshot(stats, { currentOfferId: currentOfferSel.value }, costInputs);
     const eur = (v) => `€ ${Number(v).toFixed(0)}`;
     finAnnual.textContent = eur(fin.annualTotal);
@@ -210,8 +226,11 @@
         if (lev != null) costInputs.levies = lev / 100;
         if (cap != null) costInputs.capacity = cap;
         if (vat != null) costInputs.vatRate = vat / 100;
+        recompute();
       })
-      .catch(() => {});
+      .catch(() => {
+        recompute();
+      });
   }
 
   function initWorker() {
